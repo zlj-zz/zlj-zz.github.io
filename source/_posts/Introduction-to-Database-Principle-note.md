@@ -1,5 +1,6 @@
 title: Introduction to Database Principle note
 category: Database
+date: 2020-04-15
 
 ---
 I have recently studied the database again, so take a note
