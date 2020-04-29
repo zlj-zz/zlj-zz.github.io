@@ -1,249 +1,266 @@
-<!DOCTYPE html>
-<html lang="zh-Hans">
-
-<!-- Head tag -->
+<!DOCTYPE HTML>
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!--Description-->
-    
-
-    <!--Author-->
-    
-        <meta name="author" content="Zachary Zhang">
-    
-
-    <!-- Title -->
-    
-    <title>Hexo</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    
-<link rel="stylesheet" href="/css/style.css">
-
-
-    <!-- Custom Fonts -->
-    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-
-    <!-- jQuery -->
-    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>Hexo</title>
+  <meta name="author" content="Zachary Zhang">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="Hexo"/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
 <meta name="generator" content="Hexo 4.2.0"></head>
 
 <body>
-
-    <!-- Content -->
-    <!-- Go Site -->
-
-
-
-<!-- Main Content -->
-<section class="intro">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                
-                    <div class="post-preview">
-    <a href="/2020/04/29/Introduction-to-Database-Principle-note/">
-        <h2 class="post-title">
-            Introduction-to-Database-Principle-note
-        </h2>
-        <p>I have recently studied the database again, so take a note</p>
-    </a>
-</div>
-                
-                    <div class="post-preview">
-    <a href="/2020/04/29/hello-world/">
-        <h2 class="post-title">
-            Hello World
-        </h2>
-        
-    </a>
-</div>
-                
-            </div>
-        </div>
-        <!-- Pagination -->
-        <ul class="pagiantion">
-    
-    
-</ul>
-        <!-- Search -->
-        
-    <a class="nav-search" data-toggle="modal" data-target="#searchModalCenter">
-      <i class="fa fa-search"></i>
-    </a>
-    
-    <div
-      class="modal fade"
-      id="searchModalCenter"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="searchModalCenterTitle"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <input
-              type="text"
-              id="local-search-input"
-              class="form-control"
-              placeholder=""
-            />
-          </div>
-          <div class="modal-body">
-            <div id="local-search-result"></div>
-          </div>
-        </div>
-      </div>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <nav class="navbar">
+  <div class="nav-container">
+  <div class="nav navbar-nav navbar-left">
+    <div class="navbar-header">
+      <a href="/" class="navbar-brand">come back</a>
     </div>
     
-    <script type="text/javascript">
-      // define the search function
-      var searchFunc = function(path, search_id, content_id) {
-        "use strict";
-        $.ajax({
-          url: path,
-          dataType: "xml",
-          success: function(xmlResponse) {
-            // get the contents from search data
-            var datas = $("entry", xmlResponse)
-              .map(function() {
-                return {
-                  title: $("title", this).text(),
-                  content: $("content", this).text(),
-                  url: $("id", this).text()
-                };
-              })
-              .get();
-            var $input = document.getElementById(search_id);
-            var $resultContent = document.getElementById(content_id);
-            $input.addEventListener("input", function() {
-              var str = '<ul class="search-result-list">';
-              var keywords = this.value
-                .trim()
-                .toLowerCase()
-                .split(/[\s\-]+/);
-              $resultContent.innerHTML = "";
-              if (this.value.trim().length <= 0) {
-                return;
-              }
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = true;
-                var content_index = [];
-                var data_title = data.title.trim().toLowerCase();
-                var data_content = data.content
-                  .trim()
-                  .replace(/<[^>]+>/g, "")
-                  .toLowerCase();
-                var data_url = data.url;
-                var index_title = -1;
-                var index_content = -1;
-                var first_occur = -1;
-                // only match artiles with not empty titles and contents
-                if (data_title != "" && data_content != "") {
-                  keywords.forEach(function(keyword, i) {
-                    index_title = data_title.indexOf(keyword);
-                    index_content = data_content.indexOf(keyword);
-                    if (index_title < 0 && index_content < 0) {
-                      isMatch = false;
-                    } else {
-                      if (index_content < 0) {
-                        index_content = 0;
-                      }
-                      if (i == 0) {
-                        first_occur = index_content;
-                      }
-                    }
-                  });
-                }
-                // show search results
-                if (isMatch) {
-                  str +=
-                    "<li><a href='" +
-                    data_url +
-                    "' class='search-result-title'>" +
-                    data_title +
-                    "</a>";
-                  var content = data.content.trim().replace(/<[^>]+>/g, "");
-                  if (first_occur >= 0) {
-                    // cut out 30 characters
-                    var start = first_occur - 15;
-                    var end = first_occur + 15;
-                    if (start < 0) {
-                      start = 0;
-                    }
-                    if (start == 0) {
-                      end = 30;
-                    }
-                    if (end > content.length) {
-                      end = content.length;
-                    }
-    
-                    var match_content = content.substr(start, end);
-                    // highlight all keywords
-                    keywords.forEach(function(keyword) {
-                      var regS = new RegExp(keyword, "gi");
-                      match_content = match_content.replace(
-                        regS,
-                        '<em class="search-keyword">' + keyword + "</em>"
-                      );
-                    });
-    
-                    str += '<p class="search-result">' + match_content + "...</p>";
-                  }
-                  str += "</li>";
-                }
-              });
-              str += "</ul>";
-              $resultContent.innerHTML = str;
-            });
-          }
-        });
-      };
-    
-      // use atom.xml to search blog
-      searchFunc("/atom.xml", "local-search-input", "local-search-result");
-      $("#searchModalCenter").on("shown.bs.modal", function(e) {
-        setTimeout(function() {
-          $("#local-search-input").focus();
-        }, 1);
-      });
-    </script>
 
+    <div class="dropdown">
+      <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        <svg class="i-tag" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <circle cx="24" cy="8" r="2"></circle>
+          <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+        </svg>
+      </span></a>
+
+      <ul class="dropdown-content">
+
+          
+           <div><a href="/categories/Database/">Database</a></div>
+
+      </ul>
 
     </div>
-</section>
+    
 
-    <!-- Scripts -->
-    <script type="text/javascript">
-    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
-</script>
+  </div>
+  <div id="site_search" class="">
+  <input type="text" id="local-search-input" name="q" placeholder="search" class="form-control"/>
+</div>
+<div id="local-search-result"></div>
+
+
+  <div class="nav navbar-nav navbar-right">
+    <div class="dropdown">
+      <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        <svg class="i-link" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <path d="M18 8 C18 8 24 2 27 5 30 8 29 12 24 16 19 20 16 21 14 17 M14 24 C14 24 8 30 5 27 2 24 3 20 8 16 13 12 16 11 18 15"></path>
+        </svg>
+      </a>
+      <base href="/">
+      <ul class="dropdown-content">
+        
+          <div>
+            <a href="/links.html">
+        友情链接
+      </a>
+    </div>
+     
+          <div>
+            <a href="https://github.com/zlj-zz/" target="_blank" rel="noopener">
+        Github
+      </a>
+    </div>
+     
+          <div>
+            <a href="http://weibo.com/XXX" target="_blank" rel="noopener">
+        微博
+      </a>
+    </div>
+     
+          <div>
+            <a href="https://www.zhihu.com/people/XXX" target="_blank" rel="noopener">
+        知乎
+      </a>
+    </div>
+     
+          <div>
+            <a href="/rss2.xml">
+        rss
+      </a>
+    </div>
+     
+          <div>
+            <a href="/">
+        关于我
+      </a>
+    </div>
+     
+    </ul>
+    </div>
+    <div class="archives"><a href="/archives">
+      <svg class="i-archive" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+        <path d="M4 10 L4 28 28 28 28 10 M2 4 L2 10 30 10 30 4 Z M12 15 L20 15"></path>
+      </svg>
+    </a></div>
+  </div>
+  </div>
+</nav>
+
+<ul class="posts">
   
-    <!-- Google Analytics -->
     
+<li class="post-item">
+  
+  
+    <h1 class="index-title">
+        <a href="/2020/04/29/Introduction-to-Database-Principle-note/">
+            Introduction-to-Database-Principle-note
+        </a>
+    </h1>
+  
 
-    <!-- Service Worker -->
-    <!-- if using service worker -->
+
+  <div class="excerpt">
+  
+    <p>I have recently studied the database again, so take a note</p>
+  
+  <a href="/2020/04/29/Introduction-to-Database-Principle-note/">
+    more
+  </a>
+  </div>
+  <div class="index-meta">
+    <time datetime="2020-04-29T01:44:23.102Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2020-04-29
+</time>
+
 
     
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/Database/">Database</a>
+
+
+
+
+
+  </div>
+</li>
+<hr>
+
+
+
+
+
+  
+    
+<li class="post-item">
+  
+  
+    <h1 class="index-title">
+        <a href="/2020/04/29/hello-world/">
+            Hello World
+        </a>
+    </h1>
+  
+
+
+  <div class="excerpt">
+  
+    Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
+  
+  <a href="/2020/04/29/hello-world/">
+    more
+  </a>
+  </div>
+  <div class="index-meta">
+    <time datetime="2020-04-29T00:23:52.538Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2020-04-29
+</time>
+
+
+
+
+
+
+  </div>
+</li>
+<hr>
+
+
+
+
+
+  
+</ul>
+<ul class="pager">
+    <span class="page-number current">1</span>
+</ul>
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © zachary 2019-2020
+    </div>
+    <div class="secondrow">
+        <a href="https://github.com/gaoryrt/hexo-theme-pln" target="_blank" rel="noopener">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
 </body>
-
 </html>
