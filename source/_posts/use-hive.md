@@ -1,7 +1,7 @@
 ---
 title: Detailed explanation of using hive
 date: 2020-03-12 
-tags:
+tags: Database
 ---
 
 最近用到hive，这里做个笔记. hive 的 hql 的使用总结也算的上七七八八了. 以后在补充吧.
@@ -24,6 +24,7 @@ hive不支持 `insert` 语句，数据只能通过 `load` 导入
 # hive建表
 首先看官网介绍 (进行一定标注)
 `[ ]`表示可选，`|` 表示二选一
+
 ```sql
 CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] [db_name.]table_name    
 	-- (Note: TEMPORARY 0.14.0版本及以后存在)
@@ -145,21 +146,24 @@ hive> create external table cpo_1 (url string, title string, reply_number int, l
 >下面表中描述了谓词操作符，这些操作符同样可以用于JOIN…ON和HAVING语句中。
 	
 **比较运算符**
-操作符|支持的数据类型|描述
-|---|---|---|
-A=B|基本数据类型|如果A等于B则返回TRUE，反之返回FALSE
-A<=>B|基本数据类型|如果A和B都为NULL，则返回TRUE，其他的和等号（=）操作符的结果一致，如果任一为NULL则结果为NULL
-A<>B, A!=B|基本数据类型|A或者B为NULL则返回NULL；如果A不等于B，则返回TRUE，反之返回FALSE
-A<B|基本数据类型|A或者B为NULL，则返回NULL；如果A小于B，则返回TRUE，反之返回FALSE
-A<=B|基本数据类型|A或者B为NULL，则返回NULL；如果A小于等于B，则返回TRUE，反之返回FALSE
-A>B|基本数据类型|A或者B为NULL，则返回NULL；如果A大于B，则返回TRUE，反之返回FALSE
-A>=B|基本数据类型|A或者B为NULL，则返回NULL；如果A大于等于B，则返回TRUE，反之返回FALSE
-A [NOT] BETWEEN B AND C|基本数据类型|如果A，B或者C任一为NULL，则结果为NULL。如果A的值大于等于B而且小于或等于C，则结果为TRUE，反之为FALSE。如果使用NOT关键字则可达到相反的效果。
-A IS NULL|所有数据类型|如果A等于NULL，则返回TRUE，反之返回FALSE
-A IS NOT NULL|所有数据类型|如果A不等于NULL，则返回TRUE，反之返回FALSE
-IN(数值1, 数值2)|所有数据类型|使用 IN运算显示列表中的值
-A [NOT] LIKE B|STRING 类型|B是一个SQL下的简单正则表达式，如果A与其匹配的话，则返回TRUE；反之返回FALSE。B的表达式说明如下：‘x%’表示A必须以字母‘x’开头，‘%x’表示A必须以字母’x’结尾，而‘%x%’表示A包含有字母’x’,可以位于开头，结尾或者字符串中间。如果使用NOT关键字则可达到相反的效果。
-A RLIKE B, A REGEXP B|STRING 类型|B是一个正则表达式，如果A与其匹配，则返回TRUE；反之返回FALSE。匹配使用的是JDK中的正则表达式接口实现的，因为正则也依据其中的规则。例如，正则表达式必须和整个字符串A相匹配，而不是只需与其字符串匹配。
+
+```
+| 操作符                  | 支持的数据类型 | 描述                                                                                                                                                                                                                                                      |
+|-------------------------|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| A=B                     | 基本数据类型   | 如果A等于B则返回TRUE，反之返回FALSE                                                                                                                                                                                                                       |
+| A<=>B                   | 基本数据类型   | 如果A和B都为NULL，则返回TRUE，其他的和等号（=）操作符的结果一致，如果任一为NULL则结果为NULL                                                                                                                                                               |
+| A<>B, A!=B              | 基本数据类型   | A或者B为NULL则返回NULL；如果A不等于B，则返回TRUE，反之返回FALSE                                                                                                                                                                                           |
+| A<B                     | 基本数据类型   | A或者B为NULL，则返回NULL；如果A小于B，则返回TRUE，反之返回FALSE                                                                                                                                                                                           |
+| A<=B                    | 基本数据类型   | A或者B为NULL，则返回NULL；如果A小于等于B，则返回TRUE，反之返回FALSE                                                                                                                                                                                       |
+| A>B                     | 基本数据类型   | A或者B为NULL，则返回NULL；如果A大于B，则返回TRUE，反之返回FALSE                                                                                                                                                                                           |
+| A>=B                    | 基本数据类型   | A或者B为NULL，则返回NULL；如果A大于等于B，则返回TRUE，反之返回FALSE                                                                                                                                                                                       |
+| A [NOT] BETWEEN B AND C | 基本数据类型   | 如果A，B或者C任一为NULL，则结果为NULL。如果A的值大于等于B而且小于或等于C，则结果为TRUE，反之为FALSE。如果使用NOT关键字则可达到相反的效果。                                                                                                                |
+| A IS NULL               | 所有数据类型   | 如果A等于NULL，则返回TRUE，反之返回FALSE                                                                                                                                                                                                                  |
+| A IS NOT NULL           | 所有数据类型   | 如果A不等于NULL，则返回TRUE，反之返回FALSE                                                                                                                                                                                                                |
+| IN(数值1, 数值2)        | 所有数据类型   | 使用 IN运算显示列表中的值                                                                                                                                                                                                                                 |
+| A [NOT] LIKE B          | STRING 类型    | B是一个SQL下的简单正则表达式，如果A与其匹配的话，则返回TRUE；反之返回FALSE。B的表达式说明如下：‘x%’表示A必须以字母‘x’开头，‘%x’表示A必须以字母’x’结尾，而‘%x%’表示A包含有字母’x’,可以位于开头，结尾或者字符串中间。如果使用NOT关键字则可达到相反的效果。 |
+| A RLIKE B, A REGEXP B   | STRING 类型    | B是一个正则表达式，如果A与其匹配，则返回TRUE；反之返回FALSE。匹配使用的是JDK中的正则表达式接口实现的，因为正则也依据其中的规则。例如，正则表达式必须和整个字符串A相匹配，而不是只需与其字符串匹配。                                                       |
+```
 
 **逻辑运算符**
 
