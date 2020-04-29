@@ -5,5 +5,5 @@
 # but these
 !/.gitignore
 !/_config.yml
-!/source
+!/source/
 !/themes/
