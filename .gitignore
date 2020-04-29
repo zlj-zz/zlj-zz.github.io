@@ -1,0 +1,9 @@
+# ignore everything
+/*
+/*/
+
+# but these
+!/.gitignore
+!/_config.yml
+!/source
+!/themes
