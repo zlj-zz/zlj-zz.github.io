@@ -1,7 +1,9 @@
 ---
 title: Detailed explanation of using hive
 date: 2020-03-12 
-tags: Database
+category: Database
+tags: Hive
+
 ---
 
 最近用到hive，这里做个笔记. hive 的 hql 的使用总结也算的上七七八八了. 以后在补充吧.

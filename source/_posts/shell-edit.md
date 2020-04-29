@@ -1,7 +1,9 @@
 ---
 title: shell edit
 date: 2020-03-04 
-tags: Linux
+category: Linux
+tags: shell
+
 ---
 基础的 shell 编程知识, 还有一些对应的小例子.
 <!--more-->

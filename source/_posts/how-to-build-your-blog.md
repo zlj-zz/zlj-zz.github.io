@@ -1,8 +1,9 @@
 ---
 title: How to build your blog use hexo + github
-category: hexo
+category: Front-end
 date: 2020-04-29 10:08:13
 tags: hexo
+
 ---
 Building a personal blog is simpler than it seems
 <!--more-->

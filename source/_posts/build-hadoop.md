@@ -1,7 +1,9 @@
 ---
 title: 搭建 Hadoop 平台
 date: 2020-03-11 09:18:59
-tags: Database
+category: Database
+tags: Hadoop
+
 ---
 如何一步步的搭建 Hadoop 平台, 并解决一些搭建过程中遇到的问题. Hadoop 版本为: 2.10
 <!--more-->

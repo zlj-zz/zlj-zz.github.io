@@ -1,7 +1,9 @@
 ---
 title: 部署 hive 
 date: 2020-03-11 22:01:55
-tags: Database
+category: Database
+tags: Hive
+
 ---
 如何一步步的搭建 Hive, 选择 MySQL 作为元仓库, 并解决一些搭建过程中遇到的问题. Hive 版本为: 2.3.6
 <!--more-->
