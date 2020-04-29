@@ -5,11 +5,11 @@
 # Site
 title: =just a blogs=
 subtitle: ''
-description: ''
-keywords:
+description: 'This is my personal blog, share knowledge, record life.'
+keywords: computer,Linux,Python,big-data
 author: Zachary Zhang
 language: en
-timezone: ''
+timezone: 'Aisa/Shanghai'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
