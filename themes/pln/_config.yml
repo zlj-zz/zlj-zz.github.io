@@ -19,6 +19,14 @@ about:
 
 show_toc_bool: true
 
+favicon:
+    small: /images/favicon16.ico
+    medium: /images/favicon32.ico
+
+search:
+  path: search.xml
+  field: all
+
 # If you want to use valine,you should get the appId and appKey form https://leancloud.cn ,more setting please see https://valine.js.org
 valine:
   enable: false # !!if you want use valine comment system,please set enable: true
