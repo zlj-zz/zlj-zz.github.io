@@ -1,5 +1,5 @@
 ---
-title: Redis Command Note
+title: Redis 常用命令总结
 date: 2020-01-12 18:42:01
 category: Database
 tags: redis

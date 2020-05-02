@@ -1,6 +1,6 @@
 ---
-title: shell edit
-date: 2020-03-04 
+title: 如何 shell 编程?
+date: 2020-03-04
 category: Linux
 tags: shell
 

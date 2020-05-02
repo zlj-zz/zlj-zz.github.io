@@ -1,5 +1,5 @@
 ---
-title: Detailed explanation of using hive
+title: Hive 使用命令总结
 date: 2020-03-12 
 category: Database
 tags: Hive

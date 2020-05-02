@@ -1,4 +1,4 @@
-title: Introduction to Database Principle note
+title: 数据库系统概论总结笔记
 category: Database
 date: 2020-04-15
 
