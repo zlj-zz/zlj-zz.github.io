@@ -6,14 +6,14 @@
 title: =just a blogs=
 subtitle: 'Hope to have what you need'
 description: 'This is my personal blog, share knowledge, record life.'
-keywords: computer,Linux,Python,big-data
+keywords: computer,Linux,Python,big data,machine learning
 author: Zachary Zhang
 language: en
 timezone: 'Asia/Shanghai'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://zlj-zz.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -91,6 +91,16 @@ archive: 1
 include:
 exclude:
 ignore:
+
+#toc:
+  #maxdepth: 2
+  #class: toc
+  #slugify: transliteration
+  #decodeEntities: false
+  #anchor:
+    #position: after
+    #symbol: '#'
+    #style: header-anchor
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
