@@ -11,7 +11,7 @@ more:
   微博: http://weibo.com/277008301
   知乎: https://www.zhihu.com/people/te-amo-88-81
   markdown 表格: https://tableconvert.com/
-  关于我: /
+  #关于我: /
 
 about:
   title: Theme Pln
@@ -43,6 +43,6 @@ valine:
 
 excerpt_num: 120
 
-footer_info: © zachary 2019-2020
+footer_info: © zachary 2018-2020
 
 latex: true
