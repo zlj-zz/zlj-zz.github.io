@@ -735,11 +735,17 @@ blockquote p {
     color: #aaa;
     text-indent: 0;
     /*line-height: 1.0;*/
-    font-size: 13px
+    font-size: 15px
 }
 
 table {
-    width: 100%
+    width: 100%;
+}
+
+th, td{
+  text-align: left;
+  border-left:1px solid #B0B0B0;
+  border-top:1px solid #B0B0B0;
 }
 
 img,object,article.post iframe,video {
