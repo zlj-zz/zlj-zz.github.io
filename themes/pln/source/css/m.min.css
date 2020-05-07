@@ -740,10 +740,16 @@ blockquote p {
 
 table {
     width: 100%;
+    border-collapse: collapse;
 }
 
 th, td{
   text-align: left;
+  /*border-left:1px solid #B0B0B0;*/
+  /*border-top:1px solid #B0B0B0;*/
+}
+
+.header>th, .odd>td, .even>td {
   border-left:1px solid #B0B0B0;
   border-top:1px solid #B0B0B0;
 }
