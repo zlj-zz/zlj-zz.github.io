@@ -357,7 +357,16 @@ a.page-number:hover,a.next:hover,a.prev:hover {
 }
 
 figure {
-    overflow-x: auto
+    overflow-x: auto;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+
+}
+
+figure::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
 }
 
 td.gutter {
@@ -551,7 +560,19 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 h1 {
-    font-size: 32px
+    font-size: 34px
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 26px;
+}
+h4 {
+  font-size: 22px;
+}
+h5{
+  font-size: 18px;
 }
 
 .index-title,.navbar-brand,.section-year,.archive-title,.dropdown-content,.pager,.page-title,h1,h2,h3,h4,h5,h6,.toc,.index-meta,.meta,.description,.busuanzi,.archive-num {
