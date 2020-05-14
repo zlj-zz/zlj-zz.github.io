@@ -447,8 +447,8 @@ pre .function,pre .python .decorator,pre .python .title,pre .ruby .function .tit
     }
 
     pre {
-        font-size: 1.2rem;
-        line-height: 18px;
+        font-size: 1rem;
+        line-height: 27px;
         padding: 10px;
         background-size: auto 36px
     }
