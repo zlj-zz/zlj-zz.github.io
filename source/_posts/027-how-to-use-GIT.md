@@ -1,26 +1,37 @@
 ---
 title: 如何流畅丝滑的使用git
 date: 2020-09-07
+change-date: 2020-10-17 14:40
 category: Linux
 ---
 
-@[TOC](这里写目录标题)
-
 # git 使用
+
+## basic
 
 <kbd>git init</kbd> 可以将一个文件夹初始化为一个 git 目录，会生成一个`.git`的隐藏目录。
 
-<kbd>git remote add \<url\></kbd> 可以帮助我们连接到一个远程的仓库。
+<kbd>git remote add \<remote\> \<branch\> \<url\></kbd> 可以帮助我们连接到一个远程的仓库。
 
 <kbd>git clone [-b branch-name] \<url\> </kbd> 可以克隆一个远程仓库到本地，`-b`参数可以指定分支。
 
-<kbd>git status</kbd>查看工作树状态。
+## view
 
-<kbd>git add \<file\></kbd>可以添加文件的变化到暂存区，可以用`.`表示添加所有变化。
+<kbd>git status</kbd>查看工作树状态。
 
 > `-u`参数用来添加被追踪的文件，即新建文件不会被添加。
 
 <kbd>git diff \<file\></kbd>查看文件的改变。
+
+<kbd>git log</kbd> 查看**commit**提交信息日志。
+
+> `-graph`以图的形式显示。
+> `-all`查看全部分支。
+> `-oneline`条件信息只显示一行。
+
+## change
+
+<kbd>git add \<file\></kbd>可以添加文件的变化到暂存区，可以用`.`表示添加所有变化。
 
 <kbd>git commit</kbd>用来提交文件，回车后自动打开编辑器让你编辑提交信息。
 
@@ -31,9 +42,13 @@ category: Linux
 
 <kbd>git fetch</kbd>将远程最新的内容拉到本地。
 
+<kbd>git fetch \<remote\> \<remotebranch\>:\<localebranch\> </kbd>将远程最新的内容拉到本地。
+
 <kbd>git merge [branch-name]</kbd>合并分支，默认合并远程分支；可以将指定分支合并到当前分支。
 
 <kbd>git pull</kbd>等于`git fetch`+`git merge`
+
+## option
 
 <kbd>git branch [branch-name]</kbd>查看分支或者创建新分支。
 
@@ -42,11 +57,9 @@ category: Linux
 > 使用`-b`参数创建并切换分支。
 > 合并冲突时，`--ours|--theirs [file]`选择使用哪个分支。
 
-<kbd>git log</kbd> 查看**commit**提交信息日志。
+<kbd>git stash</kbd> Can hide your uncommitted changes.
 
-> `-graph`以图的形式显示。
-> `-all`查看全部分支。
-> `-oneline`条件信息只显示一行。
+<kbd>git stash pop</kbd> Can restore your hidden changes.
 
 <kbd>git reset</kbd> 复位操作，可以用于`add`, `commit`
 
