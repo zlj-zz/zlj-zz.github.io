@@ -2,7 +2,6 @@
 title: Python最好减少使用 from...import，这里告诉你为什么
 date: 2020-06-11
 category: Python
-
 ---
 
 在 **Python** 中我们可以通过三种方式来引入外部的模块：
@@ -24,9 +23,9 @@ __import__('sys')
 - 有节制地使用 `from a import B` 形式，可以直接访问 `B`。
 - 尽量避免使用 `from a import *`，因为这会污染命名空间，并且无法清晰地表示导入了哪些对象。
 
-那么为什么要注意i这些呢？
+那么为什么要注意 i 这些呢？
 
-这就不得不说说 Python 中的 `import` 机制。Python在初始化运行环境的时候会预先加载一批内建模块到内存中，这些模块相关的信息被存放在 `sys.modules` 中。导入 `sys` 模块后在 Python 解释器中输入 `sys.modules.items()` 便可显示所有预加载模块的相关信息。当加载一个模块的时候，解释器实际上要完成以下动作：
+这就不得不说说 Python 中的 `import` 机制。Python 在初始化运行环境的时候会预先加载一批内建模块到内存中，这些模块相关的信息被存放在 `sys.modules` 中。导入 `sys` 模块后在 Python 解释器中输入 `sys.modules.items()` 便可显示所有预加载模块的相关信息。当加载一个模块的时候，解释器实际上要完成以下动作：
 
 1. 在 `sys.modules` 中进行搜索看看该模块是否已经存在，如果存在，则将其导入到当前局部命名空间，加载结束。
 2. 如果在 `sys.modules` 中找不到对应模块的名称，则为需要导入的模块创建一个字典对象，并将该对象信息插入 `sys.modules` 中。
@@ -35,11 +34,11 @@ __import__('sys')
 
 ![demo](https://img-blog.csdnimg.cn/2020061101451629.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDEwNDk0,size_16,color_FFFFFF,t_70#pic_center)
 
-从输出结果可以看出，对于用户定义的模块，`import` 机制会创建一个新的module将其加入当前的局部命名空间中，与此同时，`sys.modules` 也加入了该模块的相关信息。
+从输出结果可以看出，对于用户定义的模块，`import` 机制会创建一个新的 module 将其加入当前的局部命名空间中，与此同时，`sys.modules` 也加入了该模块的相关信息。
 
 ![demo2](https://img-blog.csdnimg.cn/20200611015113603.png#pic_center)
 
-但从它们的id输出结果可以看出，本质上是引用同一个对象。
+但从它们的 id 输出结果可以看出，本质上是引用同一个对象。
 
 需要注意的是，直接使用 `import` 和使用 `from a import B` 形式这两者之间存在一定的差异，后者直接将 `B` 暴露于当前局部空间，而将 `a` 加载到 `sys.modules` 集合。
 

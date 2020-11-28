@@ -1,11 +1,10 @@
 ---
 title: How to make Hexo support mathematical formulas
-date: 2020-04-30 
+date: 2020-04-30
 category: Front-end
 tags:
-- hexo
-- Latex
-
+  - hexo
+  - Latex
 ---
 
 Mathematical formulas are often used when we blog. But we will find bugs in Hexo's support for mathematical formulas.
@@ -15,11 +14,13 @@ By default, Hexo uses the `hexo-render-marked` engine to render web pages. This 
 When we write mathematical formulas in Latex-like format, some meaningful symbols will conflict with the engine. We can solve this problems by replacing the engine.
 
 Download `pandoc`:
+
 ```shell
 sudo pacman -S Pandoc
 ```
 
 Install `hexo-renderer-pandoc`:
+
 ```shell
 npm uninstall hexo-renderer-marked --save
 npm install hexo-renderer-pandoc --save

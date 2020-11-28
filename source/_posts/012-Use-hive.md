@@ -1,34 +1,36 @@
 ---
 title: Hive 使用命令总结
-date: 2020-03-12 
+date: 2020-03-12
 category: Database
 tags: Hive
-
 ---
 
-最近用到hive，这里做个笔记. hive 的 hql 的使用总结也算的上七七八八了. 以后在补充吧.
+最近用到 hive，这里做个笔记. hive 的 hql 的使用总结也算的上七七八八了. 以后在补充吧.
 
 <!--more-->
 
-# hive导入数据
-hive不支持 `insert` 语句，数据只能通过 `load` 导入
+# hive 导入数据
+
+hive 不支持 `insert` 语句，数据只能通过 `load` 导入
 **1.本地导入**
 ` hive> load data local inpath 'file-path' into table table-name;`
-**2.HDFS导入**
+**2.HDFS 导入**
 `hive> load data inpath 'hdfs-path' into table table-name;`
->本地导入的过程就是先加载到HDFS中，再导入hive表中
+
+> 本地导入的过程就是先加载到 HDFS 中，再导入 hive 表中
 
 **3.查询导入**
 `hive> insert into table table-name 查询语句`
 **4.创建表时查询导入** (建表的方式之一)
 `hive> create table table-name as 查询语句`
 
-# hive建表
+# hive 建表
+
 首先看官网介绍 (进行一定标注)
 `[ ]`表示可选，`|` 表示二选一
 
 ```sql
-CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] [db_name.]table_name    
+CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] [db_name.]table_name
 	-- (Note: TEMPORARY 0.14.0版本及以后存在)
   [(col_name data_type [COMMENT col_comment], ... [constraint_specification])]
   --(列名 data_type comment 列注释内容)
@@ -46,15 +48,15 @@ CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] [db_name.]table_name
   ]
   [LOCATION hdfs_path]
   [TBLPROPERTIES (property_name=property_value, ...)]   -- (Note: Available in Hive 0.6.0 and later)
- 
+
 
 [AS select_statement];   -- (Note: Available in Hive 0.5.0 and later; not supported for external tables)
- 
+
 
 CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] [db_name.]table_name
   LIKE existing_table_or_view_name
   [LOCATION hdfs_path];
- 
+
 data_type --(支持数据类型)
   : primitive_type --(原始类型)
   | array_type --(存储同类型的list，如:array<data_type>)
@@ -62,8 +64,8 @@ data_type --(支持数据类型)
   | struct_type --(存储不同类型)
   		：STRUCT < col_name : data_type [COMMENT col_comment], ...>
   | union_type  -- (有限取值范围内取值，Note:0.7.0版本及之后存在)
-  		: UNIONTYPE < data_type, data_type, ... >  
-  		
+  		: UNIONTYPE < data_type, data_type, ... >
+
 primitive_type --(支持原始类型)
   : TINYINT --(1bit整数，如：45Y)
   | SMALLINT --(2bit整数，如：45S)
@@ -81,13 +83,13 @@ primitive_type --(支持原始类型)
   | DATE        -- (日期，如：'2020-3-10'，Note: 0.12.0版本及之后存在)
   | VARCHAR     -- (变长字符串，长度有上限，Note: 0.12.0版本及之后存在)
   | CHAR        -- (定长字符串，Note: 0.13.0版本及之后存在)
- 
+
 row_format --(行样式格式)
   : DELIMITED [FIELDS TERMINATED BY char [ESCAPED BY char]] [COLLECTION ITEMS TERMINATED BY char]
         [MAP KEYS TERMINATED BY char] [LINES TERMINATED BY char]
         [NULL DEFINED AS char]   -- (Note: 0.13.0版本及之后存在)
   | SERDE serde_name [WITH SERDEPROPERTIES (property_name=property_value, property_name=property_value, ...)]
- 
+
 file_format: --(文件存储格式)
   : SEQUENCEFILE
   | TEXTFILE    -- (Default, 文本格式, 常用)
@@ -97,56 +99,65 @@ file_format: --(文件存储格式)
   | PARQUET     -- (Note: 0.13.0版本及之后存在)
   | AVRO        -- (Note: 0.14.0版本及之后存在)
   | INPUTFORMAT input_format_classname OUTPUTFORMAT output_format_classname
- 
+
 constraint_specification: --(约束规范)
   : [, PRIMARY KEY (col_name, ...) DISABLE NOVALIDATE ] --(主键)
   	--(外键约束)
     [, CONSTRAINT constraint_name FOREIGN KEY (col_name, ...) REFERENCES table_name(col_name, ...) DISABLE NOVALIDATE
 ```
+
 样例
+
 ```sql
 hive> create table cpo_1 (url string, title string, reply_number int, last_time string, content array<string>)
     > row format delimited fields terminated by '\t' collection items terminated by '-';
 ```
-### like建表
-会创建结构完全相同的表，但是没有数据。 
+
+### like 建表
+
+会创建结构完全相同的表，但是没有数据。
 常用语中间表 `CREATE TABLE empty_key_value_store LIKE key_value_store;`
 
 ### 外部表
-未被 `external` 修饰的是内部表(managed table)，被 `external` 修饰的为外部表(external table)；  
->内部表数据由 Hive 自身管理，外部表数据由 HDFS 管理； 
-内部表数据存储的位置是hive.metastore.warehouse.dir（默认：/user/hive/warehouse），外部表数据的存储位置由自己制定； 
-删除内部表会直接删除元数据（metadata）及存储数据；删除外部表仅仅会删除元数据，HDFS上的文件并不会被删除； 
-对内部表的修改会将修改直接同步给元数据，而对外部表的表结构和分区进行修改，则需要修复（MSCK REPAIR TABLE table_name;）
+
+未被 `external` 修饰的是内部表(managed table)，被 `external` 修饰的为外部表(external table)；
+
+> 内部表数据由 Hive 自身管理，外部表数据由 HDFS 管理；
+> 内部表数据存储的位置是 hive.metastore.warehouse.dir（默认：/user/hive/warehouse），外部表数据的存储位置由自己制定；
+> 删除内部表会直接删除元数据（metadata）及存储数据；删除外部表仅仅会删除元数据，HDFS 上的文件并不会被删除；
+> 对内部表的修改会将修改直接同步给元数据，而对外部表的表结构和分区进行修改，则需要修复（MSCK REPAIR TABLE table_name;）
 
 样例
+
 ```sql
 hive> create external table cpo_1 (url string, title string, reply_number int, last_time string, content array<string>, add map<String,string>)
-    > row format delimited fields terminated by '\t' 
-    > collection items terminated by '-'  
+    > row format delimited fields terminated by '\t'
+    > collection items terminated by '-'
 	> map keys terminated by ':'
 	> location '/user/t2';
 ```
 
-# hive查询
-1. 显示表结构：`desc tablename` or `desc formatted tablename`
-1.  全表查询：`select * from emp;`
-2.  选择特定列查询：`select empno, ename from emp;`
-3.  列别名查询：`select ename AS name, deptno dn from emp;`
-4.  算术运算符：`select sal + 1 from emp;`
-5.  常用函数
-    ① 求总行数（**count**）：`hive> select count(*) cnt from emp;`
-    ② 求工资的最大值（**max**）：`hive> select max(sal) max_sal from emp;`
-    ③ 求工资的最小值（**min**）：`hive> select min(sal) min_sal from emp;`
-    ④ 求工资的总和（**sum**）：`hive> select sum(sal) sum_sal from emp;`
-    ⑤ **Limit** 语句：`hive> select * from emp limit 5;`
+# hive 查询
 
-6. where语句
-    `hive> select * from emp where sal >1000;`
+1. 显示表结构：`desc tablename` or `desc formatted tablename`
+1. 全表查询：`select * from emp;`
+1. 选择特定列查询：`select empno, ename from emp;`
+1. 列别名查询：`select ename AS name, deptno dn from emp;`
+1. 算术运算符：`select sal + 1 from emp;`
+1. 常用函数
+   ① 求总行数（**count**）：`hive> select count(*) cnt from emp;`
+   ② 求工资的最大值（**max**）：`hive> select max(sal) max_sal from emp;`
+   ③ 求工资的最小值（**min**）：`hive> select min(sal) min_sal from emp;`
+   ④ 求工资的总和（**sum**）：`hive> select sum(sal) sum_sal from emp;`
+   ⑤ **Limit** 语句：`hive> select * from emp limit 5;`
+
+1. where 语句
+   `hive> select * from emp where sal >1000;`
 
 ### 运算符
->下面表中描述了谓词操作符，这些操作符同样可以用于JOIN…ON和HAVING语句中。
-	
+
+> 下面表中描述了谓词操作符，这些操作符同样可以用于 JOIN…ON 和 HAVING 语句中。
+
 **比较运算符**
 
 ```
@@ -169,109 +180,140 @@ hive> create external table cpo_1 (url string, title string, reply_number int, l
 
 **逻辑运算符**
 
-操作符|含义
-|--|--|
-AND|逻辑并
-OR|逻辑或
-NOT|逻辑否
+| 操作符 | 含义   |
+| ------ | ------ |
+| AND    | 逻辑并 |
+| OR     | 逻辑或 |
+| NOT    | 逻辑否 |
 
-### Like和RLike
+### Like 和 RLike
+
 1. 使用 `like` 运算选择类似的值
-2.  选择条件可以包含字符或数字:`%` 代表零个或多个字符(任意个字符)。`_`  代表一个字符。
-3.  `RLIKE` 子句是Hive中这个功能的一个扩展，其可以通过Java的正则表达式这个更强大的语言来指定匹配条件。
+2. 选择条件可以包含字符或数字:`%` 代表零个或多个字符(任意个字符)。`_` 代表一个字符。
+3. `RLIKE` 子句是 Hive 中这个功能的一个扩展，其可以通过 Java 的正则表达式这个更强大的语言来指定匹配条件。
 
- `查找薪水中含有2的员工信息：hive (default)> select * from emp where sal RLIKE  '[2]’;`
+`查找薪水中含有2的员工信息：hive (default)> select * from emp where sal RLIKE '[2]’;`
 
 ### 分组
- **Group By语句**
->GROUP BY语句通常会和聚合函数一起使用，按照一个或者多个列队结果进行分组，然后对每个组执行聚合操作。
 
-计算emp表每个部门的平均工资:`hive> select t.deptno, avg(t.sal) avg_sal from emp t group by t.deptno;`
+**Group By 语句**
 
-**Having语句**
-having与where不同点 :
+> GROUP BY 语句通常会和聚合函数一起使用，按照一个或者多个列队结果进行分组，然后对每个组执行聚合操作。
 
-1. where针对表中的列发挥作用,查询数据；having针对查询结果中的列发挥作用，筛选数据。
-2.  where后面不能写分组函数，而having后面可以使用分组函数。
-3. having只用于group by分组统计语句。
+计算 emp 表每个部门的平均工资:`hive> select t.deptno, avg(t.sal) avg_sal from emp t group by t.deptno;`
 
-求每个部门的平均薪水大于2000的部门:`hive> select deptno, avg(sal) avg_sal from emp group by deptno having avg_sal > 2000;`
+**Having 语句**
+having 与 where 不同点 :
+
+1. where 针对表中的列发挥作用,查询数据；having 针对查询结果中的列发挥作用，筛选数据。
+2. where 后面不能写分组函数，而 having 后面可以使用分组函数。
+3. having 只用于 group by 分组统计语句。
+
+求每个部门的平均薪水大于 2000 的部门:`hive> select deptno, avg(sal) avg_sal from emp group by deptno having avg_sal > 2000;`
 
 ### join
- **等值Join**
->Hive支持通常的SQL JOIN语句，但是只支持等值连接，不支持非等值连接。
+
+**等值 Join**
+
+> Hive 支持通常的 SQL JOIN 语句，但是只支持等值连接，不支持非等值连接。
 
 案例实操:根据员工表和部门表中的部门编号相等，查询员工编号、员工名称和部门编号:
+
 ```sql
 select e.empno, e.ename, d.deptno, d.dname from emp e join dept d on e.deptno = d.deptno;
 ```
- **内连接**
- >只有进行连接的两个表中都存在与连接条件相匹配的数据才会被保留下来。
+
+**内连接**
+
+> 只有进行连接的两个表中都存在与连接条件相匹配的数据才会被保留下来。
+
 ```sql
 select e.empno, e.ename, d.deptno from emp e join dept d on e.deptno=d.deptno;
 ```
+
 **左外连接**
->JOIN操作符左边表中符合WHERE子句的所有记录将会被返回。
+
+> JOIN 操作符左边表中符合 WHERE 子句的所有记录将会被返回。
+
 ```sql
 select e.empno, e.ename, d.deptno from emp e left join dept d on e.deptno=d.deptno;
 ```
- **右外连接**
->JOIN操作符右边表中符合WHERE子句的所有记录将会被返回。
+
+**右外连接**
+
+> JOIN 操作符右边表中符合 WHERE 子句的所有记录将会被返回。
+
 ```sql
 select e.empno, e.ename, d.deptno from emp e right join dept d on e.deptno= d.deptno;
 ```
+
 **满外连接**
->将会返回所有表中符合WHERE语句条件的所有记录。如果任一表的指定字段没有符合条件的值的话，那么就使用NULL值替代。
+
+> 将会返回所有表中符合 WHERE 语句条件的所有记录。如果任一表的指定字段没有符合条件的值的话，那么就使用 NULL 值替代。
+
 ```sql
 select e.empno, e.ename, d.deptno from emp e full join dept d on e.deptno= d.deptno;
 ```
+
 **多表连接**
->连接 n个表，至少需要n-1个连接条件。例如：连接三个表，至少需要两个连接条件。
+
+> 连接 n 个表，至少需要 n-1 个连接条件。例如：连接三个表，至少需要两个连接条件。
+
 ```sql
 SELECT e.ename, d.deptno, l. loc_name FROM  emp e JOIN  dept d ON d.deptno = e.deptno JOIN   location l ON  d.loc = l.loc;
 ```
->**说明**：大多数情况下，Hive会对每对JOIN连接对象启动一个MapReduce任务。本例中会首先启动一个MapReduce job对表e和表d进行连接操作，然后会再启动一个MapReduce job将第一个MapReduce job的输出和表l进行连接操作。
->**注意**：为什么不是表d和表l先进行连接操作呢？这是因为Hive总是按照从左到右的顺序执行的。
 
+> **说明**：大多数情况下，Hive 会对每对 JOIN 连接对象启动一个 MapReduce 任务。本例中会首先启动一个 MapReduce job 对表 e 和表 d 进行连接操作，然后会再启动一个 MapReduce job 将第一个 MapReduce job 的输出和表 l 进行连接操作。
+> **注意**：为什么不是表 d 和表 l 先进行连接操作呢？这是因为 Hive 总是按照从左到右的顺序执行的。
 
 ### 排序
+
 **全局排序**（`Order By`）
->    `ASC`（ascend）: 升序（默认）
+
+> `ASC`（ascend）: 升序（默认）
+
     `DESC`（descend）: 降序
 
-ORDER BY 子句在SELECT语句的结尾:
+ORDER BY 子句在 SELECT 语句的结尾:
 `hive (default)> select * from emp order by col_name;`
->也可以用别名，和使用多个字段
 
-**每个MapReduce内部排序**（`Sort By`）
- >Sort By：每个MapReduce内部进行排序，对全局结果集来说不是排序。
+> 也可以用别名，和使用多个字段
 
-（1）设置reduce个数:`hive> set mapreduce.job.reduces=3;`
-（2）查看设置reduce个数:`hive> set mapreduce.job.reduces;`
+**每个 MapReduce 内部排序**（`Sort By`）
+
+> Sort By：每个 MapReduce 内部进行排序，对全局结果集来说不是排序。
+
+（1）设置 reduce 个数:`hive> set mapreduce.job.reduces=3;`
+（2）查看设置 reduce 个数:`hive> set mapreduce.job.reduces;`
 （3）根据部门编号降序查看员工信息:`hive> select * from emp sort by empno desc;`
 （4）将查询结果导入到文件中（按照部门编号降序排序）:`hive> insert overwrite local directory '/opt/module/datas/sortby-result' select * from emp sort by deptno desc;`
 
 **分区排序**（`Distribute By`）
->Distribute By：类似MR中partition，进行分区，结合sort by使用。
-注意，Hive要求DISTRIBUTE BY语句要写在SORT BY语句之前。对于distribute by进行测试，一定要分配多reduce进行处理，否则无法看到distribute by的效果。
+
+> Distribute By：类似 MR 中 partition，进行分区，结合 sort by 使用。
+> 注意，Hive 要求 DISTRIBUTE BY 语句要写在 SORT BY 语句之前。对于 distribute by 进行测试，一定要分配多 reduce 进行处理，否则无法看到 distribute by 的效果。
 
 案例实操：
+
 - 先按照部门编号分区，再按照员工编号降序排序。
+
 ```sql
 hive> set mapreduce.job.reduces=3;
 hive> insert overwrite local directory '/opt/module/datas/distribute-result' select * from emp distribute by deptno sort by empno desc;
 ```
 
 **Cluster By**
->当distribute by和sorts by字段相同时，可以使用cluster by方式。
-cluster by除了具有distribute by的功能外还兼具sort by的功能。但是排序只能是倒序排序，不能指定排序规则为ASC或者DESC。
+
+> 当 distribute by 和 sorts by 字段相同时，可以使用 cluster by 方式。
+> cluster by 除了具有 distribute by 的功能外还兼具 sort by 的功能。但是排序只能是倒序排序，不能指定排序规则为 ASC 或者 DESC。
 
 以下两种写法等价
+
 ```sql
 hive (default)> select * from emp cluster by deptno;
 hive (default)> select * from emp distribute by deptno sort by deptno;
 ```
->注意：按照部门编号分区，不一定就是固定死的数值，可以是20号和30号部门分到一个分区里面去。
+
+> 注意：按照部门编号分区，不一定就是固定死的数值，可以是 20 号和 30 号部门分到一个分区里面去。
 
 ### 分桶及抽样查询
-

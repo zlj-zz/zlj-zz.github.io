@@ -3,21 +3,20 @@ title: linux下virtualbox使用
 date: 2020-05-27
 category: Linux
 tags:
-
 ---
 
-这里以自己使用的系统为案例  [MANJARO]
+这里以自己使用的系统为案例 [MANJARO]
 
-**VirtualBox** 是一种流行的应用程序，它允许在现有操作系统（称为Host）中安装和运行其他操作系统（称为Guests）。
+**VirtualBox** 是一种流行的应用程序，它允许在现有操作系统（称为 Host）中安装和运行其他操作系统（称为 Guests）。
 
 # 安装
 
 安装命令：
 
-要安装VirtualBox，您需要安装软件包 `virtualbox` 和 `linux*-virtualbox-host-modules`。后者必须与您正在运行的内核版本匹配。要列出已安装的内核，请使用 `mhwd`:
+要安装 VirtualBox，您需要安装软件包 `virtualbox` 和 `linux*-virtualbox-host-modules`。后者必须与您正在运行的内核版本匹配。要列出已安装的内核，请使用 `mhwd`:
 
 ```bash
-~> mhwd-kernel -li                                                           
+~> mhwd-kernel -li
 Currently running: 5.4.0-1-MANJARO (linux54)
 The following kernels are installed in your system:
    * linux54
@@ -76,4 +75,3 @@ sudo vboxreload
 安装完成后会出现一个驱动，点击安装该驱动。安装完成后重启就可以看到你的共享文件夹了。
 
 ![](https://img-blog.csdnimg.cn/20200527234751103.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDEwNDk0,size_16,color_FFFFFF,t_70#pic_center)
-

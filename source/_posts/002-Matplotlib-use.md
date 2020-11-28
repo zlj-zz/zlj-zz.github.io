@@ -3,9 +3,10 @@ title: 使用 matplotlib 绘制图标
 date: 2019-11-02 18:34:05
 category: Python
 tags: matplotlib
-
 ---
+
 怎么用 Python 绘制图标呢? 最常用的一定是 matplotlib 库吧. 那么来看看怎么使用吧.
+
 <!--more-->
 
 首先绘制一张简单的图
@@ -48,11 +49,11 @@ plt.show()
 
 ![在这里插入图片描述](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ickZyUUZ3QUIwWVhVdHVHaWJlYlBXN2tSUWZlNVI5aWI2NVpza3JKM1VzTDY0RkswMWliVmxRMDIyVUtDQXpsU3poellhNTBSRHRSQ1ZIeTMxdU9ySmZpYXcvNjQw?x-oss-process=image/format,png)
 
-现在图表是不是看起来好多了。在代码中我们可以通过title来指定图表的标题，通过`xlablel`和`ylabel`来指定`x`轴和`y`轴的标题。在绘制折线图的`plot()`方法中可以通过`color`参数来指定颜色，`linestyle`参数来指定线的样式。通过`legend()` 方法可以让图表显示图例，图例的文字可以通过plot中的`label`参数来指定。
+现在图表是不是看起来好多了。在代码中我们可以通过 title 来指定图表的标题，通过`xlablel`和`ylabel`来指定`x`轴和`y`轴的标题。在绘制折线图的`plot()`方法中可以通过`color`参数来指定颜色，`linestyle`参数来指定线的样式。通过`legend()` 方法可以让图表显示图例，图例的文字可以通过 plot 中的`label`参数来指定。
 
 花完了折线图，接下来让我们条形图和直方图
 
-有了plt.plot()的基础之后，对后面的理解就很容易了。
+有了 plt.plot()的基础之后，对后面的理解就很容易了。
 
 直接上例子：
 
@@ -132,6 +133,7 @@ plt.ylabel('y', rotation=0, fontsize='large')
 plt.legend()
 plt.show()
 ```
+
 运行结果如下：
 
 ![在这里插入图片描述](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ickZyUUZ3QUIwWVhVdHVHaWJlYlBXN2tSUWZlNVI5aWI2VzBQblZVWk9maWJIZUdEdVRkaWE1Nzc3dWdtbThzREVMT24xN256NzhyNFRNc3M4WlJ5VmhPMmcvNjQw?x-oss-process=image/format,png)
@@ -140,7 +142,6 @@ plt.show()
 
 - 条形图的长度是当前类别的频数，而它的宽是没有意义的，各个矩阵之间通常是分开排列的，主要是用于展示分类数据
 - 直方图使用矩阵的面积表示各组频度的，高代表频率、宽为组距，由于分组之间的数据具有连续性通常矩形直之间连续排列，主要用于展示数值型数
-
 
 最后让我们来看看散点图和饼图：
 
@@ -175,7 +176,6 @@ plt.show()
 
 用两组数据构成多个坐标点，考察坐标点的分布，判断两变量之间是否存在某种关联或总结坐标点的分布模式。散点图将序列显示为一组点。值由点在图表中的位置表示。类别由图表中的不同标记表示。散点图通常用于比较跨类别的聚合数据。
 
-
 ### 饼状图
 
 通常，饼图用于显示部分对于整体的情况，通常以`％`为单位。幸运的是，Matplotlib 会处理切片大小以及一切事情，我们只需要提供数值。
@@ -204,6 +204,6 @@ plt.show()
 
 接下来，我们可以选择指定图形的起始角度。这使你可以在任何地方开始绘图。例子中，我们为饼图选择了 90 度角。
 
-我们也可以选择给绘图添加一个字符大小的阴影，我们甚至可以使用`explode`拉出一个切片，使用explode参数就可以了，如果我们不想拉出任何切片，我们传入0,0,0,0,0。如果我们想要拉出第一个切片，我们传入0,0.1,0,0,0。
+我们也可以选择给绘图添加一个字符大小的阴影，我们甚至可以使用`explode`拉出一个切片，使用 explode 参数就可以了，如果我们不想拉出任何切片，我们传入 0,0,0,0,0。如果我们想要拉出第一个切片，我们传入 0,0.1,0,0,0。
 
 最后，我们使用`autopct`，选择将百分比放置到图表上面。
