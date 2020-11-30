@@ -67,3 +67,12 @@ Exponential moving average(EMA) of squared gradients is not monotonically increa
 
 - Adam: fast training, large generalization gap, unstable
 - SGDM: stable, little generalization gap, better convergence(?)
+
+**Advices**
+
+| SGDM              | Adam                     |
+| ----------------- | ------------------------ |
+| - Computer vision | - NLP                    |
+|                   | - Speedch synthesis      |
+|                   | - GAN                    |
+|                   | - Reinforcement learning |
