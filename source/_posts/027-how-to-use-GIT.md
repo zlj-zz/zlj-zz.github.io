@@ -54,6 +54,8 @@ category: Linux
 
 <kbd>git checkout</kbd>切换分支。
 
+<kbd>git checkout \<branch-name\> \<path-name\> [file-name]</kbd>合并分支制定文件
+
 > 使用`-b`参数创建并切换分支。
 > 合并冲突时，`--ours|--theirs [file]`选择使用哪个分支。
 
