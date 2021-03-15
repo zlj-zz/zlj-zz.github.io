@@ -1,0 +1,269 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>flutter 按钮用法小记</title>
+  <meta name="author" content="Zachary Zhang">
+  <meta name="description" content="This is my personal blog, share knowledge, record life.">
+  
+  
+  <meta property="og:title" content="flutter 按钮用法小记"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="=just a blogs="/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="=just a blogs=" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  <div class="description">
+    &nbsp;Hope to have what you need
+  </div>
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        flutter 按钮用法小记
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2020-11-17T07:12:00.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2020-11-17
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/Flutter/">Flutter</a>
+
+
+
+
+
+    </div>
+    <hr>
+    <div>
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#flutter-%E6%8C%89%E9%92%AE"><span class="toc-text">Flutter 按钮</span></a></li></ol>
+    
+    </div>
+    <div class="picture-container">
+      
+    </div>
+    <h1 id="flutter-按钮">Flutter 按钮</h1>
+<p>知识是人类进步的阶梯，总结笔记就是...... 额，管他的呢，挺好。那今天就聊聊 Flutter 中的按钮组件。</p>
+<p>Flutter 中已经定义好了一些默认的按钮组件供我们直接使用，所以先请它们登场</p>
+<ol type="1">
+<li><code>RaisedButton</code>: 凸起的按钮</li>
+<li><code>FlatButton</code>: 扁平的按钮</li>
+<li><code>OutlineButton</code>: 边框按钮</li>
+<li><code>IconButton</code>: 图标按钮</li>
+</ol>
+<blockquote>
+<p>前面三个都继承自 <code>MaterialButton</code>，最后一个继承自 <code>StatelessWidget</code>。</p>
+</blockquote>
+<p>为了去使用它们，那得再了解了解其内在（属性），下面就给出一张表：</p>
+<table>
+<thead>
+<tr class="header">
+<th>属性</th>
+<th>值类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>onPressed</td>
+<td>VoidCallback</td>
+<td>一般接收一个方法 必填参数，按下按钮时触发的回调，传 <code>null</code> 表示按钮禁用，会显示禁用相关样式</td>
+</tr>
+<tr class="even">
+<td>child</td>
+<td>Widget</td>
+<td>文本控件</td>
+</tr>
+<tr class="odd">
+<td>textColor</td>
+<td>Color</td>
+<td>文本颜色</td>
+</tr>
+<tr class="even">
+<td>color</td>
+<td>Color</td>
+<td>按钮的颜色</td>
+</tr>
+<tr class="odd">
+<td>disabledColor</td>
+<td>Color</td>
+<td>按钮禁用时的颜色</td>
+</tr>
+<tr class="even">
+<td>disabledTextColor</td>
+<td>Color</td>
+<td>按钮禁用时的文本颜色</td>
+</tr>
+<tr class="odd">
+<td>splashColor</td>
+<td>Color</td>
+<td>点击按钮时水波纹的颜色</td>
+</tr>
+<tr class="even">
+<td>highlightColor</td>
+<td>Color</td>
+<td>点击（长按）按钮后按钮的颜色</td>
+</tr>
+<tr class="odd">
+<td>elevation</td>
+<td>double</td>
+<td>阴影的范围，值越大阴影范围越大</td>
+</tr>
+<tr class="even">
+<td>padding</td>
+<td>EdgeInsetsGeometry （抽象类）</td>
+<td>内边距</td>
+</tr>
+<tr class="odd">
+<td>shape</td>
+<td>ShapeBorder（抽象类）</td>
+<td>设置按钮的形状</td>
+</tr>
+<tr class="even">
+<td>minWidth</td>
+<td>double</td>
+<td>最小宽度</td>
+</tr>
+<tr class="odd">
+<td>height</td>
+<td>double</td>
+<td>高度</td>
+</tr>
+</tbody>
+</table>
+<p>上面这些属性呢，就是大多按钮都有的。但是，有那么几个我们的单独说一下（怕你不会用啊）。</p>
+<p><strong>padding</strong></p>
+<p>内边距，其接收值的类型是<code>EdgeInsetsGeometry</code>类型的，是一个抽象类。所以一般都用<code>EdgeInsets</code>类中的方法来设置，先看看这个类中的常用方法。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//单独设置左上右下的间距，四个参数都要填写</span></span><br><span class="line"><span class="keyword">const</span> EdgeInsets.fromLTRB(<span class="keyword">this</span>.left, <span class="keyword">this</span>.top, <span class="keyword">this</span>.right, <span class="keyword">this</span>.bottom);</span><br><span class="line"></span><br><span class="line"><span class="comment">//单独设置左上右下的间距，四个均为可选参数</span></span><br><span class="line">  <span class="keyword">const</span> EdgeInsets.only(&#123;</span><br><span class="line">    <span class="keyword">this</span>.left = <span class="number">0.0</span>,</span><br><span class="line">    <span class="keyword">this</span>.top = <span class="number">0.0</span>,</span><br><span class="line">    <span class="keyword">this</span>.right = <span class="number">0.0</span>,</span><br><span class="line">    <span class="keyword">this</span>.bottom = <span class="number">0.0</span></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//一次性设置上下左右的间距</span></span><br><span class="line"><span class="keyword">const</span> EdgeInsets.all(<span class="built_in">double</span> value)</span><br><span class="line">  : left = value, top = value, right = value, bottom = value;</span><br></pre></td></tr></table></figure>
+<p>看到这些方法，想必大家应该知道怎么用了吧，这里我就不举例了哈。（啥？有人说不会。唉！那我就写一个吧）</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">RaisedButton(</span><br><span class="line">      onPressed: <span class="keyword">null</span>,</span><br><span class="line">      child: Text(<span class="string">&quot;按钮&quot;</span>),</span><br><span class="line">      color: Colors.blue,</span><br><span class="line">      textColor: Colors.white,</span><br><span class="line">      padding: EdgeInsets.only(top: <span class="number">30</span>),</span><br><span class="line">    );</span><br></pre></td></tr></table></figure>
+<p><strong>shape</strong></p>
+<p>shape 用来设置按钮的形状，其接收值是 ShapeBorder 类型，也是一个抽象类。它的实现类还是蛮多的，我们主要来看看常用的就好了。</p>
+<ul>
+<li><code>BeveledRectangleBorder</code> 六边形</li>
+<li><code>CircleBorder</code> 圆形</li>
+<li><code>RoundedRectangleBorder</code> 圆角矩形</li>
+<li><code>StadiumBorder</code> 两端是半圆</li>
+</ul>
+<p>它们主要用的属性就两个，<code>side</code> 和 <code>borderRadius</code></p>
+<p><code>side</code> 接收一个 <code>BorderSide</code> 类型的值。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> BorderSide(&#123;</span><br><span class="line">    <span class="keyword">this</span>.color = <span class="keyword">const</span> Color(<span class="number">0xFF000000</span>), <span class="comment">// 颜色</span></span><br><span class="line">    <span class="keyword">this</span>.width = <span class="number">1.0</span>,                     <span class="comment">// 宽度</span></span><br><span class="line">    <span class="keyword">this</span>.style = BorderStyle.solid,       <span class="comment">// 样式</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><code>borderRadius</code> 接收一个 <code>BorderRadius</code> 类型的值，常用方法也不多。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">BorderRadius.all()        <span class="comment">// 配置所有方向</span></span><br><span class="line">BorderRadius.cricular()   <span class="comment">// 环形配置，跟all效果差不多，直接接收double类型的值</span></span><br><span class="line">BorderRadius.horizontal() <span class="comment">// 只配置左右方向</span></span><br><span class="line">BorderRadius.only()       <span class="comment">// 可选左上，右上，左下，右下配置</span></span><br><span class="line">BorderRadius.vertical()   <span class="comment">// 只配置上下方向</span></span><br></pre></td></tr></table></figure>
+<p><strong>OutlineButton</strong></p>
+<p><code>OutlineButton</code> 是一个有默认边线且背景透明的按钮，也就是说我们设置其边线和颜色是无效的。</p>
+<p><strong>IconButton</strong></p>
+<p><code>IconButton</code> 是直接继承自 <strong>StatelessWidget </strong>的，默认没有背景,所以有个 <code>icon</code> 参数是必填的。下面给出参考代码</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">IconButton(</span><br><span class="line">      icon: Icon(Icons.home),</span><br><span class="line">      onPressed: <span class="keyword">null</span>,</span><br><span class="line">      color: Colors.blueAccent,</span><br><span class="line">      highlightColor: Colors.red,</span><br><span class="line">    );</span><br></pre></td></tr></table></figure>
+<p>Icon 除了用 flutter 提供的之外还可以使用图片去自定义图形图标，下面也会给出参考代码</p>
+<blockquote>
+<p><strong>叮</strong> 图片一定要 png，加载出来是纯色的背景图片哦</p>
+</blockquote>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Widget getImageIcon()&#123;</span><br><span class="line">    <span class="keyword">return</span> ImageIcon(</span><br><span class="line">          AssetImage(<span class="string">&#x27;images/test.png&#x27;</span>),</span><br><span class="line">          color: Colors.red,</span><br><span class="line">          size: <span class="number">50</span>,</span><br><span class="line">        );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">IconButton(</span><br><span class="line">      icon: getImageIcon(),</span><br><span class="line">      onPressed: <span class="keyword">null</span>,</span><br><span class="line">    );</span><br></pre></td></tr></table></figure>
+<p>当然也可以使用图片</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Widget getImage() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Image.asset(</span><br><span class="line">      <span class="string">&#x27;images/test.png&#x27;</span>,</span><br><span class="line">      width: <span class="number">300.0</span>,</span><br><span class="line">      height: <span class="number">300.0</span>,</span><br><span class="line">      matchTextDirection: <span class="keyword">false</span>,</span><br><span class="line">      fit: BoxFit.fitWidth,</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+  </article>
+  </script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © zachary 2018-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

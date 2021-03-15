@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>控制台文件管理器-Ranger</title>
+  <meta name="author" content="Zachary Zhang">
+  <meta name="description" content="This is my personal blog, share knowledge, record life.">
+  
+  
+  <meta property="og:title" content="控制台文件管理器-Ranger"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="=just a blogs="/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="=just a blogs=" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  <div class="description">
+    &nbsp;Hope to have what you need
+  </div>
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        控制台文件管理器-Ranger
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2020-02-22T16:00:00.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2020-02-23
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/Linux/">Linux</a>
+
+
+
+
+
+    </div>
+    <hr>
+    <div>
+    
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A5%E9%97%A8"><span class="toc-text">入门</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6"><span class="toc-text">进阶</span></a></li></ol>
+    
+    </div>
+    <div class="picture-container">
+      
+    </div>
+    <p>今天给大家介绍一款特别的软件。在终端上，我们可以通过 <code>ls</code> 来查看文件，同过 <code>ls</code> 命令我们只能看到当前目录下的文件。那么有没有办法可以在终端中清晰的看到目录的层级关系，方便的查看文件呢？ 如果你有这样的想法或需求，那么 <code>Ranger</code> 绝对是你想要的。<code>Ranger</code> 是具有 VI 键绑定的控制台文件管理器。它提供了一个简约而美观的 <code>curses</code> 界面，并具有目录层次结构的视图。它附带了<code>rifle</code>（一个文件启动器），该文件启动器擅长自动找出用于哪种文件类型的程序。看看效果 <img src="https://img-blog.csdnimg.cn/20200225174158198.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDEwNDk0,size_16,color_FFFFFF,t_70" alt="01" /></p>
+<h2 id="安装">安装</h2>
+<p>如何安装 <code>Ranger</code> 呢？首先 <code>Ranger</code>是依赖 Python 的，所以你的电脑里需要有 Python（<code>&gt;=2.6或&gt;=3.1</code>） 我们可以通 PyPI 的方式安装<code>Ranger</code>： <code>sudo pip install ranger</code> 安装完成后打开终端输入 <code>ranger</code> 回车，我们就可以开启 <code>Ranger</code> 之旅了 <img src="https://img-blog.csdnimg.cn/20200225174231650.gif" width="100%"></p>
+<h2 id="入门">入门</h2>
+<p>启动 <code>Ranger</code> 后，你会看到三个面板</p>
+<ul>
+<li>中间一个包含当前目录的内容，</li>
+<li>左侧显示父目录，突出显示当前目录，</li>
+<li>右边的提供各种预览。</li>
+</ul>
+<p>您可以使用箭头键或 <code>h</code> <code>j</code> <code>k</code> <code>l</code> 进行导航，<code>Enter</code> 打开文件或 <code>q</code> 退出。 <img src="https://img-blog.csdnimg.cn/20200225174413155.gif" alt="在这里插入图片描述" /> 当前文件的属性可以在底部看到，而当前目录路径可以在顶部看到。 <img src="https://img-blog.csdnimg.cn/20200225174348856.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDEwNDk0,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></p>
+<h2 id="进阶">进阶</h2>
+<p>如果你熟悉 <code>vim</code>，那么使用 <code>ranger</code> 将十分容易。<code>ranger</code> 借鉴了许多 <code>vim</code> 语法。例如：<code>yy</code>复制文件（在 <code>vim</code> 中复制一行），<code>pp</code> 粘贴，<code>dd</code> 剪切文件。还可以使用 <code>:</code>（冒号）调用的命令行中调用更复杂的函数。</p>
+<p>要打开文件并让 <code>Ranger</code> 选择要使用的程序（通过<code>rifle</code>）打开 ，只需按 <code>Enter</code>。要选择自己，请按 <code>r</code>，然后从列表中选择或键入要使用的程序。你也可以使用命令 <code>:open_with</code>。 <img src="https://img-blog.csdnimg.cn/20200225174441939.gif" width="100%"></p>
+<p>如果你一次要在一个以上的目录中工作，则可以为每个要快速访问的目录创建选项卡。选项卡已编号。要切换到第 N 个标签，请按 <code>Alt-N</code>，其中 N 是标签编号。如果这样的标签还不存在，它将被创建。要关闭选项卡，请按<code>q</code>（如果关闭最后一个选项卡，则整个 ranger 过程将关闭）。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200225174616637.gif" width="100%"></p>
+<p><strong>Ranger</strong>: <a target="_blank" rel="noopener" href="https://ranger.github.io/index.html">https://ranger.github.io/index.html</a></p>
+
+
+  </article>
+  </script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © zachary 2018-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>Interesting plugin in linux</title>
+  <meta name="author" content="Zachary Zhang">
+  <meta name="description" content="This is my personal blog, share knowledge, record life.">
+  
+  
+  <meta property="og:title" content="Interesting plugin in linux"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="=just a blogs="/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="=just a blogs=" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  <div class="description">
+    &nbsp;Hope to have what you need
+  </div>
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        Interesting plugin in linux
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2020-05-03T05:33:21.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2020-05-03
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/Linux/">Linux</a>
+
+
+
+
+
+    </div>
+    <hr>
+    <div>
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#figlet"><span class="toc-text">FIGLET</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#toilet"><span class="toc-text">TOILET</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#neofetch"><span class="toc-text">NEOFETCH</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#sl"><span class="toc-text">SL</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#asciiquarium"><span class="toc-text">ASCIIQUARIUM</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cowsay"><span class="toc-text">COWSAY</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cmatrixs"><span class="toc-text">CMATRIXS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lolcat"><span class="toc-text">LOLCAT</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#oneko"><span class="toc-text">ONEKO</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#fortune"><span class="toc-text">FORTUNE</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#rev"><span class="toc-text">REV</span></a></li></ol>
+    
+    </div>
+    <div class="picture-container">
+      
+    </div>
+    <p>If you are a programer, then you must know the Linux system. Even it's your main working environment. So can we have some <strong>interesting</strong>?</p>
+<p>Next, I will introduce a few software that is interesting under <strong>Linux</strong>. Different Linux distributions may have different installation methods, the following installations use <code>Arch</code> as an example.</p>
+<h1 id="figlet">FIGLET</h1>
+<p>FIGLET --display large characters made up of ordinary screen characters.</p>
+<p><strong>Install</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S figlet</span><br></pre></td></tr></table></figure>
+<p><strong>Display</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">figlet hello world</span><br><span class="line"></span><br><span class="line">watch -n1 &quot;date &#x27;+%D%n%T&#x27;|figlet -k&quot;   # terminal clok</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/images/linux-plugin/figlet.png" alt="figlet" /><figcaption aria-hidden="true">figlet</figcaption>
+</figure>
+<h1 id="toilet">TOILET</h1>
+<p>TOIlet --display large colourful characters.</p>
+<p>TOIlet prints text using large characters made of smaller characters. It is similar in many ways to FIGlet with additional features such as Unicode handling, colour fonts, filters and various export formats.</p>
+<p><strong>Install</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S toilet</span><br></pre></td></tr></table></figure>
+<p><strong>Display</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">toilet -f mono12 &quot;Takio&quot;</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/images/linux-plugin/toilet.png" alt="toilet" /><figcaption aria-hidden="true">toilet</figcaption>
+</figure>
+<h1 id="neofetch">NEOFETCH</h1>
+<p>Neofetch --A fast, highly customizable system info script</p>
+<p>Neofetch is a CLI system information tool written in BASH. Neofetch displays information about your system next to an image, your OS logo, or any ASCII file of your choice.</p>
+<p><em>NOTE: Every launch flag has a config option.</em></p>
+<p><strong>Install</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S neofetch</span><br></pre></td></tr></table></figure>
+<p><strong>Display</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">neofetch</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/images/linux-plugin/neofetch.png" alt="neofetch" /><figcaption aria-hidden="true">neofetch</figcaption>
+</figure>
+<h1 id="sl">SL</h1>
+<p>sl - cure your bad habit of mistyping</p>
+<p>sl is a highly advanced animation program for curing your bad habit of mistyping.</p>
+<p><strong>Install</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S sl</span><br></pre></td></tr></table></figure>
+<p><strong>Display</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sl</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/images/linux-plugin/sl.png" alt="sl" /><figcaption aria-hidden="true">sl</figcaption>
+</figure>
+<h1 id="asciiquarium">ASCIIQUARIUM</h1>
+<p>asciiquarium --Show a beautiful dynamic aquarium in terminal.</p>
+<p><strong>Install</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S asciiquarium</span><br></pre></td></tr></table></figure>
+<p><strong>Display</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">asciiquarium</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/images/linux-plugin/quarium.png" alt="asciiquarium" /><figcaption aria-hidden="true">asciiquarium</figcaption>
+</figure>
+<h1 id="cowsay">COWSAY</h1>
+<p>cowsay/cowthink --configurable speaking/thinking cow (and a bit more)</p>
+<p>Cowsay generates an ASCII picture of a cow saying something provided by the user. If run with no arguments, it accepts standard input, word-wraps the message given at about 40 columns, and prints the cow saying the given message on standard output.</p>
+<p><strong>Install</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S cowsay</span><br></pre></td></tr></table></figure>
+<p><strong>Display</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cowsay &quot;hello world&quot;</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/images/linux-plugin/cowsay.png" alt="cowsay" /><figcaption aria-hidden="true">cowsay</figcaption>
+</figure>
+<h1 id="cmatrixs">CMATRIXS</h1>
+<p>CMatrix --Shows a scrolling 'Matrix' like screen in Linux</p>
+<p><strong>Install</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S cmatrixs</span><br></pre></td></tr></table></figure>
+<p><strong>Display</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmatrixs</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/images/linux-plugin/cmatrixs.png" alt="cmatrixs" /><figcaption aria-hidden="true">cmatrixs</figcaption>
+</figure>
+<h1 id="lolcat">LOLCAT</h1>
+<p>lolcat --rainbow coloring effect for text console display</p>
+<p>This manual page documents briefly the lolcat command.</p>
+<p>lolcat is a program that concatenates files, or standard input, to standard output (like the generic cat), and adds rainbow coloring to it.</p>
+<p><strong>Install</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S lolcat</span><br></pre></td></tr></table></figure>
+<p><strong>Display</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">neofetch | lolcat</span><br><span class="line"></span><br><span class="line">cowsay -dragon &quot;hello world&quot; | lolcat</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/images/linux-plugin/lolcat-1.png" alt="lolcat-demo-1" /><figcaption aria-hidden="true">lolcat-demo-1</figcaption>
+</figure>
+<figure>
+<img src="/images/linux-plugin/lolcat-2.png" alt="lolcat-demo-2" /><figcaption aria-hidden="true">lolcat-demo-2</figcaption>
+</figure>
+<h1 id="oneko">ONEKO</h1>
+<p>oneko --The program oneko creates a cute cat chasing around your mouse cursor.</p>
+<p>oneko changes your mouse cursor into mouse and creates a little cute cat and the cat start chasing around your mouse cursor. If the cat catchup the <em>mouse</em>, start sleeping.</p>
+<p><strong>Install</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S oneko</span><br></pre></td></tr></table></figure>
+<p><strong>Display</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">oneko -speed 15</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/images/linux-plugin/oneko.png" alt="oneko" /><figcaption aria-hidden="true">oneko</figcaption>
+</figure>
+<h1 id="fortune">FORTUNE</h1>
+<p>fortune --print a random, hopefully interesting, adage</p>
+<p><strong>Install</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S fortune</span><br></pre></td></tr></table></figure>
+<p><strong>Display</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fortune</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/images/linux-plugin/fortune.png" alt="fortune" /><figcaption aria-hidden="true">fortune</figcaption>
+</figure>
+<h1 id="rev">REV</h1>
+<p>rev --reverse lines characterwise</p>
+<p><strong>Install</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S rev-plugins</span><br></pre></td></tr></table></figure>
+<p><strong>Display</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rev</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/images/linux-plugin/rev.png" alt="rev" /><figcaption aria-hidden="true">rev</figcaption>
+</figure>
+<hr />
+<blockquote>
+<p>To be continued ...</p>
+</blockquote>
+
+
+  </article>
+  </script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © zachary 2018-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>部署 hive</title>
+  <meta name="author" content="Zachary Zhang">
+  <meta name="description" content="This is my personal blog, share knowledge, record life.">
+  
+  
+  <meta property="og:title" content="部署 hive"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="=just a blogs="/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="=just a blogs=" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  <div class="description">
+    &nbsp;Hope to have what you need
+  </div>
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        部署 hive
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2020-03-11T14:01:55.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2020-03-11
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/Database/">Database</a>
+
+
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/tags/Hive/">Hive</a>
+
+
+    </div>
+    <hr>
+    <div>
+    
+      
+    
+    </div>
+    <div class="picture-container">
+      
+    </div>
+    <p>如何一步步的搭建 Hive, 选择 MySQL 作为元仓库, 并解决一些搭建过程中遇到的问题. Hive 版本为: 2.3.6</p>
+<a id="more"></a>
+<p>Hive 是一个数据仓库基础工具在 Hadoop 中用来处理结构化数据。它架构在 Hadoop 之上，总归为大数据，并使得查询和分析方便。并提供简单的 sql 查询功能，可以将 sql 语句转换为 MapReduce 任务进行运行。</p>
+<p>MapReduce 程序对于 Java 程序员来说比较容易写，但是对于其他语言使用者来说不太方便。Hive 让对 Hadoop 使用 SQL 查询（实际上 SQL 后台转化为了 MapReduce）成为可能，那些非 Java 程序员也可以更方便地使用。</p>
+<h3 id="下载-hive">下载 hive</h3>
+<p>hive 是基于 hadoop，所以要先安装 hadoop， <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38410494/article/details/104801399">hadoop 安装部署</a> 下载 hive 前要查看支持的版本 下载地址，北京理工大学开源软件镜：<a target="_blank" rel="noopener" href="http://mirror.bit.edu.cn/apache/hive/">http://mirror.bit.edu.cn/apache/hive/</a> 解压 hive：<code>tar -xzvf apache-hive-2.3.6-bin.jar</code></p>
+<h3 id="hive-配置">hive 配置</h3>
+<ol type="1">
+<li><strong>配置 hive 环境变量</strong> 打开 <code>/etc/profile</code> <code>bash export HIVE_HOME=/opt/module/hive-2.3.6-bin PATH=$PATH:$HIVE_HOME/bin</code> 重新编译 <code>profile'</code>， <code>source /etc/profile</code></li>
+<li><strong>hive 配置文件</strong> hive 的配置文件在 hive 目录下的 <code>conf</code> 中 <strong>a</strong>. <code>cp hive-env.sh.template hive-env.sh</code> <strong>b</strong>. <code>cp hive-log4j2.properties.template hive-log4j2.propertie</code> <strong>c</strong>. <code>cp hive-default.xml.template hive-site.xml</code> 修改 <code>hive-site.xml</code> ，这里以 2.3.6 为例： 544 行，连接数据库设置，默认 derby <code>xml &lt;name&gt;javax.jdo.option.ConnectionURL&lt;/name&gt; &lt;value&gt;jdbc:derby:;databaseName=metastore_db;create=true&lt;/value&gt; 修改 &lt;name&gt;javax.jdo.option.ConnectionURL&lt;/name&gt; &lt;value&gt;jdbc:mysql://127.0.0.1:3306/hive?allowPublicKeyPublicKeyRetrieval=true&amp;amp;userSSL=false&lt;/value&gt;</code> 1019 行，连接驱动设置 <code>xml &lt;name&gt;javax.jdo.option.ConnectionDriverName&lt;/name&gt; &lt;value&gt;org.apache.derby.jdbc.EmbeddedDriver&lt;/value&gt; 修改 &lt;name&gt;javax.jdo.option.ConnectionDriverName&lt;/name&gt; &lt;!-- 这里使用mysql8.0, 低版本为 com.mysql.jdbc.Driver--&gt; &lt;value&gt;com.mysql.cj.jdbc.Driver&lt;/value&gt;</code> 1044 行，设置用户名 <code>xml &lt;name&gt;javax.jdo.option.ConnectionUserName&lt;/name&gt; &lt;value&gt;root&lt;/value&gt;</code> 529 行，设置密码 <code>xml &lt;name&gt;javax.jdo.option.ConnectionPassword&lt;/name&gt; &lt;value&gt;mysql&lt;/value&gt;</code> 配置缓存目录，共三个，分别在 74、80、3975 行，将 <code>$&#123;system:java.io.tmpdir&#125;</code> 换成具体目录 <code>bash &lt;name&gt;hive.exec.local.scratchdir&lt;/name&gt; &lt;value&gt;$&#123;system:java.io.tmpdir&#125;/$&#123;system:user.name&#125;&lt;/value&gt; &lt;name&gt;hive.downloaded.resources.dir&lt;/name&gt; &lt;value&gt;$&#123;system:java.io.tmpdir&#125;/$&#123;hive.session.id&#125;_resources&lt;/value&gt; &lt;name&gt;hive.server2.logging.operation.log.location&lt;/name&gt; &lt;value&gt;$&#123;system:java.io.tmpdir&#125;/$&#123;system:user.name&#125;/operation_logs&lt;/value&gt;</code></li>
+<li><strong>添加驱动</strong> 驱动下载地址：<a target="_blank" rel="noopener" href="http://mvnrepository.com/artifact/mysql/mysql-connector-java">http://mvnrepository.com/artifact/mysql/mysql-connector-java</a> 下载文件：mysql-connector-java-8.0.17.jar，将驱动添加到：hive 目录下的 <code>/lib</code> 中</li>
+</ol>
+<h3 id="启动">启动</h3>
+<ol type="1">
+<li><p>初始化 <code>schematool -dbType mysql -initSchema</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">SLF4J: Class path contains multiple SLF4J bindings.</span><br><span class="line">SLF4J: Found binding in [jar:file:&#x2F;opt&#x2F;module&#x2F;hive-2.3.6-bin&#x2F;lib&#x2F;log4j-slf4j-impl-2.6.2.jar!&#x2F;org&#x2F;slf4j&#x2F;impl&#x2F;StaticLoggerBinder.class]</span><br><span class="line">SLF4J: Found binding in [jar:file:&#x2F;opt&#x2F;module&#x2F;hadoop-2.8.5&#x2F;share&#x2F;hadoop&#x2F;common&#x2F;lib&#x2F;slf4j-log4j12-1.7.10.jar!&#x2F;org&#x2F;slf4j&#x2F;impl&#x2F;StaticLoggerBinder.class]</span><br><span class="line">SLF4J: See http:&#x2F;&#x2F;www.slf4j.org&#x2F;codes.html#multiple_bindings for an explanation.</span><br><span class="line">SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]</span><br><span class="line">Metastore connection URL:        jdbc:mysql:&#x2F;&#x2F;192.168.228.128:3306&#x2F;onhive?</span><br><span class="line">Metastore Connection Driver :    com.mysql.cj.jdbc.Driver</span><br><span class="line">Metastore connection User:       hive</span><br><span class="line">Starting metastore schema initialization to 2.3.0</span><br><span class="line">Initialization script hive-schema-2.3.0.mysql.sql</span><br><span class="line">Initialization script completed</span><br><span class="line">schemaTool completed</span><br></pre></td></tr></table></figure>
+<p>初始化成功</p></li>
+<li><p>启动 ，命令行输入 <code>hive</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Logging initialized using configuration in file:&#x2F;home&#x2F;zachary&#x2F;hive-2.3.6&#x2F;conf&#x2F;hive-log4j2.properties Async: true</span><br><span class="line">Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.</span><br><span class="line">hive&gt;</span><br></pre></td></tr></table></figure>
+<p>成功启动</p></li>
+<li><p>推出 <code>quit;</code> or <code>exit;</code></p></li>
+</ol>
+<h3 id="解决问题">解决问题</h3>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" />
+遇到问题 1 hive 中使用 <code>show tables;</code> ，出现报错：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Failed with exception java.io.IOException:java.lang.IllegalArgumentException: java.net.URISyntaxException: Relative path in absolute URI: $&#123;system:user.name%7D</span><br></pre></td></tr></table></figure>
+<p>解决，修改配置文件：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 修改前 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.exec.local.scratchdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>/home/lch/software/Hive/apache-hive-2.1.1-bin/tmp/$&#123;ｓｙstem:user.name&#125;<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 修改后 --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.exec.local.scratchdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>/home/lch/software/Hive/apache-hive-2.1.1-bin/tmp/$&#123;user.name&#125;<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+  </article>
+  </script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © zachary 2018-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

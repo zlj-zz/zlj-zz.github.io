@@ -1,0 +1,206 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>Z-shell zsh 让终端不在只是终端</title>
+  <meta name="author" content="Zachary Zhang">
+  <meta name="description" content="This is my personal blog, share knowledge, record life.">
+  
+  
+  <meta property="og:title" content="Z-shell zsh 让终端不在只是终端"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="=just a blogs="/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="=just a blogs=" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  <div class="description">
+    &nbsp;Hope to have what you need
+  </div>
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        Z-shell zsh 让终端不在只是终端
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2021-01-19T07:12:00.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2021-01-19
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/Linux/">Linux</a>
+
+
+
+
+
+    </div>
+    <hr>
+    <div>
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-zsh"><span class="toc-text">什么是 Zsh</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-zsh"><span class="toc-text">安装 Zsh</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#linux"><span class="toc-text">Linux</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mac"><span class="toc-text">Mac</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#windows"><span class="toc-text">Windows</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A9-zsh-%E6%88%90%E4%B8%BA%E9%BB%98%E8%AE%A4"><span class="toc-text">让 Zsh 成为默认</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E4%BD%A0%E7%9A%84-zsh"><span class="toc-text">配置你的 Zsh</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%AE%9A%E5%88%B6-zsh"><span class="toc-text">深度定制 Zsh</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%81%9C%E6%AD%A2%E9%87%8D%E5%A4%8D%E5%AE%89%E8%A3%85%E5%AE%83"><span class="toc-text">停止重复安装它</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%83%8F-vim-%E4%B8%80%E6%A0%B7%E4%BD%BF%E7%94%A8"><span class="toc-text">像 vim 一样使用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%88%91%E7%9A%84-zsh"><span class="toc-text">我的 Zsh</span></a></li></ol>
+    
+    </div>
+    <div class="picture-container">
+      
+    </div>
+    <p>很久之前有说到 fish，一个开箱即用的优质 shell。这次来讲讲 zsh，让你深度定制自己的 shell。使你的终端独一无二。</p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20210119000431880.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDEwNDk0,size_16,color_FFFFFF,t_70" alt="Screenshot" /><figcaption aria-hidden="true">Screenshot</figcaption>
+</figure>
+<h1 id="什么是-zsh">什么是 Zsh</h1>
+<p>Zsh 是一个强大的 shell，既可以作为交互式 shell，也可以作为脚本语言解释器。用户社区网站"<a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh">Oh My Zsh</a>"收集 Z shell 的第三方插件及主题。[8]截止于 2018 年，其 GitHub 源共有超过 1000 位贡献者、200 多款插件和超过 140 款主题。</p>
+<p>相比于 bash，zsh 在很多方面做出了优化。例如：自带对数百条命令的补全支持；本身就可以通过文件扩展来匹配文件；自带拼写检查；可编程的命令行界面；自带一些常用的命令，如 <code>where</code>.于此同时，zsh 是兼容 bash 的，而 fish 并不是。</p>
+<p>选择了 zsh，你会拥有比 bash 更好的使用体验，比 fish 更灵活的自定义空间。</p>
+<h1 id="安装-zsh">安装 Zsh</h1>
+<h2 id="linux">Linux</h2>
+<p>安装 zsh 是非常简单的，任何的 <strong>Linux</strong> 都可以使用自带的包管理器来安装 zsh， 例如 Ubuntu：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install zsh</span><br></pre></td></tr></table></figure>
+<h2 id="mac">Mac</h2>
+<p>Mac 从 2019 年开始就将默认的 shell 从 bash 替换成了 zsh，所以也许你根本不需要安装就已经拥有了 zsh。当然，如果你的 mac 是 2019 以前的，没有 zsh， 用 <code>brew</code> 安装它也十分容易。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install zsh</span><br></pre></td></tr></table></figure>
+<h2 id="windows">Windows</h2>
+<p>在 windows 中安装 zsh 就显得麻烦多了。首先，你需要安装 <a target="_blank" rel="noopener" href="https://cygwin.com/install.html"><strong>Cygwim</strong></a>，它可以帮你在在 windows 中构建 Unix 环境，在 windows 中感受 Liunx 的感觉。</p>
+<p>运行安装程序时，请按照说明操作，确保安装程序安装在 <code>C:\cygwin64</code>。</p>
+<p><img src="https://img-blog.csdnimg.cn/20210119010300363.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDEwNDk0,size_16,color_FFFFFF,t_70#pic_center" /></p>
+<p>在包选择页面，搜索 wget 展开所有在 Web 下选择最新版本在 wget 的 bin 下，不需要选择源。然后继续</p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20210119010321466.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDEwNDk0,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
+</figure>
+<p>我们将使用 Cygwin 安装一些软件包，这些软件包将有助于在 Windows 上使用 Linux 系统。我们将安装 <code>apt-cyg</code>，它将像 <code>apt-get</code> 一样工作，还将安装许多其他包，像 vim 一样。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget rawgit.com/transcode-open/apt-cyg/master/apt-cyg</span><br><span class="line">install apt-cyg /bin</span><br><span class="line">apt-cyg install zsh git</span><br></pre></td></tr></table></figure>
+<h2 id="让-zsh-成为默认">让 Zsh 成为默认</h2>
+<p>在 Linux 和 Mac 中，你只需要打开 terminal， 输入下面的命令就可将 zsh 设置成默认的 shell。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chsh -s $(<span class="built_in">which</span> zsh)</span><br></pre></td></tr></table></figure>
+<h1 id="配置你的-zsh">配置你的 Zsh</h1>
+<p>一开进入 zsh，你可能觉得很一般。因为 zsh 的默认几乎和 bash 差不多。但 zsh 拥有许多强大的插件，这些插件可以在<a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh">Oh My Zsh</a>中找到。</p>
+<p>这里呢，我推荐使用 <a target="_blank" rel="noopener" href="https://github.com/zimfw/zimfw">zimfw</a> 来安装插件。Zim 是一个 Zsh 配置框架，具有极快的速度和模块化扩展。Zim 非常容易定制，并且提供了一组丰富的模块和功能。</p>
+<p>Zim 提供了两种安装方式。</p>
+<ul>
+<li><p>With curl:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh</span><br></pre></td></tr></table></figure></li>
+<li><p>With wget:</p>
+<pre><code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -nv -O - https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh</span><br></pre></td></tr></table></figure></code></pre>
+<p>然后，就可以在 <code>~/.zimrc</code> 中配置你想要的插件，这里我也推荐几个：</p></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">zmodule completion</span><br><span class="line"></span><br><span class="line">zmodule zsh-users&#x2F;zsh-completions</span><br><span class="line"></span><br><span class="line">zmodule zsh-users&#x2F;zsh-autosuggestions</span><br><span class="line"></span><br><span class="line"># Fish-like history search (up arrow) for Zsh.</span><br><span class="line"># zsh-users&#x2F;zsh-history-substring-search must be sourced after zsh-users&#x2F;zsh-syntax-highlighting</span><br><span class="line">zmodule zsh-users&#x2F;zsh-history-substring-search</span><br><span class="line"></span><br><span class="line"># Enables and configures smart and extensive tab completion.</span><br><span class="line"># completion must be sourced after zsh-users&#x2F;zsh-completions</span><br><span class="line">zmodule zdharma&#x2F;fast-syntax-highlighting</span><br></pre></td></tr></table></figure>
+<p>配置好你想要的模块后，记得使用 <code>zimfw install</code> 来安装它们。</p>
+<p>同样的，安装主题就和安装模块一样，放在配置文件中， install 就好了。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/zimfw/zimfw/wiki/Themes">https://github.com/zimfw/zimfw/wiki/Themes</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh/wiki/Themes">https://github.com/ohmyzsh/ohmyzsh/wiki/Themes</a></p>
+<h1 id="深度定制-zsh">深度定制 Zsh</h1>
+<h2 id="停止重复安装它">停止重复安装它</h2>
+<p>在完成插件和主题的安装后，想必你的 zsh 已经相当的好用了。</p>
+<p>Ok，现在你基本配置好了你喜欢的 zsh，但如果换了电脑不就要再来一次这些安装过程，实在是太麻烦了。我们可以将配置上传到 github 上并写一个自动安装的脚本，这样下一次，我们只需要 clone 代码，运行脚本就重新配置好 zsh 了。</p>
+<p>这里我给出我的脚本，作为参考。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PLUG_DIR=<span class="variable">$HOME</span>/.zim</span><br><span class="line"><span class="keyword">if</span> [[ ! -d <span class="variable">$PLUG_DIR</span> ]]; <span class="keyword">then</span></span><br><span class="line">    curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh</span><br><span class="line">    rm ~/.zimrc</span><br><span class="line">    ln -s ~/.config/zsh/zimrc ~/.zimrc</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;source ~/.config/zsh/zshrc&quot;</span>&gt;&gt;~/.zshrc</span><br><span class="line">    zimfw install</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<h2 id="像-vim-一样使用">像 vim 一样使用</h2>
+<p>如果你是一个 Vim 或者 Neovim 的使用者，想必一定十分喜爱 vim 的模式。那么，恭喜你，zsh 刚好支持 vim 模式和键位的绑定。</p>
+<p>创建一个文件 <code>vi.zsh</code>，内容是：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bindkey</span> -v</span><br><span class="line"><span class="built_in">bindkey</span> -M vicmd <span class="string">&quot;i&quot;</span> vi-insert</span><br><span class="line"><span class="built_in">bindkey</span> -M vicmd <span class="string">&quot;I&quot;</span> vi-insert-bol</span><br><span class="line"><span class="built_in">bindkey</span> -M vicmd <span class="string">&quot;h&quot;</span> vi-backward-char</span><br><span class="line"><span class="built_in">bindkey</span> -M vicmd <span class="string">&quot;l&quot;</span> vi-forward-char</span><br><span class="line"><span class="built_in">bindkey</span> -M vicmd <span class="string">&quot;0&quot;</span> vi-beginning-of-line</span><br><span class="line"><span class="built_in">bindkey</span> -M vicmd <span class="string">&quot;4&quot;</span> vi-end-of-line</span><br><span class="line"><span class="built_in">bindkey</span> -M vicmd <span class="string">&quot;j&quot;</span> down-line-or-history</span><br><span class="line"><span class="built_in">bindkey</span> -M vicmd <span class="string">&quot;k&quot;</span> up-line-or-history</span><br><span class="line"><span class="built_in">bindkey</span> -M vicmd <span class="string">&quot;u&quot;</span> undo</span><br><span class="line"><span class="comment">#bindkey -M vicmd &quot;-&quot; vi-rev-repeat-search</span></span><br><span class="line"><span class="built_in">bindkey</span> -M vicmd <span class="string">&quot;=&quot;</span> vi-repeat-search</span><br><span class="line"><span class="built_in">bindkey</span> -M vicmd <span class="string">&quot;e&quot;</span> vi-forward-word-end</span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&quot;^D&quot;</span> autosuggest-accept</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> zle-line-init zle-keymap-select &#123;</span><br><span class="line">    RPS1=<span class="string">&quot;<span class="variable">$&#123;<span class="variable">$&#123;KEYMAP/vicmd/-- NOR --&#125;</span>/(main|viins)/-- INS --&#125;</span>&quot;</span></span><br><span class="line">    RPS2=<span class="variable">$RPS1</span></span><br><span class="line">    <span class="built_in">zle</span> reset-prompt</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> zle-keymap-select &#123;</span><br><span class="line">  <span class="keyword">if</span> [[ <span class="variable">$&#123;KEYMAP&#125;</span> == vicmd ]] || [[ <span class="variable">$1</span> = <span class="string">&#x27;block&#x27;</span> ]]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> -ne <span class="string">&#x27;\e[1 q&#x27;</span></span><br><span class="line">  <span class="keyword">elif</span> [[ <span class="variable">$&#123;KEYMAP&#125;</span> == main ]] || [[ <span class="variable">$&#123;KEYMAP&#125;</span> == viins ]] || [[ <span class="variable">$&#123;KEYMAP&#125;</span> = <span class="string">&#x27;&#x27;</span> ]] || [[ <span class="variable">$1</span> = <span class="string">&#x27;beam&#x27;</span> ]]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> -ne <span class="string">&#x27;\e[5 q&#x27;</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">zle</span> -N zle-keymap-select</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> -ne <span class="string">&#x27;\e[5 q&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">preexec</span></span>() &#123;</span><br><span class="line">  <span class="built_in">echo</span> -ne <span class="string">&#x27;\e[5 q&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">_fix_cursor</span></span>() &#123;</span><br><span class="line">  <span class="built_in">echo</span> -ne <span class="string">&#x27;\e[5 q&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">precmd_functions+=(_fix_cursor)</span><br><span class="line"></span><br><span class="line"><span class="built_in">zle</span> -N zle-line-init</span><br><span class="line"><span class="built_in">zle</span> -N zle-keymap-select</span><br><span class="line"></span><br><span class="line">KEYTIMEOUT=1</span><br></pre></td></tr></table></figure>
+<p>然后在 <code>~/.zshrc</code> 中使用 <code>source</code> 命令载入它，你就可以像使用 vim 一样使用 zsh。</p>
+<h1 id="我的-zsh">我的 Zsh</h1>
+<p>最后，贴上我的 zsh 配置，供有需要的人参考。 <a target="_blank" rel="noopener" href="https://github.com/zlj-zz/dotconfig/tree/master/zsh">https://github.com/zlj-zz/dotconfig/tree/master/zsh</a></p>
+
+
+  </article>
+  </script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © zachary 2018-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

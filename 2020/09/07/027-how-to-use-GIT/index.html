@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>如何流畅丝滑的使用git</title>
+  <meta name="author" content="Zachary Zhang">
+  <meta name="description" content="This is my personal blog, share knowledge, record life.">
+  
+  
+  <meta property="og:title" content="如何流畅丝滑的使用git"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="=just a blogs="/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="=just a blogs=" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  <div class="description">
+    &nbsp;Hope to have what you need
+  </div>
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        如何流畅丝滑的使用git
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2020-09-06T16:00:00.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2020-09-07
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/Linux/">Linux</a>
+
+
+
+
+
+    </div>
+    <hr>
+    <div>
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#git-%E4%BD%BF%E7%94%A8"><span class="toc-text">git 使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#basic"><span class="toc-text">basic</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#view"><span class="toc-text">view</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#change"><span class="toc-text">change</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#option"><span class="toc-text">option</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#git-%E8%AE%BE%E7%BD%AE"><span class="toc-text">git 设置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#git-commit-%E4%BF%A1%E6%81%AF%E8%A7%84%E8%8C%83"><span class="toc-text">git commit 信息规范</span></a></li></ol>
+    
+    </div>
+    <div class="picture-container">
+      
+    </div>
+    <h1 id="git-使用">git 使用</h1>
+<h2 id="basic">basic</h2>
+<p><kbd>git init</kbd> 可以将一个文件夹初始化为一个 git 目录，会生成一个<code>.git</code>的隐藏目录。</p>
+<p><kbd>git remote add &lt;remote&gt; &lt;branch&gt; &lt;url&gt;</kbd> 可以帮助我们连接到一个远程的仓库。</p>
+<p><kbd>git clone [-b branch-name] &lt;url&gt; </kbd> 可以克隆一个远程仓库到本地，<code>-b</code>参数可以指定分支。</p>
+<h2 id="view">view</h2>
+<p><kbd>git status</kbd>查看工作树状态。</p>
+<blockquote>
+<p><code>-u</code>参数用来添加被追踪的文件，即新建文件不会被添加。</p>
+</blockquote>
+<p><kbd>git diff &lt;file&gt;</kbd>查看文件的改变。</p>
+<p><kbd>git log</kbd> 查看<strong>commit</strong>提交信息日志。</p>
+<blockquote>
+<p><code>-graph</code>以图的形式显示。 <code>-all</code>查看全部分支。 <code>-oneline</code>条件信息只显示一行。</p>
+</blockquote>
+<h2 id="change">change</h2>
+<p><kbd>git add &lt;file&gt;</kbd>可以添加文件的变化到暂存区，可以用<code>.</code>表示添加所有变化。</p>
+<p><kbd>git commit</kbd>用来提交文件，回车后自动打开编辑器让你编辑提交信息。</p>
+<blockquote>
+<p>可以通过<code>-m &lt;msg&gt;</code>在命令行添加提交信息。 通过<code>-amend</code> 参数将本次提交添加到上一次提交中，加上<code>--no-edit</code>参数可以不同编辑提交信息。</p>
+</blockquote>
+<p><kbd>git push</kbd>将本地分支推送到远程，<code>-f</code>参数可以强制推送。</p>
+<p><kbd>git fetch</kbd>将远程最新的内容拉到本地。</p>
+<p><kbd>git fetch &lt;remote&gt; &lt;remotebranch&gt;:&lt;localebranch&gt; </kbd>将远程最新的内容拉到本地。</p>
+<p><kbd>git merge [branch-name]</kbd>合并分支，默认合并远程分支；可以将指定分支合并到当前分支。</p>
+<p><kbd>git pull</kbd>等于<code>git fetch</code>+<code>git merge</code></p>
+<h2 id="option">option</h2>
+<p><kbd>git branch [branch-name]</kbd>查看分支或者创建新分支。</p>
+<p><kbd>git checkout</kbd>切换分支。</p>
+<p><kbd>git checkout &lt;branch-name&gt; &lt;path-name&gt; [file-name]</kbd>合并分支制定文件</p>
+<blockquote>
+<p>使用<code>-b</code>参数创建并切换分支。 合并冲突时，<code>--ours|--theirs [file]</code>选择使用哪个分支。</p>
+</blockquote>
+<p><kbd>git stash</kbd> Can hide your uncommitted changes.</p>
+<p><kbd>git stash pop</kbd> Can restore your hidden changes.</p>
+<p><kbd>git reset</kbd> 复位操作，可以用于<code>add</code>, <code>commit</code></p>
+<blockquote>
+<p><code>git reset HEAD [file]</code> 撤销添加操作。 <code>git reset \&lt;HEAD~n|版本号\&gt;</code> 退回上 n 个版本或指定版本 <code>--hard</code> 清楚工作区 <code>--merged</code> 回滚时不清楚不要的版本工作区 <code>--soft</code> 仅撤回提交，工作区内容不变 <code>--keep</code> 清楚提交，保持工作区不变</p>
+</blockquote>
+<hr />
+<h1 id="git-设置">git 设置</h1>
+<p>使用<code>HTTP</code>协议时，可以使用<kbd>git config credential.helper store</kbd>来记住用户名和密码。</p>
+<p>可以使用<kbd>git config --global core.editor /usr/bin/vim</kbd>指定提交信息的编辑器。</p>
+<hr />
+<h1 id="git-commit-信息规范">git commit 信息规范</h1>
+<h3 id="why">why</h3>
+<ol type="1">
+<li>提供更多的历史信息，方便快速浏览。</li>
+<li>可以过滤某些 commit（比如文档改动），便于快速查找信息。</li>
+<li>可以直接从 commit 生成 Change log。</li>
+</ol>
+<h3 id="angularjs-规范">AngularJS 规范</h3>
+<blockquote>
+<p>它是由 Google 推出的一套提交消息规范标准，也是目前使 用范围最广的规范。有一套合理的手册也较为系统化；并且还有配套的工具可以供我们使用。</p>
+</blockquote>
+<figure>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWcyMDE4LmNuYmxvZ3MuY29tL2Jsb2cvMzI4NTk5LzIwMTkwMS8zMjg1OTktMjAxOTAxMjMxMDQxMDExNjAtODQ1MzY4MTYwLnBuZw?x-oss-process=image/format,png#pic_center" alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
+</figure>
+<h5 id="格式">格式</h5>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="built_in">type</span>&gt;(&lt;scope&gt;): &lt;subject&gt;</span><br><span class="line">&lt;BLANK LINE&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;BLANK LINE&gt;</span><br><span class="line">&lt;footer&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="要求">要求</h5>
+<ul>
+<li>消息只占用一行，任何行都不能超过 100 个字符</li>
+<li>允许使用 GitHub 以及各种 Git 工具阅读消息</li>
+<li>提交消息由页眉、正文和页脚组成，由空行分隔</li>
+</ul>
+
+
+  </article>
+  </script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © zachary 2018-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

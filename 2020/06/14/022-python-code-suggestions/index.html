@@ -1,0 +1,311 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>编写高质量 Python 代码的 47 个建议</title>
+  <meta name="author" content="Zachary Zhang">
+  <meta name="description" content="This is my personal blog, share knowledge, record life.">
+  
+  
+  <meta property="og:title" content="编写高质量 Python 代码的 47 个建议"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="=just a blogs="/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="=just a blogs=" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  <div class="description">
+    &nbsp;Hope to have what you need
+  </div>
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        编写高质量 Python 代码的 47 个建议
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2020-06-13T16:00:00.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2020-06-14
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/Python/">Python</a>
+
+
+
+
+
+    </div>
+    <hr>
+    <div>
+    
+      
+    
+    </div>
+    <div class="picture-container">
+      
+    </div>
+    <p>我在这里总结归纳了 47 个有关 Python 代码的建议，试图去帮助你编写高质量的 Pyhon 代码。希望你能从中得到一定的收获。</p>
+<a id="more"></a>
+<h4 id="建议-1放弃自己的代码风格">建议 1：放弃自己的代码风格</h4>
+<p>也许规范的书写看上去千篇一律，没有自己风格的代码没有特色。但是这样做可以帮助你规范你的代码，让它更加漂亮易读。</p>
+<h4 id="建议-2代码中添加适当的注释">建议 2：代码中添加适当的注释</h4>
+<p>更新代码的同时别忘记更新注释。</p>
+<h4 id="建议-3适当的添加空行">建议 3：适当的添加空行</h4>
+<p>布局清晰、整洁、优雅的代码能够给阅读它的人带来愉悦感，而且它能帮助开发者之间进行良好的沟通。</p>
+<h4 id="建议-4编写函数的-4-个建议">建议 4：编写函数的 4 个建议</h4>
+<ul>
+<li>原则 1 函数设计要尽量短小，嵌套层次不宜过深。</li>
+<li>原则 2 函数申明应该做到合理、简单、易于使用。</li>
+<li>原则 3 　函数参数设计应该考虑向下兼容。</li>
+<li>原则 4 一个函数只做一件事，尽量保证函数语句粒度的一致性。</li>
+</ul>
+<h4 id="建议-5常量集中在一起">建议 5：常量集中在一起</h4>
+<p>将自己定义的常量使用<strong>全大写</strong>的命名，并将它们定义在一个文件中，这样更加方便使用和有利于维护。</p>
+<h4 id="建议-6利用-assert-语句发现问题">建议 6：利用 <code>assert</code> 语句发现问题</h4>
+<p>断言（assert）在很多语言中都存在，它主要为调试程序服务，能够快速方便地检查程序的异常或者发现不恰当的输入等，可防止意想不到的情况出现。</p>
+<h4 id="建议-7直接交换数据">建议 7：直接交换数据</h4>
+<p>当我们需要交换两个变量的值时，不推荐使用中间变量，这样更简洁且效率更高。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x, y = y, x</span><br></pre></td></tr></table></figure>
+<h4 id="建议-8不推荐使用-tpye-来检查类型">建议 8：不推荐使用 <code>tpye</code> 来检查类型</h4>
+<p><strong>基于内建类型扩展的用户自定义类型，<code>type</code> 函数并不能准确返回结果</strong>。因此更加推荐使用 <code>isintance</code>。</p>
+<h4 id="建议-9除法时尽量转为浮点类型">建议 9：除法时尽量转为浮点类型</h4>
+<p>标准的算术运算，包括除法，返回值总是和操作数类型相同。当你编写一个函数时，即使你希望调用者传入的是浮点类型，但如果不在函数入口进行类型检查或者转换，就无法阻止函数调用者传递整数参数，而往往这种类型的错误还不容易发觉。因此推荐的做法之一是当涉及除法运算的时候尽量先将操作数转换为浮点类型再做运算。</p>
+<h4 id="建议-10尽量少的使用-eval">建议 10：尽量少的使用 <code>eval</code></h4>
+<p>Python 中 eval()函数将字符串 str 当成有效的表达式来求值并返回计算结果。实际应用过程中如果使用对象不是信任源，应该尽量避免使用 eval，在需要使用 eval 的地方可用安全性更好的 ast.literal_eval 替代。</p>
+<h4 id="建议-11使用-enumerate获取序列迭代的索引和值">建议 11：使用 enumerate()获取序列迭代的索引和值</h4>
+<p>它代码清晰简洁，可读性好。它具有一定的惰性（lazy），每次仅在需要的时候才会产生一个(index,item)对。</p>
+<p><code>enumerate()</code> 函数的内部实现非常简单，<code>enumerate(sequence,start=0)</code> 实际相当于如下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">enumerate</span>(<span class="params">sequence, start=<span class="number">0</span></span>):</span></span><br><span class="line">    n = start</span><br><span class="line">    <span class="keyword">for</span> elem <span class="keyword">in</span> sequence:</span><br><span class="line">        <span class="keyword">yield</span> n, elem</span><br><span class="line">        n += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>因此利用这个特性用户还可以实现自己的 <code>enumerate()</code> 函数。比如，<code>myenumerate()</code> 以反序的方式获取序列的索引和值:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myenumerate</span>(<span class="params">sequence</span>):</span></span><br><span class="line">    n = -<span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> elem <span class="keyword">in</span> <span class="built_in">reversed</span>(sequence):</span><br><span class="line">        <span class="keyword">yield</span> <span class="built_in">len</span>(sequence) + n, elem</span><br><span class="line">        n -= <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h4 id="建议-12区分-与-is">建议 12：区分 <code>==</code> 与 <code>is</code></h4>
+<p><code>is</code> 的作用是用来检查对象的标示符是否一致的，也就是比较两个对象在内存中是否拥有同一块内存空间，它并不适合用来判断两个字符串是否相等。而 <code>==</code> 才是用来检验两个对象的值是否相等的，它实际调用内部<code>__eq__()</code> 方法。所以 <code>==</code> 操作符是可以被重载的，而 <code>is</code> 不能被重载。</p>
+<h4 id="建议-13考虑兼容性尽量使用-unicode">建议 13：考虑兼容性，尽量使用 <code>Unicode</code></h4>
+<h4 id="建议-14少的使用-form-...-import">建议 14：少的使用 <code>form ... import</code></h4>
+<ul>
+<li><p>一般情况下尽量优先使用 <code>import a</code> 形式，如访问 <code>B</code> 时需要使用 <code>a.B</code> 的形式。</p></li>
+<li><p>有节制地使用 <code>from a import B</code> 形式，可以直接访问 <code>B</code>。</p></li>
+<li><p>尽量避免使用 <code>from a import *</code>，因为这会污染命名空间，并且无法清晰地表示导入了哪些对象。</p></li>
+</ul>
+<p>更详细的说明：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38410494/article/details/106679049">https://blog.csdn.net/qq_38410494/article/details/106679049</a></p>
+<h4 id="建议-15i-1-不等于-i">建议 15：<code>i += 1</code> 不等于 <code>++i</code></h4>
+<p>我们都知道 Python 中不支持自加和自减操作，但是 <code>++i</code>，<code>--i</code> 这样的操作并不是错误的，这里的 <code>+</code> 和 <code>-</code> 代表的只是正负符号。因此你需要明白 <code>++i</code> 在 Python 中语法上是合法的，但并不是我们理解的通常意义上的自增操作。</p>
+<h4 id="建议-16使用-with-自动关闭资源">建议 16：使用 <code>with</code> 自动关闭资源</h4>
+<h4 id="建议-17多使用-else-子句简化循环">建议 17：多使用 <code>else</code> 子句简化循环</h4>
+<p>看一下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_prime</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n):</span><br><span class="line">        found = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, i)</span><br><span class="line">            <span class="keyword">if</span> i % j == <span class="number">0</span>:</span><br><span class="line">                found = <span class="literal">False</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> found:</span><br><span class="line">            print(<span class="string">&quot;&#123;i&#125; is a prime number&quot;</span>.<span class="built_in">format</span>(i))</span><br></pre></td></tr></table></figure>
+<p>这是一个查找素数的简单实现，可以看到我们借助了一个标志量 <code>found</code> 来判断是循环结束是不是由 <code>break</code> 语句引起的。如果对 <code>else</code> 善加利用，代码可以简洁得多。来看下面的具体实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_prime</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, i)</span><br><span class="line">            <span class="keyword">if</span> i % j == <span class="number">0</span>:</span><br><span class="line">                found = <span class="literal">False</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">&quot;&#123;i&#125; is a prime number&quot;</span>.<span class="built_in">format</span>(i))</span><br></pre></td></tr></table></figure>
+<p>当循环“自然”终结（循环条件为假）时 <code>else</code> 从句会被执行一次，而当循环是由 <code>break</code> 语句中断时，<code>else</code> 子句就不被执行。与 <code>for</code> 语句相似，<code>while</code> 语句中的 <code>else</code> 子句的语意是一样的：<code>else</code> 块在循环正常结束和循环条件不成立时被执行。</p>
+<h4 id="建议-18异常处理的基本原则">建议 18：异常处理的基本原则</h4>
+<ul>
+<li>注意异常的粒度，不推荐在 try 中放入过多的代码。</li>
+<li>谨慎使用单独的 except 语句处理所有异常，最好能定位具体的异常。</li>
+<li>注意异常捕获的顺序，在合适的层次处理异常。</li>
+<li>使用更为友好的异常信息，遵守异常参数的规范。</li>
+<li>如果内建异常类不能满足需求，用户可以在继承内建异常的基础上针对特定的业务逻辑定义自己的异常类。</li>
+</ul>
+<h4 id="建议-19拼接字符串推荐-join">建议 19：拼接字符串推荐 <code>join</code></h4>
+<p>字符串处理在大多时候会常常遇到，在 Python 中我们可以使用 <code>join</code> 和 <code>+</code> 两种常见的方式来拼接字符串，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">str1, str2, str3 = <span class="string">&quot;abc&quot;</span>, <span class="string">&quot;de&quot;</span>, <span class="string">&quot;fg&quot;</span></span><br><span class="line"></span><br><span class="line">str4 = str1 + str2 + str3</span><br><span class="line">str5 = <span class="string">&#x27;&#x27;</span>.join([str1, str2, str3])</span><br></pre></td></tr></table></figure>
+<p>如果进行过测试，就会发现，<code>join</code> 的速度是要高于 <code>+</code> 操作的，特别当拼接的字符串越多的时候。那么为什么呢？</p>
+<p>这就关系到两个操作在内存中具体是怎么实现的。假设现在有 <code>s1, s2, s3, ..., sn</code> 个字符串，我们现在要拼接它们。如果使用 <code>+</code> 操作时，每遇到一次 <code>+</code> 号就会申请内存并将字符串复制到新的内存中，那么我们要拼接 n 个字符串时，就需要申请 n-1 次内存，当 n 越大时，效率会越低。</p>
+<p>而当用 <code>join()</code> 方法连接字符串的时候，会首先计算需要申请的总的内存空间，然后一次性申请所需内存并将字符序列中的每一个元素复制到内存中去。因此，字符串的连接，特别是大规模字符串的处理，应该尽量优先使用 join 而不是+。</p>
+<h4 id="建议-20格式化字符串使用-.format">建议 20：格式化字符串使用 <code>.format</code></h4>
+<p>Python 中内置的 <code>%</code> 操作符和 <code>.format</code> 方式都可用于格式化字符串。</p>
+<ul>
+<li>理由一：format 方式在使用上较%操作符更为灵活。使用 format 方式时，参数的顺序与格式化的顺序不必完全相同。</li>
+<li>理由二：format 方式可以方便地作为参数传递。</li>
+<li>理由三：%方法在某些特殊情况下使用时需要特别小心。</li>
+</ul>
+<p>如果你使用的 Python 是 3.8 以上，还可使用<code>f&#123;&#125;</code> 字符串。具体可以看这里：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38410494/article/details/106691210">https://blog.csdn.net/qq_38410494/article/details/106691210</a></p>
+<h4 id="建议-21记住函数传参既不是传值也不是传引用">建议 21：记住函数传参既不是传值也不是传引用</h4>
+<p>正确的叫法应该是传对象（call by object）或者说传对象的引用（call-by-object-reference）。函数参数在传递的过程中将整个对象传入，对可变对象的修改在函数外部以及内部都可见，调用者和被调用者之间共享这个对象，而对于不可变对象，由于并不能真正被修改，因此，修改往往是通过生成一个新对象然后赋值来实现的。</p>
+<h4 id="建议-22尽量不使用变长参数">建议 22：尽量不使用变长参数</h4>
+<ul>
+<li>使用过于灵活。</li>
+<li>如果一个函数的参数列表很长，虽然可以通过使用 <code>*args</code> 和 <code>**kwargs</code> 来简化函数的定义，但通常这意味着这个函数可以有更好的实现方式，应该被重构。</li>
+<li>可变长参数适合在下列情况下使用（不仅限于以下场景）：为函数添加一个装饰器。</li>
+</ul>
+<h4 id="建议-23区分-str-和-repr">建议 23：区分 <code>str()</code> 和 <code>repr()</code></h4>
+<p>函数 <code>str()</code> 和 <code>repr()</code> 都可以将 Python 中的对象转换成字符串，但两者依旧存在区别：</p>
+<ul>
+<li>两者之间的目标不同：<code>str()</code> 主要面向用户，其目的是可读性，返回形式为用户友好性和可读性都较强的字符串类型；而 <code>repr()</code> 面向的是 Python 解释器，其返回值表示 Python 解释器内部的含义，常作为编程人员 debug 用途。</li>
+<li>在解释器中直接输入 <code>a</code> 时默认调用 <code>repr()</code> 函数，而 <code>print a</code> 则调用 <code>str()</code> 函数。</li>
+<li><code>repr()</code> 的返回值一般可以用 <code>eval()</code> 函数来还原对象。</li>
+<li>这两个方法分别调用内建的 <code>__str__()</code> 和 <code>__repr__()</code> 方法，一般来说在类中都应该定义 <code>__repr__()</code> 方法，而 <code>__str__()</code> 方法则为可选，当可读性比准确性更为重要的时候应该考虑定义 <code>__str__()</code> 方法。如果类中没有定义 <code>__str__()</code> 方法，则默认会使用 <code>__repr__()</code> 方法的结果来返回对象的字符串表示形式。用户实现 <code>__repr__()</code> 方法的时候最好保证其返回值可以用 <code>eval()</code> 方法使对象重新还原。</li>
+</ul>
+<h4 id="建议-24掌握字符串的用法">建议 24：掌握字符串的用法</h4>
+<p>有人说过，编程有两件事，一件是处理数值，另一件是处理字符串。所以掌握字符串的用法尤为重要。具体可以看看这篇博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38410494/article/details/106697509">https://blog.csdn.net/qq_38410494/article/details/106697509</a></p>
+<h4 id="建议-25了解并学会选择-sort-和-sorted">建议 25：了解并学会选择 <code>sort()</code> 和 <code>sorted()</code></h4>
+<ul>
+<li>两者都是排序，但 <code>sorted()</code> 的使用范围更加广。</li>
+<li><code>sorted()</code> 在 Python2.4 中引入，返回一个排序后的列表，原列表保持不变;<code>sort()</code> 直接修改原有列表，函数返回 <code>None</code>。</li>
+<li><code>sorted()</code> 可以作用与任何可迭代对象，而 <code>sort()</code> 一般作用与列表。</li>
+</ul>
+<h4 id="建议-26使用-counter-进行计数统计">建议 26：使用 Counter 进行计数统计</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>datas = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;2&#x27;</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="string">&#x27;a&#x27;</span>, <span class="number">5</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;z&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(Counter(datas))</span><br><span class="line">Counter(&#123;<span class="string">&#x27;a&#x27;</span>: <span class="number">3</span>, <span class="string">&#x27;2&#x27;</span>: <span class="number">2</span>, <span class="number">4</span>: <span class="number">2</span>, <span class="number">5</span>: <span class="number">2</span>, <span class="number">2</span>: <span class="number">1</span>, <span class="string">&#x27;b&#x27;</span>: <span class="number">1</span>, <span class="number">7</span>: <span class="number">1</span>, <span class="string">&#x27;d&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;z&#x27;</span>: <span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
+<p>Counter 类是自 Python2.7 起增加的，属于字典类的子类，是一个容器对象，主要用来统计散列对象，支持集合操作 <code>+</code>、<code>-</code>、<code>&amp;</code>、<code>|</code>，其中 <code>&amp;</code> 和 <code>|</code> 操作分别返回两个 Counter 对象各元素的最小值和最大值。</p>
+<h4 id="建议-27使用-pandas-处理大型-csv-文件">建议 27：使用 <code>pandas</code> 处理大型 CSV 文件</h4>
+<p>Pandas 即 Python Data Analysis Library，是为了解决数据分析而创建的第三方工具，它不仅提供了丰富的数据模型，而且支持多种文件格式处理，包括 CSV、HDF5、HTML 等，能够提供高效的大型数据处理。其支持的两种数据结构—— <code>Series</code> 和 <code>DataFrame</code> ——是数据处理的基础。</p>
+<h4 id="建议-28使用-traceback-获取栈信息">建议 28：使用 <code>traceback</code> 获取栈信息</h4>
+<p>当程序产生异常的时候，最需要面对异常的其实是开发人员，他们需要更多的异常提示的信息，以便调试程序中潜在的错误和问题。traceback 模块可以满足这个需求，它会输出完整的栈信息。类似这样：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">execpt IndexError <span class="keyword">as</span> e:</span><br><span class="line">    print(<span class="string">&quot;the index out of range&quot;</span>)</span><br><span class="line">    print(e)</span><br><span class="line">    traceback.print_exc()</span><br></pre></td></tr></table></figure>
+<h4 id="建议-29使用-logging-记录日志信息">建议 29：使用 <code>logging</code> 记录日志信息</h4>
+<p>仅仅将栈信息输出到控制台是远远不够的，更为常见的是使用日志保存程序运行过程中的相关信息，如运行时间、描述信息以及错误或者异常发生时候的特定上下文信息。</p>
+<h4 id="建议-30推荐使用-threading-编写多线程">建议 30：推荐使用 <code>threading</code> 编写多线程</h4>
+<h4 id="建议-31使用-queue-多线程更安全">建议 31：使用 <code>Queue</code> 多线程更安全</h4>
+<h4 id="建议-32知道-__init__-不是构造方法">建议 32：知道 <code>__init__()</code> 不是构造方法</h4>
+<p>实际上 <code>__init__()</code> 并不是真正意义上的构造方法，<code>__init__()</code> 方法所做的工作是在类的对象创建好之后进行变量的初始化。<code>__new__()</code> 方法才会真正创建实例，是类的构造方法。</p>
+<h4 id="建议-33理解-self-参数">建议 33：理解 <code>self</code> 参数</h4>
+<p>也许很多人感受 self 最奇怪的地方就是：在方法声明的时候需要定义 self 作为第一个参数，而调用方法的时候却不用传入这个参数。这里简单说说为什么需要 <code>self</code>：</p>
+<ul>
+<li>Python 在当初设计的时候借鉴了其他语言的一些特征。</li>
+<li>Python 语言本身的动态性决定了使用 <code>self</code> 能够带来一定便利。</li>
+<li>在存在同名的局部变量以及实例变量的情况下使用 self 使得实例变量更容易被区分。</li>
+</ul>
+<h4 id="建议-34区分-__getattr__-和-__getattribute__">建议 34：区分 <code>__getattr__()</code> 和 <code>__getattribute__()</code></h4>
+<p><code>__getattr__()</code> 和 <code>__getattribute__()</code> 都可以用做实例属性的获取和拦截，<code>__getattr__()</code> 适用于未定义的属性，即该属性在实例中以及对应的类的基类以及祖先类中都不存在，而 <code>__getattribute__()</code> 对于所有属性的访问都会调用该方法。需要注意的是 <code>__getattribute__()</code> 仅应用于新式类。</p>
+<p><code>__getattribute__()</code> 总会被调用，而 <code>__getattr__()</code> 只有在 <code>__getattribute__()</code> 中引发异常的情况下才会被调用。</p>
+<h4 id="建议-35掌握-metaclass">建议 35：掌握 <code>metaclass</code></h4>
+<p>元类用来指导类的生成，元方法可以从元类或者类中调用，不能从类的实例中调用，而类方法既可以从类中调用也可以从类的实例中调用。</p>
+<h4 id="建议-36熟悉-python-的迭代器">建议 36：熟悉 Python 的迭代器</h4>
+<h4 id="建议-37熟悉-python-的生成器">建议 37：熟悉 Python 的生成器</h4>
+<h4 id="建议-38理解-gil-的局限性">建议 38：理解 GIL 的局限性</h4>
+<p>GIL 被称为为全局解释器锁（Global Interpreter Lock），是 Python 虚拟机上用作互斥线程的一种机制，它的作用是保证任何情况下虚拟机中只会有一个线程被运行，而其他线程都处于等待 GIL 锁被释放的状态。</p>
+<p>在单核 CPU 中，GIL 对多线程的执行并没有太大影响，因为单核上的多线程本质上就是顺序执行的。多核 CPU 已经成为一个常见的现象，GIL 的局限性限制了其在多核 CPU 上发挥优势，因此对于 GIL 的去留也曾引发过激烈的讨论。</p>
+<p>Guido 以及 Python 的开发人员都有一个很明确的解释，那就是去掉 GIL 并不容易。Python1.5 他们曾尝试过，但结果非常糟糕。Python3.2 他们重新实现了 GIL，进行了优化。至少目前看来，GIL 依旧会保留。</p>
+<h4 id="建议-39使用-multiprocessin-克服-gil-缺陷">建议 39：使用 <code>multiprocessin</code> 克服 GIL 缺陷</h4>
+<p>为了能够充分利用多核优势，Python 的专家们提供了另外一个解决方案：多进程。<code>Multiprocessing</code> 由此而生，它是 Python 中的多进程管理包，主要用来帮助处理进程的创建以及它们之间的通信和相互协调。</p>
+<h4 id="建议-40使用线程池提高效率">建议 40：使用线程池提高效率</h4>
+<p>线程池，它通过将事先创建多个能够执行任务的线程放入池中，所需要执行的任务通常被安排在队列中。由于线程预先被创建并放入线程池中，同时处理完当前任务之后并不销毁而是被安排处理下一个任务，因此能够避免多次创建线程，从而节省线程创建和销毁的开销，带来更好的性能和系统稳定性。</p>
+<h4 id="建议-41使用-pylint-检查代码风格">建议 41：使用 <code>Pylint</code> 检查代码风格</h4>
+<p>如果你的团队遵循 PEP8 的编码风格，Pylint 是个不错的选择（当然还有其他很多选择，如 pychecker、pep8 等）。</p>
+<h4 id="建议-42了解代码优化的基本原则">建议 42：了解代码优化的基本原则</h4>
+<ol type="1">
+<li>优先保证代码是可工作的。</li>
+<li>权衡优化的代价，优化是有代价的，想解决所有性能问题几乎是不可能的。、</li>
+<li>定义性能指标，集中力量解决首要问题，在进行优化之前，一定要针对问题进行主次排列，并集中力量解决主要问题。</li>
+<li>不要忽略可读性，优化不能以牺牲代码的可读性，甚至带来更多的副作用为代价。</li>
+</ol>
+<h4 id="建议-43让-cprofile-定位性能拖油瓶">建议 43：让 <code>cProfile</code> 定位性能拖油瓶</h4>
+<p>程序性能影响往往符合 <code>80/20</code> 法则，即 <code>20%</code> 的代码的运行时间占用了 <code>80%</code> 的总运行时间，实际上，比例要夸张得多。所以如何定位瓶颈所在很有难度，靠经验是很难找出造成性能瓶颈的代码的。这时候，我们需要一个工具帮忙，<code>profile</code> 是 Python 的标准库。可以统计程序里每一个函数的运行时间，并且提供了多样化的报表，而 <code>cProfile</code> 则是它的 C 实现版本，剖析过程本身需要消耗的资源更少。所以在 Python 3 中，<code>cProfile</code> 代替了 <code>profile</code>，成为默认的性能剖析模块</p>
+<h4 id="建议-44努力降低算法复杂度">建议 44：努力降低算法复杂度</h4>
+<p>同一问题可用不同算法解决，而一个算法的优劣将直接影响程序的效率和性能。算法的评价主要从时间复杂度和空间复杂度来考虑。</p>
+<h4 id="建议-45学会优化循环">建议 45：学会优化循环</h4>
+<ol type="1">
+<li>减少循环内部的计算。能提出循环的运算不要在循环内部进行。</li>
+<li>将显式循环改为隐式循环。比如，求 <code>1, 2, ..., n</code> 的和，可以写成 <code>n*(n+1)/2</code>。类似的情况写成计算表达式效率更高，这可能牺牲了可读性，这时注释就显得尤为重要。</li>
+<li>在循环中尽量引用局部变量。在命名空间中局部变量优先搜索，因此局部变量的查询会比全局变量要快。</li>
+<li>关注内层嵌套循环。在多层嵌套循环中，重点关注内层嵌套循环，尽量将内层循环的计算往上层移。</li>
+</ol>
+<h4 id="建议-46选择合适的数据结构">建议 46：选择合适的数据结构</h4>
+<p>在解决性能问题的时候，往往可以从使用的数据结构入手。了解不同数据结构的实现原理，针对不同的应用场景选择合适的数据结构，也是优化性能的一种有效手段。</p>
+<h4 id="建议-47使用-cc-模块扩展提高性能">建议 47：使用 C/C++ 模块扩展提高性能</h4>
+<p>Python 具有良好的可扩展性，利用 Python 提供的 API，如宏、类型、函数等，可以让 Python 方便地进行 C/C++ 扩展，从而获得较优的执行性能。</p>
+<p>但是，这种方式仍然有几个问题让 Pythonistas 非常头疼。那就是掌握 C/C++ 的学习成本巨大，而且编写过程繁琐复杂。通过开发人员的艰苦工作，<code>Cython</code> 诞生了，它可以把 Python 代码直接编译成等价的 C/C++代码，从而获得性能提升。所以在这里推荐使用 <code>Cython</code> 编写扩展模块。</p>
+<hr />
+<p>到这里就是全部的 47 个有关编写高质量 Python 代码的建议，不知道你有没有收获。</p>
+
+
+  </article>
+  </script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © zachary 2018-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

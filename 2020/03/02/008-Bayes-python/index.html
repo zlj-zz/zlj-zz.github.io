@@ -1,0 +1,284 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>朴素贝叶斯及python实现案例</title>
+  <meta name="author" content="Zachary Zhang">
+  <meta name="description" content="This is my personal blog, share knowledge, record life.">
+  
+  
+  <meta property="og:title" content="朴素贝叶斯及python实现案例"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="=just a blogs="/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="=just a blogs=" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  <div class="description">
+    &nbsp;Hope to have what you need
+  </div>
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        朴素贝叶斯及python实现案例
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2020-03-02T04:42:39.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2020-03-02
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/Machine-learning/">Machine learning</a>
+
+
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/tags/Python/">Python</a>·<a href="/tags/bayes/">bayes</a>
+
+
+    </div>
+    <hr>
+    <div>
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%96%B9%E6%B3%95"><span class="toc-text">贝叶斯方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF"><span class="toc-text">朴素贝叶斯</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+    
+    </div>
+    <div class="picture-container">
+      
+    </div>
+    <h1 id="贝叶斯方法">贝叶斯方法</h1>
+<p><strong>贝叶斯方法</strong>是以<code>贝叶斯定理</code>为基础，使用概率统计的知识对样本数据集进行分类。由于其有着坚实的数学基础，贝叶斯分类算法的误判率是很低的。贝叶斯分类算法在数据集较大的情况下表现出较高的准确率，同时算法本身也比较简单。</p>
+<blockquote>
+<p><strong>概率</strong>，亦称“或然率”，它是反映随机事件出现的<code>可能性（likelihood)</code>大小。某事件 A 出现的概率，常用<span class="math inline">\(P(A)\)</span>表示。</p>
+</blockquote>
+<h3 id="贝叶斯定理">贝叶斯定理</h3>
+<p><strong>贝叶斯定理</strong>源于英国数学贝叶斯（Thomas Bayes）生前为了解决<code>逆向概率</code>问题的一篇文章。</p>
+<blockquote>
+<ul>
+<li><strong>正向概率</strong>: 假设袋子里面有 n 个白球，m 个黑球，随意拿一个出来，摸出黑球的概率是多少？这样的就是正向概率问题。</li>
+<li><strong>逆向概率</strong>: 还是有一个袋子，假设我们不知道袋子里黑白球的比例，当我们进行一定的随意的摸取后，根据摸出球的颜色，推测袋子里黑白球的比例。这样的就是逆向概率问题。</li>
+</ul>
+</blockquote>
+<h5 id="贝叶斯解决的问题">贝叶斯解决的问题</h5>
+<p>由于实际上的问题是不确定的，而自身的观察能力是有限的。所以有时我们需要通过观察的结果进行推测。贝叶斯方法基于假设的<code>先验概率</code>、给定假设下观察到不同数据的概率以及观察到的数据本身而得出的。其方法为，将关于未知参数的先验信息与样本信息综合，再根据<code>贝叶斯公式</code>，得出后验信息，然后根据后验信息去推断未知参数的方法。</p>
+<blockquote>
+<p><strong>先验概率</strong>: 是指根据以往经验和分析得到的概率。<strong>事情还没有发生，要求这件事情发生的可能性的大小，是先验概率。</strong></p>
+</blockquote>
+<h3 id="贝叶斯公式">贝叶斯公式</h3>
+<p>假设一个学校共有<span class="math inline">\(N\)</span>个学生，有 60%男生和 40%女生。女生穿裤子的人数和穿裙子的人数相等，所有男生穿裤子。<strong>我们想求解一个穿长裤的学生是女生的概率。记为：<span class="math inline">\(P(girl|pants)\)</span></strong></p>
+<p><span class="math display">\[P(girl|pants)=\frac{穿长裤女生人数}{穿长裤总人数}\]</span> <span class="math display">\[穿长裤总人数=总人数\cdot 穿长裤的概率=N\cdot P(pants)\]</span></p>
+<p>那么穿长裤女生人数为<strong>总人数乘以女生的概率再乘以女生中穿长裤的概率</strong>：<span class="math inline">\(N\cdot P(girl)\cdot P(pants|girl)\)</span>，所以： <span class="math display">\[P(girl|pants)=\frac{N\cdot P(girl)\cdot P(pants|girl)}{N\cdot P(pants)}\]</span></p>
+<p>可以看出与总人数<span class="math inline">\(N\)</span>无关，于是： <span class="math display">\[P(girl|pants)=\frac{P(girl)\cdot P(pants|girl)}{P(pants)}\]</span></p>
+<p>我们可以计算出<code>后验概率</code><span class="math inline">\(P(girl|pants)=\frac{0.4\cdot 0.5}{0.5×0.4 + 1×0.6}=0.25\)</span></p>
+<blockquote>
+<p><strong>后验概率</strong>:指在得到“结果”的信息后重新修正的概率。<strong>事情已经发生，要求这件事情发生的原因是由某个因素引起的可能性的大小，是后验概率。</strong></p>
+</blockquote>
+<p>这样我们也得到了<code>贝叶斯公式</code>，即<span class="math inline">\(B\)</span>条件下<span class="math inline">\(A\)</span>的概率(记作<span class="math inline">\(P(A|B)\)</span>)和<span class="math inline">\(A\)</span>条件下<span class="math inline">\(B\)</span>的概率(记作<span class="math inline">\(P(B|A)\)</span>)的关系： <span class="math display">\[P(A|B)=\frac{P(B|A)P(A)}{P(B)}\]</span></p>
+<p>穿长裤的概率=是女生概率 x 女生穿长裤概率+是男生概率 x 男生穿长裤概率，于是: <span class="math display">\[P(pants)=P(girl)\cdot P(pants|girl)+P(boy)\cdot P(pants|boy)\]</span></p>
+<p>根据全概率公式: <span class="math display">\[P(B)=\displaystyle\sum_{i=1}^nP(B|A_i)P(A_i)\]</span></p>
+<p>这样，必然事件被分为 n 个不相交的子事件，事件<span class="math inline">\(B\)</span>的条件概率为给定每一个子事件<span class="math inline">\(A_i(i=1,2,...,n)\)</span>下事件 B 的条件概率之和。那么，给定事件<span class="math inline">\(B(P(B)&gt;0)\)</span>，事件的条件概率可以写为： <span class="math display">\[P(A_k|B)=\frac{P(B|A_k)P(A_k)}{P(B)}=\frac{P(B|A_k)P(A_k)}{\sum_{i=1}^nP(B|A_i)P(A_i)}\quad(k=1,2,...,n)\]</span></p>
+<p>这就是<code>贝叶斯定理</code>。</p>
+<h1 id="朴素贝叶斯">朴素贝叶斯</h1>
+<p>朴素贝叶斯使用的就是贝叶斯方法，使用概率统计的知识对样本数据集进行分类，但是在条件上做了一定的限制。</p>
+<blockquote>
+<p><strong>分类方式</strong>：在给定的条件下，计算是各个类别的概率，根据<strong>最大似然估计</strong>，是哪个类别的概率最高，就分类为该类别</p>
+</blockquote>
+<p>朴素贝叶斯<strong>假设特征之间（朴素）独立，即特征值相互之间是没有影响的</strong>。这是一个非常强的假设，现实中往往很难成立，但简化了问题的复杂度，使求解变得简单。</p>
+<h3 id="概率模型">概率模型</h3>
+<p>输入特征向量为<span class="math inline">\(x\)</span>，<span class="math inline">\(x\in X\)</span>，其中<span class="math inline">\(X\)</span>为<span class="math inline">\(n\)</span>维向量集合;</p>
+<p>输出类类别为<span class="math inline">\(y\)</span>，<span class="math inline">\(y\in Y\)</span>，其中<span class="math inline">\(Y=\{c_1,c_2,...,c_j\}\)</span>;</p>
+<p>得到训练数据集：<span class="math inline">\(T=\{(x_1,y_1),(x_2,y_2),...,(x_m,y_m)\}\)</span></p>
+<p>朴素贝叶斯算法通过训练集学习联合概率分布<span class="math inline">\(P(X,Y)\)</span>,<span class="math inline">\(联合概率=先验概率x条件概率\)</span>,</p>
+<p>其中<strong>先验概率</strong>为：<span class="math inline">\(P(Y=c_k)\quad k=1,2,...,j\)</span></p>
+<p><strong>条件概率</strong>为<span class="math display">\[P(X=x|Y=c_k)=P(X^{(1)}=x^{(1)},X^{(2)}=x^{(2)},...,X^{(n)}x^{(n)}|Y=c_k)=\displaystyle\prod_{l=1}^nP(X^{(l)}=x^{(l)}|Y=c_k)\]</span></p>
+<p>分类时,对给定输入<span class="math inline">\(x\)</span>,通过学习到的模型计算后验概率分布<span class="math inline">\(P(Y=c_k|X=x)\)</span>,将后验概率最大的类作为输入<span class="math inline">\(x\)</span>的类输出.后验概率根据贝叶斯定理计算:</p>
+<p><span class="math display">\[P(Y=c_k|X=x)=\frac{P(X=x|Y=c_k)P(Y=c_k)}{\sum_{i=1}^kP(X=x|Y=c_i)P(Y=c_i)}=\frac{P(Y=c_k)\prod_{l=1}^nP(X^{(l)}=x^{(l)}|Y=c_k)}{\sum_{i=1}^nP(Y=c_k)\prod_{l=1}^nP(X^{(l)}=x^{(l)}|Y=c_k)}\]</span></p>
+<p>上面的公式是后验概率分布中的一项,对于相同输入<span class="math inline">\(x\)</span>下不同类别的<code>后验概率</code>的分母相同,所以我们可以简化为只比较分子的大小就可以确定最终的结果,最终类输出为概率最大对应的类别:</p>
+<p><span class="math display">\[y=argmax_{c_k}P(Y=c_k)\displaystyle\prod_{l=1}^nP(X^{(l)}=x^{(l)}|Y=c_k)\]</span></p>
+<p>可以通过<code>右式取对数</code>的方式，将连乘化为求和，简化运算得：</p>
+<p><span class="math display">\[y=argmax_{c_k}\log P(Y=c_k)+\displaystyle\sum_{l=1}^n\log P(X^{(l)}=x^{(l)}|Y=c_k)\]</span></p>
+<p>这就是,<code>朴素贝叶斯概率模型</code>。</p>
+<h3 id="拉普拉斯平滑">拉普拉斯平滑</h3>
+<p><strong>拉普拉斯平滑系数</strong>作用是解决<code>零概率</code>问题。就是在计算实例的概率时，如果某个量 <span class="math inline">\(x\)</span>，在观察样本库（训练集）中没有出现过，会导致整个实例的概率结果是 0，不能因为一个事件没有观察到就武断的认为该事件的概率是 0。</p>
+<p>所以假定训练样本很大时，每个分量 <span class="math inline">\(x\)</span> 的计数加 <code>1</code> 造成的估计概率变化可以忽略不计，但可以方便有效的避免零概率问题。</p>
+<p><span class="math inline">\(P(X_i│Y)=（N_i+α)/(N+αm)\)</span></p>
+<p><span class="math inline">\(\alpha\)</span> 为指定的系数一般为 <code>1</code>，<span class="math inline">\(m\)</span> 为训练集中统计的特征值个数。</p>
+<h3 id="拼写检查案例">拼写检查案例</h3>
+<p>导入使用模块</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> collections</span><br></pre></td></tr></table></figure>
+<p>处理训练数据集</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">words</span>(<span class="params">text</span>):</span></span><br><span class="line">	<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">	将训练集转成小写，提取出所有单词</span></span><br><span class="line"><span class="string">	params: text 训练集文本</span></span><br><span class="line"><span class="string">	return: list 单词列表</span></span><br><span class="line"><span class="string">	&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> re.findall(<span class="string">&#x27;[a-z]+&#x27;</span>, text.lower())</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span>(<span class="params">features</span>):</span></span><br><span class="line">	<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">	单词频率统计</span></span><br><span class="line"><span class="string">	params: list 单词列表</span></span><br><span class="line"><span class="string">	return: dict 词频字典</span></span><br><span class="line"><span class="string">	&quot;&quot;&quot;</span></span><br><span class="line">    model = collections.defaultdict(<span class="keyword">lambda</span>: <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> f <span class="keyword">in</span> features:</span><br><span class="line">        model[f] += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> model</span><br><span class="line"></span><br><span class="line">WORDS = train(words(<span class="built_in">open</span>(<span class="string">&#x27;words.txt&#x27;</span>).read()))</span><br></pre></td></tr></table></figure>
+<p>计算编辑距离</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">alphabet = <span class="string">&#x27;abcdefghijklmnopqrstuvwxyz&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit_distance_1</span>(<span class="params">word</span>):</span></span><br><span class="line">	<span class="string">&quot;&quot;&quot;返回编辑距离为1的set&quot;&quot;&quot;</span></span><br><span class="line">    n = <span class="built_in">len</span>(word)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">set</span>([word[<span class="number">0</span>:i]+word[i+<span class="number">1</span>:] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n)] +                     <span class="comment"># 删除一个字母</span></span><br><span class="line">               [word[<span class="number">0</span>:i]+word[i+<span class="number">1</span>]+word[i]+word[i+<span class="number">2</span>:] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n-<span class="number">1</span>)] + <span class="comment"># 交换两个字母位置</span></span><br><span class="line">               [word[<span class="number">0</span>:i]+c+word[i+<span class="number">1</span>:] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n) <span class="keyword">for</span> c <span class="keyword">in</span> alphabet] + <span class="comment"># 改变一个字母</span></span><br><span class="line">               [word[<span class="number">0</span>:i]+c+word[i:] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n+<span class="number">1</span>) <span class="keyword">for</span> c <span class="keyword">in</span> alphabet])  <span class="comment"># 插入一个字母</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit_distance_2</span>(<span class="params">word</span>):</span></span><br><span class="line">	<span class="string">&quot;&quot;&quot;返回编辑距离为2的set&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">set</span>(e2 <span class="keyword">for</span> e1 <span class="keyword">in</span> edit_distance_1(word) <span class="keyword">for</span> e2 <span class="keyword">in</span> edit_distance_1(e1))</span><br></pre></td></tr></table></figure>
+<p>拼写检查</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">known</span>(<span class="params">words</span>):</span></span><br><span class="line">	<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">	返回正确单词的set，默认WORDS中存在的为正确</span></span><br><span class="line"><span class="string">	params： 单词集合</span></span><br><span class="line"><span class="string">	return： 正确单词集合</span></span><br><span class="line"><span class="string">	&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">set</span>(w <span class="keyword">for</span> w <span class="keyword">in</span> words <span class="keyword">if</span> w <span class="keyword">in</span> WORDS)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">correct</span>(<span class="params">word</span>):</span></span><br><span class="line">	<span class="string">&quot;&quot;&quot;拼写纠正&quot;&quot;&quot;</span></span><br><span class="line">    candidates = known([word]) <span class="keyword">or</span> known(edit_distance_1(word)) <span class="keyword">or</span> know(edit_distance_2(word)) <span class="keyword">or</span> [word]</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">max</span>(candidates, key=<span class="keyword">lambda</span> w: WORDS[w])</span><br></pre></td></tr></table></figure>
+<p>运行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">correct(<span class="string">&#x27;liko&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>'like'</code></p>
+</blockquote>
+<h3 id="文本分类案例">文本分类案例</h3>
+<p>导入使用模块</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_20newsgroups</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> TfidfVectorizer</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> classification_report</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.naive_bayes <span class="keyword">import</span> MultinomialNB</span><br><span class="line"><span class="keyword">from</span> pprint <span class="keyword">import</span> pprint</span><br></pre></td></tr></table></figure>
+<p>加载数据集</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用的是sklearn自带的数据 (18000篇新闻文章，一共涉及到20种话题)</span></span><br><span class="line">news = fetch_20newsgroups(subset=<span class="string">&quot;all&quot;</span>)</span><br><span class="line">pprint(<span class="built_in">list</span>(news.target_names))</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>['alt.atheism',</code> <code>'comp.graphics',</code> <code>'comp.os.ms-windows.misc',</code> <code>'comp.sys.mac.hardware',</code> <code>'comp.windows.x',</code> <code>'misc.forsale',</code> <code>'rec.autos',</code> <code>'rec.motorcycles',</code> <code>'rec.sport.baseball',</code> <code>'rec.sport.hockey',</code> <code>'sci.crypt',</code> <code>'sci.electronics',</code> <code>'sci.med',</code> <code>'sci.space',</code> <code>'soc.religion.christian',</code> <code>'talk.politics.guns',</code> <code>'talk.politics.mideast',</code> <code>'talk.politics.misc',</code> <code>'talk.religion.misc']</code></p>
+</blockquote>
+<p>数据处理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进行数据分割，分成训练集和测试集</span></span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(news.data, news.target, test_size=<span class="number">0.25</span>)</span><br><span class="line"><span class="comment"># 对数据集进行特征抽取</span></span><br><span class="line">tf = TfidfVectorizer()</span><br><span class="line"><span class="comment"># 以训练集的列表进行重要行统计</span></span><br><span class="line">x_train = tf.fit_transform(x_train)</span><br><span class="line">print(x_train.shape)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>(14134, 145231)</code></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">x_test = tf.transform(x_test)</span><br><span class="line"><span class="comment"># 进行朴素贝叶斯算法预测</span></span><br><span class="line">mlt = MultinomialNB(alpha=<span class="number">1.0</span>)</span><br><span class="line">print(x_train)</span><br><span class="line">mlt.fit(x_train, y_train)</span><br><span class="line">y_predict = mlt.predict(x_test)</span><br><span class="line"><span class="comment"># 得出准确率</span></span><br><span class="line">print(<span class="string">&quot;预测的文章类别为：&quot;</span>, y_predict)</span><br><span class="line"><span class="comment"># 得出准确率</span></span><br><span class="line">print(<span class="string">&quot;准确率为：&quot;</span>, mlt.score(x_test, y_test))</span><br><span class="line"></span><br><span class="line">print(<span class="string">&quot;每个类别的精确率和召回率：\n&quot;</span>, classification_report(y_test, y_predict, target_names=news.target_names))</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>预测的文章类别为： [ 2 10 3 ... 15 17 8]</code> <code>准确率为： 0.8571731748726655</code></p>
+</blockquote>
+<pre><code>    每个类别的精确率和召回率：
+                               precision    recall  f1-score   support
+
+             alt.atheism       0.84      0.84      0.84       173
+           comp.graphics       0.91      0.76      0.83       268
+ comp.os.ms-windows.misc       0.85      0.82      0.83       250
+comp.sys.ibm.pc.hardware       0.70      0.85      0.77       232
+   comp.sys.mac.hardware       0.96      0.82      0.88       258
+          comp.windows.x       0.92      0.87      0.89       235
+            misc.forsale       0.91      0.69      0.78       229
+               rec.autos       0.93      0.91      0.92       266
+         rec.motorcycles       0.97      0.94      0.95       266
+      rec.sport.baseball       0.96      0.94      0.95       262
+        rec.sport.hockey       0.92      0.97      0.94       257
+               sci.crypt       0.77      0.99      0.86       245
+         sci.electronics       0.85      0.83      0.84       231
+                 sci.med       0.96      0.88      0.92       247
+               sci.space       0.87      0.96      0.91       237
+  soc.religion.christian       0.60      0.99      0.75       255
+      talk.politics.guns       0.77      0.96      0.85       233
+   talk.politics.mideast       0.95      0.98      0.96       233
+      talk.politics.misc       0.99      0.66      0.79       171
+      talk.religion.misc       0.97      0.19      0.32       164
+
+            accuracy                           0.86      4712
+           macro avg       0.88      0.84      0.84      4712
+        weighted avg       0.88      0.86      0.85      4712</code></pre>
+<h1 id="总结">总结</h1>
+<h5 id="优点">优点：</h5>
+<ul>
+<li>朴素贝叶斯模型发源于古典数学理论，有稳定的分类效率。</li>
+<li>对缺失数据不太敏感，算法也比较简单，常用于文本分类。</li>
+<li>分类准确度高，速度快。</li>
+</ul>
+<h5 id="缺点">缺点：</h5>
+<ul>
+<li>需要知道先验概率<span class="math inline">\(P(F1,F2,…|C)\)</span>，因此在某些时候会由于假设的先验模型的原因导致预测效果不佳。</li>
+</ul>
+
+
+  </article>
+  </script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © zachary 2018-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

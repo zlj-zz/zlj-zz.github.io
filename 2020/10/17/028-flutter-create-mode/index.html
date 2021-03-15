@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>Use tools to create mode in Flutter</title>
+  <meta name="author" content="Zachary Zhang">
+  <meta name="description" content="This is my personal blog, share knowledge, record life.">
+  
+  
+  <meta property="og:title" content="Use tools to create mode in Flutter"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="=just a blogs="/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="=just a blogs=" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  <div class="description">
+    &nbsp;Hope to have what you need
+  </div>
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        Use tools to create mode in Flutter
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2020-10-16T16:00:00.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2020-10-17
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/Flutter/">Flutter</a>
+
+
+
+
+
+    </div>
+    <hr>
+    <div>
+    
+      
+    
+    </div>
+    <div class="picture-container">
+      
+    </div>
+    <p>At Flutter app, sometime we need to create <code>class</code> for mode. Although it can be done manaually, it takes too much time. So we can use some tools to complete this.</p>
+<p>We can use these tools. You can view more usafe methods on the <a href="pub.dev">officail website</a>.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">json_annotation</span><br><span class="line">shared_preferences</span><br><span class="line">json_model</span><br><span class="line">build_runner</span><br><span class="line">json_serializable</span><br></pre></td></tr></table></figure>
+<p>First, we should add these package to your <code>pubspec.yaml</code>, like below. Then run the <code>pub get</code> command in terminal to install them. At this point we have made preparations.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">dependencies:</span></span><br><span class="line">  <span class="attr">flutter:</span></span><br><span class="line">    <span class="attr">sdk:</span> <span class="string">flutter</span></span><br><span class="line">  <span class="attr">flutter_localizations:</span></span><br><span class="line">    <span class="attr">sdk:</span> <span class="string">flutter</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">json_annotation:</span> <span class="string">^2.0.0</span></span><br><span class="line">  <span class="attr">shared_preferences:</span> <span class="string">^0.5.10</span></span><br><span class="line"></span><br><span class="line"><span class="attr">dev_dependencies:</span></span><br><span class="line">  <span class="attr">flutter_test:</span></span><br><span class="line">    <span class="attr">sdk:</span> <span class="string">flutter</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">json_model:</span></span><br><span class="line">    <span class="attr">git:</span></span><br><span class="line">      <span class="attr">url:</span> <span class="string">&quot;https://github.com/wbtvc/json_model.git&quot;</span></span><br><span class="line">  <span class="attr">build_runner:</span> <span class="string">^1.6.0</span></span><br><span class="line">  <span class="attr">json_serializable:</span> <span class="string">^3.0.0</span></span><br></pre></td></tr></table></figure>
+<p>Then we can create <code>jsons</code> fold to save our mode json file. The following is a case of caching mode, we can create mulitple json files corresponding to multiple modes.</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;enable&quot;</span>: <span class="literal">true</span>, <span class="comment">// 是否启用缓存</span></span><br><span class="line">  <span class="attr">&quot;maxAge&quot;</span>: <span class="number">1000</span>, <span class="comment">// 缓存的最长时间，单位（秒）</span></span><br><span class="line">  <span class="attr">&quot;maxCount&quot;</span>: <span class="number">100</span> <span class="comment">// 最大缓存数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The producted model file:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// <span class="markdown">cacheConfig.dart</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:json_annotation/json_annotation.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">part</span> <span class="string">&#x27;cacheConfig.g.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@JsonSerializable</span>()</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CacheConfig</span> </span>&#123;</span><br><span class="line">    CacheConfig();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">bool</span> enable;</span><br><span class="line">    <span class="built_in">num</span> maxAge;</span><br><span class="line">    <span class="built_in">num</span> maxCount;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">factory</span> CacheConfig.fromJson(<span class="built_in">Map</span>&lt;<span class="built_in">String</span>,<span class="built_in">dynamic</span>&gt; json) =&gt; _$CacheConfigFromJson(json);</span><br><span class="line">    <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">dynamic</span>&gt; toJson() =&gt; _$CacheConfigToJson(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// <span class="markdown">cacheConfig.g.dart</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// GENERATED CODE - DO NOT MODIFY BY HAND</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">part</span> of <span class="string">&#x27;cacheConfig.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// **************************************************************************</span></span><br><span class="line"><span class="comment">// JsonSerializableGenerator</span></span><br><span class="line"><span class="comment">// **************************************************************************</span></span><br><span class="line"></span><br><span class="line">CacheConfig _$CacheConfigFromJson(<span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">dynamic</span>&gt; json) &#123;</span><br><span class="line">  <span class="keyword">return</span> CacheConfig()</span><br><span class="line">    ..enable = json[<span class="string">&#x27;enable&#x27;</span>] <span class="keyword">as</span> <span class="built_in">bool</span></span><br><span class="line">    ..maxAge = json[<span class="string">&#x27;maxAge&#x27;</span>] <span class="keyword">as</span> <span class="built_in">num</span></span><br><span class="line">    ..maxCount = json[<span class="string">&#x27;maxCount&#x27;</span>] <span class="keyword">as</span> <span class="built_in">num</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">dynamic</span>&gt; _$CacheConfigToJson(CacheConfig instance) =&gt;</span><br><span class="line">    &lt;<span class="built_in">String</span>, <span class="built_in">dynamic</span>&gt;&#123;</span><br><span class="line">      <span class="string">&#x27;enable&#x27;</span>: instance.enable,</span><br><span class="line">      <span class="string">&#x27;maxAge&#x27;</span>: instance.maxAge,</span><br><span class="line">      <span class="string">&#x27;maxCount&#x27;</span>: instance.maxCount,</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+<p>Next we just should use <code>flutter packages pub run json_model</code> in terminal and wait a minute, we can see the mode file be producted in <code>lib/models</code>. We just include the fold's <code>index.dart</code> to use our mode.</p>
+
+
+  </article>
+  </script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © zachary 2018-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>逻辑回归及python代码实现</title>
+  <meta name="author" content="Zachary Zhang">
+  <meta name="description" content="This is my personal blog, share knowledge, record life.">
+  
+  
+  <meta property="og:title" content="逻辑回归及python代码实现"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="=just a blogs="/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="=just a blogs=" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  <div class="description">
+    &nbsp;Hope to have what you need
+  </div>
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        逻辑回归及python代码实现
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2020-02-27T19:53:43.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2020-02-28
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/Machine-learning/">Machine learning</a>
+
+
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/tags/Python/">Python</a>·<a href="/tags/logic-regression/">logic regression</a>
+
+
+    </div>
+    <hr>
+    <div>
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92"><span class="toc-text">逻辑回归</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#sigmoid-%E5%87%BD%E6%95%B0"><span class="toc-text">Sigmoid 函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8E%A8%E5%AF%BC%E8%BF%87%E7%A8%8B"><span class="toc-text">推导过程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98"><span class="toc-text">多分类问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#python-%E5%AE%9E%E7%8E%B0"><span class="toc-text">python 实现</span></a></li></ol>
+    
+    </div>
+    <div class="picture-container">
+      
+    </div>
+    <h1 id="逻辑回归">逻辑回归</h1>
+<p>一种广义的线性回归分析模型，逻辑回归虽然带有回归字样，但是逻辑回归属于<strong>分类算法</strong>。逻辑回归可以进行多分类操作，但由逻辑回归算法本身性质决定其更常用于二分类。</p>
+<p><strong>逻辑回归</strong>：线性回归可以预测连续值，但是不能解决分类问题，我们需要根据预测的结果判定其属于正类还是负类。所以逻辑回归就是将线性回归的结果，通过 <code>sigmoid</code> 函数映射到 <span class="math inline">\((0,1)\)</span> 之间。</p>
+<p><strong>分类的本质</strong>：在空间中找到一个决策边界来完成分类的决策。==逻辑回归的决策边界：可以是非线性的==</p>
+<h1 id="sigmoid-函数">Sigmoid 函数</h1>
+<p><span class="math display">\[g(z)=\frac{1}{1+e^{-z}}\]</span></p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20200227224036511.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDEwNDk0,size_16,color_FFFFFF,t_70#pic_center" alt="sigmoid" /><figcaption aria-hidden="true">sigmoid</figcaption>
+</figure>
+<p><strong>为什么使用 sigmoid 函数</strong></p>
+<ol type="1">
+<li>自变量取值范围任意实数，值域 <span class="math inline">\([0,1]\)</span>，利于分类</li>
+<li>数学特性好，求导容易：<span class="math inline">\(g′(z)= g(z)\cdot(1-g(z))\)</span></li>
+</ol>
+<h1 id="推导过程">推导过程</h1>
+<p>解释：将任意的输入映射到 <span class="math inline">\([0,1]\)</span> 的区间。我们在线性回归中可以得到一个预测值，再将该值映射到 Sigmoid 函数中，就完成了由值到概率的转换，也就是分类任务</p>
+<p><strong>预测函数</strong>：<span class="math inline">\(h(\theta)=\frac{1}{1+e^{-\theta^Tx}}\)</span>，其中 <span class="math inline">\(\theta_0+\theta_1x_1+ ... +\theta_nx_n=\displaystyle\sum_{i=1}^n=\theta^Tx\)</span></p>
+<p><strong>分类任务</strong>：<span class="math inline">\(\begin{cases} P(y=1|x;\theta)=h_\theta(x) \\ P(y=0|x;\theta)=1-h_\theta(x) \end{cases}\)</span>，整合：<span class="math inline">\(P(y|x;\theta)=(h_\theta(x))^y(1-h_\theta(x))^{1-y}\)</span></p>
+<p>解释：对于二分类任务<span class="math inline">\((0,1)\)</span>，整合后 y 取 0 只保留 <span class="math inline">\((1-h_\theta(x))^{1-y}\)</span>，y 取 1 只保留<span class="math inline">\((h_\theta(x))^y\)</span></p>
+<p><strong>似然函数</strong>：<span class="math inline">\(L(\theta)=\displaystyle\prod_{i=1}^mP(y_i|x_i;\theta)=\displaystyle\prod_{i=1}^m(h_\theta(x_i))^{y_i}(1-h_\theta(x_i))^{1-{y_i}}\)</span></p>
+<p>用对数似然降低复杂度</p>
+<p><strong>对数似然</strong>：<span class="math inline">\(l(\theta)=\log L(\theta)=\displaystyle\sum_{i=1}^m(y_i\log h_\theta(x_i)+(1-y_i)\log (1-h_\theta(x_i)))\)</span></p>
+<p>此时应用梯度上升求最大值，引入<span class="math inline">\(J(\theta)=-\frac{1}{m}l(\theta)\)</span>，反之梯度下降求最小值</p>
+<p>求导过程：</p>
+<p><span class="math inline">\(\frac{\delta}{\delta_{\theta_j}}J(\theta)=-\frac{1}{m}\displaystyle\sum_{i=1}^m (y_i\frac{1}{h_\theta(x_i)}\frac{\delta}{\delta_{\theta_j}}h_\theta(x_i)-(1-y_i)\frac{1}{1-h_\theta(x_i)}\frac{\delta}{\delta_{\theta_j}}h_\theta(x_i))\)</span></p>
+<p><span class="math inline">\(=-\frac{1}{m}\displaystyle\sum_{i=1}^m (y_i\frac{1}{g(\theta^Tx_i)}-(1-y_i)\frac{1}{1-g(\theta^Tx_i)})\frac{\delta}{\delta_{\theta_j}}g(\theta^Tx_i)\)</span></p>
+<p><span class="math inline">\(=-\frac{1}{m}\displaystyle\sum_{i=1}^m (y_i\frac{1}{g(\theta^Tx_i)}-(1-y_i)\frac{1}{1-g(\theta^Tx_i)})g(\theta^Tx_i)(1-g(\theta^Tx_i))\frac{\delta}{\delta_{\theta_j}}\theta^Tx_i\)</span></p>
+<p><span class="math inline">\(=-\frac{1}{m}\displaystyle\sum_{i=1}^m (y_i(1-g(\theta^Tx_i))-(1-y_i)g(\theta^Tx_i))x_i^j\)</span></p>
+<p><span class="math inline">\(=-\frac{1}{m}\displaystyle\sum_{i=1}^m (y_i-g(\theta^Tx_i))x_i^j\)</span></p>
+<p><span class="math inline">\(=\frac{1}{m}\displaystyle\sum_{i=1}^m (h_\theta(x_i)-y_i)x_i^j\)</span></p>
+<p><strong>参数更新</strong>：<span class="math inline">\(\theta_j:=\theta_j-\alpha\frac{1}{m}\displaystyle\sum_{i=1}^m (h_\theta(x_i)-y_i)x_i^j\)</span></p>
+<h2 id="多分类问题">多分类问题</h2>
+<p>逻辑回归常用与解决二分类问题，那么它可以用来解决多分类问题吗？</p>
+<p>其实也是可以的。之前的逻辑回归可以很好地解决二分类问题，一个样本不是正类就是父类，关于多分类问题的求解可以依靠这个基本原理。常用的多分类思路是“一对多”（one vs all），它的基本思想简单粗暴，构建多个分类器（每个分类器针对一个估计函数）针对每个类别，每个分类器学会识别“是或者不是”该类别，这样就简化为多个二分类问题。用多个逻辑回归作用于待预测样本，返回的最高值作为最后的预测值。</p>
+<h1 id="python-实现">python 实现</h1>
+<blockquote>
+<p>通过建立一个逻辑回归模型来预测一个学生是否被大学录取。假设知道两次考试的成绩。有以前的申请人的历史数据，你可以用它作为逻辑回归的训练集，根据考试成绩估计入学概率。</p>
+</blockquote>
+<p>导入所需包</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> time</span><br></pre></td></tr></table></figure>
+<p>读取并查看<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1xU_JH55X3wDrW2M5zhSXUw">数据</a>(提取码: v7cd)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">path = <span class="string">&quot;LogiReg_data.txt&quot;</span></span><br><span class="line">pdData = pd.read_csv(path, header=<span class="literal">None</span>, names=[<span class="string">&#x27;exam_1&#x27;</span>, <span class="string">&#x27;exam_2&#x27;</span>, <span class="string">&#x27;admitted&#x27;</span>])</span><br><span class="line">pdData.head()</span><br><span class="line">pdData.shape</span><br></pre></td></tr></table></figure>
+<pre><code>    exam_1  exam_2  admitted
+0   34.623660   78.024693   0
+1   30.286711   43.894998   0
+2   35.847409   72.902198   0
+3   60.182599   86.308552   1
+4   79.032736   75.344376   1
+(100, 3)</code></pre>
+<p>根据 <code>admitted</code> 画出数据图像</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">positive = pdData[pdData[<span class="string">&#x27;admitted&#x27;</span>] == <span class="number">1</span>] <span class="comment"># returns the subset of rows such Admitted = 1, i.e. the set of *positive* examples</span></span><br><span class="line">negative = pdData[pdData[<span class="string">&#x27;admitted&#x27;</span>] == <span class="number">0</span>] <span class="comment"># returns the subset of rows such Admitted = 0, i.e. the set of *negative* examples</span></span><br><span class="line"></span><br><span class="line">plt.subplots(figsize=(<span class="number">10</span>,<span class="number">5</span>))</span><br><span class="line">plt.scatter(positive[<span class="string">&#x27;exam_1&#x27;</span>], positive[<span class="string">&#x27;exam_2&#x27;</span>], s=<span class="number">30</span>, c=<span class="string">&#x27;b&#x27;</span>, marker=<span class="string">&#x27;o&#x27;</span>, label=<span class="string">&#x27;Admitted&#x27;</span>)</span><br><span class="line">plt.scatter(negative[<span class="string">&#x27;exam_1&#x27;</span>], negative[<span class="string">&#x27;exam_2&#x27;</span>], s=<span class="number">30</span>, c=<span class="string">&#x27;r&#x27;</span>, marker=<span class="string">&#x27;x&#x27;</span>, label=<span class="string">&#x27;Not Admitted&#x27;</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.xlabel(<span class="string">&#x27;Exam_1 Score&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;Exam_2 Score&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Text(0, 0.5, &#39;Exam_2 Score&#39;)</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/20200228002518441.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDEwNDk0,size_16,color_FFFFFF,t_70" /></p>
+<p>逻辑回归类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LogisticRegression</span>():</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;逻辑回归类&quot;&quot;&quot;</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, n</span>):</span></span><br><span class="line">        self.STOP_ITER = <span class="number">0</span></span><br><span class="line">        self.STOP_COST = <span class="number">1</span></span><br><span class="line">        self.STOP_GRAD = <span class="number">2</span></span><br><span class="line">        self.n = n</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sigmoid</span>(<span class="params">self, z</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">            sigmoid函数</span></span><br><span class="line"><span class="string">            将预测值映射成概率</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> / (<span class="number">1</span> + np.exp(-z))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">model</span>(<span class="params">self, X, theta</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">            预测函数：返回预测值</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">return</span> self.sigmoid(np.dot(X, theta.T))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cost</span>(<span class="params">self, X, y, theta</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;损失函数&quot;&quot;&quot;</span></span><br><span class="line">        left = np.multiply(-y, np.log(self.model(X, theta)))</span><br><span class="line">        right = np.multiply(<span class="number">1</span> - y, np.log(<span class="number">1</span> - self.model(X, theta)))</span><br><span class="line">        <span class="keyword">return</span> np.<span class="built_in">sum</span>(left - right) / (<span class="built_in">len</span>(X))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">gradient</span>(<span class="params">self, X, y, theta</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;计算梯度&quot;&quot;&quot;</span></span><br><span class="line">        grad = np.zeros(theta.shape)</span><br><span class="line">        error = (self.model(X, theta)- y).ravel()</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(theta.ravel())): <span class="comment">#for each parmeter</span></span><br><span class="line">            term = np.multiply(error, X[:,j])</span><br><span class="line">            grad[<span class="number">0</span>, j] = np.<span class="built_in">sum</span>(term) / <span class="built_in">len</span>(X)</span><br><span class="line">        <span class="keyword">return</span> grad</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">stopCriterion</span>(<span class="params">self, <span class="built_in">type</span>, value, threshold</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">            停止标准函数：</span></span><br><span class="line"><span class="string">                1.迭代次数</span></span><br><span class="line"><span class="string">                2.损失值变化</span></span><br><span class="line"><span class="string">                3.梯度变化</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">type</span> == self.STOP_ITER:</span><br><span class="line">            <span class="keyword">return</span> value &gt; threshold</span><br><span class="line">        <span class="keyword">elif</span> <span class="built_in">type</span> == self.STOP_COST:</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">abs</span>(value[-<span class="number">1</span>]-value[-<span class="number">2</span>]) &lt; threshold</span><br><span class="line">        <span class="keyword">elif</span> <span class="built_in">type</span> == self.STOP_GRAD:</span><br><span class="line">            <span class="keyword">return</span> np.linalg.norm(value) &lt; threshold</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">shuffleData</span>(<span class="params">self, data</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;洗牌&quot;&quot;&quot;</span></span><br><span class="line">        np.random.shuffle(data)</span><br><span class="line">        cols = data.shape[<span class="number">1</span>]</span><br><span class="line">        X = data[:, <span class="number">0</span>:cols-<span class="number">1</span>]</span><br><span class="line">        y = data[:, cols-<span class="number">1</span>:]</span><br><span class="line">        <span class="keyword">return</span> X, y</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">descent</span>(<span class="params">self, data, theta, batchSize, stopType, thresh, alpha</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;梯度下降求解&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        init_time = time.time()</span><br><span class="line">        i = <span class="number">0</span> <span class="comment"># 迭代次数</span></span><br><span class="line">        k = <span class="number">0</span> <span class="comment"># batch</span></span><br><span class="line">        X, y = self.shuffleData(data)</span><br><span class="line">        grad = np.zeros(theta.shape) <span class="comment"># 计算的梯度</span></span><br><span class="line">        costs = [self.cost(X, y, theta)] <span class="comment"># 损失值</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            grad = self.gradient(X[k:k+batchSize], y[k:k+batchSize], theta)</span><br><span class="line">            k += batchSize <span class="comment">#取batch数量个数据</span></span><br><span class="line">            <span class="keyword">if</span> k &gt;= self.n:</span><br><span class="line">                k = <span class="number">0</span></span><br><span class="line">                X, y = self.shuffleData(data) <span class="comment">#重新洗牌</span></span><br><span class="line">            theta = theta - alpha*grad <span class="comment"># 参数更新</span></span><br><span class="line">            costs.append(self.cost(X, y, theta)) <span class="comment"># 计算新的损失</span></span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> stopType == self.STOP_ITER:</span><br><span class="line">                value = i</span><br><span class="line">            <span class="keyword">elif</span> stopType == self.STOP_COST:</span><br><span class="line">                value = costs</span><br><span class="line">            <span class="keyword">elif</span> stopType == self.STOP_GRAD:</span><br><span class="line">                value = grad</span><br><span class="line">            <span class="keyword">if</span> self.stopCriterion(stopType, value, thresh):</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> theta, i-<span class="number">1</span>, costs, grad, time.time() - init_time</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span>(<span class="params">self, X, theta</span>):</span></span><br><span class="line">        <span class="keyword">return</span> [<span class="number">1</span> <span class="keyword">if</span> x &gt;= <span class="number">0.5</span> <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">for</span> x <span class="keyword">in</span> self.model(X, theta)]</span><br></pre></td></tr></table></figure>
+<p>处理数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">pdData.insert(<span class="number">0</span>, <span class="string">&#x27;Ones&#x27;</span>, <span class="number">1</span>) <span class="comment"># in a try / except structure so as not to return an error if the block si executed several times</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set X (training data) and y (target variable)</span></span><br><span class="line">orig_data = pdData.as_matrix() <span class="comment"># convert the Pandas representation of the data to an array useful for further computations</span></span><br><span class="line">cols = orig_data.shape[<span class="number">1</span>]</span><br><span class="line">X = orig_data[:,<span class="number">0</span>:cols-<span class="number">1</span>]</span><br><span class="line">y = orig_data[:,cols-<span class="number">1</span>:cols]</span><br><span class="line"></span><br><span class="line"><span class="comment"># convert to numpy arrays and initalize the parameter array theta</span></span><br><span class="line">theta = np.zeros([<span class="number">1</span>, <span class="number">3</span>])</span><br><span class="line"></span><br><span class="line">print(X[:<span class="number">5</span>])</span><br><span class="line">print(y[:<span class="number">5</span>])</span><br><span class="line">print(theta)</span><br></pre></td></tr></table></figure>
+<pre><code>array([[ 1.        , 34.62365962, 78.02469282],
+       [ 1.        , 30.28671077, 43.89499752],
+       [ 1.        , 35.84740877, 72.90219803],
+       [ 1.        , 60.18259939, 86.3085521 ],
+       [ 1.        , 79.03273605, 75.34437644]])
+       array([[0.],
+       [0.],
+       [0.],
+       [1.],
+       [1.]])
+       array([[0., 0., 0.]])</code></pre>
+<p>功能函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">lr = LogisticRegression(<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">runExpe</span>(<span class="params">data, theta, batchSize, stopType, thresh, alpha</span>):</span></span><br><span class="line"></span><br><span class="line">    theta, <span class="built_in">iter</span>, costs, grad, dur = lr.descent(data, theta, batchSize, stopType, thresh, alpha)</span><br><span class="line">    print(theta)</span><br><span class="line">    name = <span class="string">&quot;Original&quot;</span> <span class="keyword">if</span> (data[:,<span class="number">1</span>]&gt;<span class="number">2</span>).<span class="built_in">sum</span>() &gt; <span class="number">1</span> <span class="keyword">else</span> <span class="string">&quot;Scaled&quot;</span></span><br><span class="line">    name += <span class="string">f&quot; data / learning rate: <span class="subst">&#123;alpha&#125;</span> / &quot;</span></span><br><span class="line">    <span class="keyword">if</span> batchSize==<span class="number">1</span>:</span><br><span class="line">        strDescType = <span class="string">&quot;Stochastic&quot;</span></span><br><span class="line">    <span class="keyword">elif</span> batchSize==n:</span><br><span class="line">        strDescType = <span class="string">&quot;Gradient&quot;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        strDescType = <span class="string">f&quot;Mini-batch (<span class="subst">&#123;batchSize&#125;</span>)&quot;</span></span><br><span class="line">    name += strDescType + <span class="string">&quot; descent / Stop: &quot;</span></span><br><span class="line">    <span class="keyword">if</span> stopType == lr.STOP_ITER:</span><br><span class="line">        strStop = <span class="string">f&quot;<span class="subst">&#123;thresh&#125;</span> iterations&quot;</span></span><br><span class="line">    <span class="keyword">elif</span> stopType == lr.STOP_COST:</span><br><span class="line">        strStop = <span class="string">f&quot;costs change &lt; <span class="subst">&#123;thresh&#125;</span>&quot;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        strStop = <span class="string">f&quot;gradient norm &lt; <span class="subst">&#123;thresh&#125;</span>&quot;</span></span><br><span class="line">    name += strStop</span><br><span class="line"><span class="comment">#     print(name)</span></span><br><span class="line">    <span class="built_in">print</span> (<span class="string">f&quot;<span class="subst">&#123;name&#125;</span>\nTheta: <span class="subst">&#123;theta&#125;</span> / Iter: <span class="subst">&#123;<span class="built_in">iter</span>&#125;</span> / Last cost: <span class="subst">&#123;costs[-<span class="number">1</span>]:<span class="number">03.2</span>f&#125;</span> / Duration: <span class="subst">&#123;dur:<span class="number">03.2</span>f&#125;</span>s&quot;</span>)</span><br><span class="line">    plt.subplots(figsize=(<span class="number">12</span>,<span class="number">4</span>))</span><br><span class="line">    plt.plot(np.arange(<span class="built_in">len</span>(costs)), costs, <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">    plt.xlabel(<span class="string">&#x27;Iterations&#x27;</span>)</span><br><span class="line">    plt.ylabel(<span class="string">&#x27;Cost&#x27;</span>)</span><br><span class="line">    plt.xlim(-<span class="number">1</span>,)</span><br><span class="line">    plt.title(name.upper())</span><br><span class="line">    <span class="keyword">return</span> theta</span><br></pre></td></tr></table></figure>
+<p>基于次数的迭代策略的 batch 梯度下降(5000 次)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="number">100</span></span><br><span class="line">theta = runExpe(orig_data, theta, n, <span class="number">0</span>, thresh=<span class="number">2000</span>, alpha=<span class="number">0.000001</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200228014359535.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDEwNDk0,size_16,color_FFFFFF,t_70" /></p>
+<p>基于损失值的迭代策略的 batch 梯度下降（109901 次）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">runExpe(orig_data, theta, n, <span class="number">1</span>, thresh=<span class="number">0.000001</span>, alpha=<span class="number">0.001</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200228020422840.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDEwNDk0,size_16,color_FFFFFF,t_70" /></p>
+<p>根据梯度变化停止的 batch 梯度下降（40045 次）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">runExpe(orig_data, theta, n, <span class="number">2</span>, thresh=<span class="number">0.05</span>, alpha=<span class="number">0.001</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200228020527177.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDEwNDk0,size_16,color_FFFFFF,t_70" /></p>
+<p>看一看准确率</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">scaled_X = orig_data[:, :<span class="number">3</span>]</span><br><span class="line">y = orig_data[:, <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">predictions = lr.predict(scaled_X, theta)</span><br><span class="line">correct = [<span class="number">1</span> <span class="keyword">if</span> ((a == <span class="number">1</span> <span class="keyword">and</span> b == <span class="number">1</span>) <span class="keyword">or</span> (a == <span class="number">0</span> <span class="keyword">and</span> b == <span class="number">0</span>)) <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">for</span> (a, b) <span class="keyword">in</span> <span class="built_in">zip</span>(predictions, y)]</span><br><span class="line">accuracy = (<span class="built_in">sum</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, correct)) % <span class="built_in">len</span>(correct))</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&#x27;accuracy = &#123;0&#125;%&#x27;</span>.<span class="built_in">format</span>(accuracy))</span><br></pre></td></tr></table></figure>
+<pre><code>accuracy = 60%</code></pre>
+<p>尝试下对数据进行标准化 将数据按其属性(按列进行)减去其均值，然后除以其方差。最后得到的结果是，对每个属性/每列来说所有数据都聚集在 0 附近，方差值为 1</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing <span class="keyword">as</span> pp</span><br><span class="line"></span><br><span class="line">scaled_data = orig_data.copy()</span><br><span class="line">scaled_data[:, <span class="number">1</span>:<span class="number">3</span>] = pp.scale(orig_data[:, <span class="number">1</span>:<span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+<p>再基于梯度变化停止的 batch 梯度下降（139711 次）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">runExpe(scaled_data, theta, n, <span class="number">2</span>, thresh=<span class="number">0.002</span>*<span class="number">2</span>, alpha=<span class="number">0.001</span>)</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20200228025828418.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDEwNDk0,size_16,color_FFFFFF,t_70" alt="再基于梯度变化停止的batch梯度下降" /><figcaption aria-hidden="true">再基于梯度变化停止的batch梯度下降</figcaption>
+</figure>
+<p>基于梯度变化停止的随机梯度下降（72605 次）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theta = runExpe(scaled_data, theta, <span class="number">1</span>, <span class="number">2</span>, thresh=<span class="number">0.002</span>/<span class="number">5</span>, alpha=<span class="number">0.001</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200228025132558.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDEwNDk0,size_16,color_FFFFFF,t_70" /></p>
+<p>在看一下准确度</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">scaled_X = scaled_data[:, :<span class="number">3</span>]</span><br><span class="line">y = scaled_data[:, <span class="number">3</span>]</span><br><span class="line">predictions = predict(scaled_X, theta)</span><br><span class="line">correct = [<span class="number">1</span> <span class="keyword">if</span> ((a == <span class="number">1</span> <span class="keyword">and</span> b == <span class="number">1</span>) <span class="keyword">or</span> (a == <span class="number">0</span> <span class="keyword">and</span> b == <span class="number">0</span>)) <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">for</span> (a, b) <span class="keyword">in</span> <span class="built_in">zip</span>(predictions, y)]</span><br><span class="line">accuracy = (<span class="built_in">sum</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, correct)) % <span class="built_in">len</span>(correct))</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&#x27;accuracy = &#123;0&#125;%&#x27;</span>.<span class="built_in">format</span>(accuracy))</span><br></pre></td></tr></table></figure>
+<pre><code>accuracy = 89%</code></pre>
+<p>再基于梯度变化停止的 mini-batch 的梯度下降（3051 次）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theta = runExpe(scaled_data, theta, <span class="number">16</span>, <span class="number">2</span>, thresh=<span class="number">0.002</span>*<span class="number">2</span>, alpha=<span class="number">0.001</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200228025340752.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDEwNDk0,size_16,color_FFFFFF,t_70" /></p>
+
+
+  </article>
+  </script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © zachary 2018-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

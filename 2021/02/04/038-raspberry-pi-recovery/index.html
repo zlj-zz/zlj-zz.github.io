@@ -1,0 +1,217 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>Raspberry Pi 构建恢复分区，自动恢复系统</title>
+  <meta name="author" content="Zachary Zhang">
+  <meta name="description" content="This is my personal blog, share knowledge, record life.">
+  
+  
+  <meta property="og:title" content="Raspberry Pi 构建恢复分区，自动恢复系统"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="=just a blogs="/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="=just a blogs=" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  <div class="description">
+    &nbsp;Hope to have what you need
+  </div>
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        Raspberry Pi 构建恢复分区，自动恢复系统
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2021-02-03T16:00:00.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2021-02-04
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/Linux/">Linux</a>
+
+
+
+
+
+    </div>
+    <hr>
+    <div>
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%88%86%E5%8C%BA"><span class="toc-text">创建分区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E9%95%9C%E5%83%8F"><span class="toc-text">安装镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%88%86%E5%8C%BA"><span class="toc-text">配置分区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%87%E4%BB%BD%E9%95%9C%E5%83%8F"><span class="toc-text">备份镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%81%A2%E5%A4%8D%E8%84%9A%E6%9C%AC"><span class="toc-text">恢复脚本</span></a></li></ol>
+    
+    </div>
+    <div class="picture-container">
+      
+    </div>
+    <p>首先要将树莓派的磁盘挂载到另一台电脑上，以便后续的操作。</p>
+<h1 id="创建分区">创建分区</h1>
+<p>第一步就是要创建一个新的分区用于恢复系统。你可以使用 <code>fdisk</code> 命令去创建。也可以使用一些图形化的工具。</p>
+<blockquote>
+<p><strong>Note</strong>: 记得分区时留下足够的空间去安装系统和存放备份镜像。</p>
+</blockquote>
+<p>这里我是在 <strong>Ubuntu</strong> 下使用 <code>gparted</code> 工具来分去的。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install gparted</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20210204165914976.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDEwNDk0,size_16,color_FFFFFF,t_70#pic_center" alt="GParted" /> 分区完了之后我们用 <code>sudo lsblk --fs</code> 看一看结果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">NAME           FSTYPE LABEL      UUID                                 MOUNTPOINT</span><br><span class="line">sdd</span><br><span class="line">├─sdd2         ext4   rootfs     80571af6-21c9-48a0-9df5-cffb60cf79af &#x2F;media&#x2F;ubuntu&#x2F;rootfs</span><br><span class="line">├─sdd3         ext4   recoveryfs a7adb26a-8b87-4729-99c8-9f5ac069d51e &#x2F;media&#x2F;ubuntu&#x2F;recoveryfs</span><br><span class="line">└─sdd1         vfat   boot       6341-C9E5                            &#x2F;media&#x2F;ubuntu&#x2F;boot</span><br><span class="line">sdb</span><br><span class="line">├─sdb4         ext4              3eb0c4d3-d782-44f8-b136-be73e8aa1ac4 &#x2F;media&#x2F;ubuntu&#x2F;3eb0c4d3-d782-44f8-b136-be73e8aa1ac4</span><br><span class="line">├─sdb2         ntfs              5EE0C595E0C57435                     &#x2F;media&#x2F;ubuntu&#x2F;5EE0C595E0C57435</span><br><span class="line">├─sdb5         swap              652b8cfb-fdfd-49c2-8041-3643892aa97d</span><br><span class="line">│ └─cryptswap1 swap              e68424e3-2799-4f72-8754-dacd7ad1a61c [SWAP]</span><br><span class="line">├─sdb3         vfat              1441-F786</span><br><span class="line">└─sdb1</span><br><span class="line">sda</span><br><span class="line">├─sda4         ext4              aab4fc34-f6f3-43b4-a7c2-7d70f189d0da &#x2F;</span><br><span class="line">├─sda2         vfat              0AB2-A61D                            &#x2F;boot&#x2F;efi</span><br><span class="line">├─sda5         ntfs              103ED30C3ED2EA2C</span><br><span class="line">├─sda3</span><br><span class="line">└─sda1         ntfs   恢复       320AB1060AB0C85D</span><br></pre></td></tr></table></figure>
+<p>这里 <code>sdd</code> 就是我们的树莓派硬盘：</p>
+<ul>
+<li><code>sdd1</code>: boot 引导分区</li>
+<li><code>sdd2</code>: 正常系统分区</li>
+<li><code>sdd2</code>: 恢复系统分区</li>
+</ul>
+<h1 id="安装镜像">安装镜像</h1>
+<p>这里推荐<strong>Raspberry Pi OS Lite</strong>，比较小。下载地址：<a target="_blank" rel="noopener" href="https://www.raspberrypi.org/software/operating-systems/">https://www.raspberrypi.org/software/operating-systems/</a></p>
+<p>这里你是不能直接用 <code>dd</code> 去安装的。因为你的目标是一个分区，而镜像中可能包含了多个分区。这时就需要 <code>losetup</code> 命令。</p>
+<h4 id="查看镜像信息">查看镜像信息</h4>
+<p><code>sudo fdisk -lu &lt;xxx.img&gt;</code> 用来查看镜像的信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@ubuntu-MRC-WX0:~$ sudo fdisk -lu 2021-01-11-raspios-buster-armhf-lite.img</span><br><span class="line">Disk 2021-01-11-raspios-buster-armhf-lite.img: 1.8 GiB, 1862270976 bytes, 3637248 sectors</span><br><span class="line">Units: sectors of 1 * 512 &#x3D; 512 bytes</span><br><span class="line">Sector size (logical&#x2F;physical): 512 bytes &#x2F; 512 bytes</span><br><span class="line">I&#x2F;O size (minimum&#x2F;optimal): 512 bytes &#x2F; 512 bytes</span><br><span class="line">Disklabel type: dos</span><br><span class="line">Disk identifier: 0xe8af6eb2</span><br><span class="line"></span><br><span class="line">Device                                    Boot  Start     End Sectors  Size Id Type</span><br><span class="line">2021-01-11-raspios-buster-armhf-lite.img1        8192  532479  524288  256M  c W95 FAT32 (LBA)</span><br><span class="line">2021-01-11-raspios-buster-armhf-lite.img2      532480 3637247 3104768  1.5G 83 Linux</span><br></pre></td></tr></table></figure>
+<h4 id="使用-losetup-创建回环设备">使用 losetup 创建回环设备</h4>
+<p>由上图可知 <code>2021-01-11-raspios-buster-armhf-lite.img</code> 有 2 个分区，大小单位为 512 字节，转为字节计算后如下。 2021-01-11-raspios-buster-armhf-lite.img1：</p>
+<ul>
+<li>开始=8192x512=4194304 大小=(532479-8192)x512=268434944</li>
+</ul>
+<p>2021-01-11-raspios-buster-armhf-lite.img2：</p>
+<ul>
+<li>开始=532480x512=272629760 大小=(3637247-532480)x512=1589640704</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@ubuntu-MRC-WX0:~$ sudo losetup -f -o 272629760 --sizelimit 1589640704 2021-01-11-raspios-buster-armhf-lite.img</span><br><span class="line">ubuntu@ubuntu-MRC-WX0:~$ losetup -a</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;dev&#x2F;loop0: []: (&#x2F;home&#x2F;ubuntu&#x2F;2021-01-11-raspios-buster-armhf-lite.img), offset 272629760, sizelimit 1589640704</span><br></pre></td></tr></table></figure>
+<h4 id="写入分区">写入分区</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo dd <span class="keyword">if</span>=/dev/loop0 of=/dev/sdd3 bs=4M status=progress</span><br><span class="line">sudo losetup --detach-all</span><br></pre></td></tr></table></figure>
+<p>写入后，可能由于镜像的原因都是分区变小了，不过这很好解决：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo e2fsck -f /dev/sdd3</span><br><span class="line">sudo resize2fs /dev/sdd3</span><br></pre></td></tr></table></figure>
+<h1 id="配置分区">配置分区</h1>
+<p>首先我们给新的分区设置新的 lable，默认会是 rootfs： <code>e2label /dev/loop0p2 recoveryfs</code></p>
+<p>然后我们需要修改一些文件，让它们可以正确被引导。</p>
+<ol type="1">
+<li><p>使用 <code>sudo blkid</code> 查看 <code>PARTUUID</code>，结果像下面这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;dev&#x2F;sdd1: LABEL&#x3D;&quot;boot&quot; UUID&#x3D;&quot;6341-C9E5&quot; TYPE&#x3D;&quot;vfat&quot; PARTUUID&#x3D;&quot;ea7d04d6-01&quot;</span><br><span class="line">&#x2F;dev&#x2F;sdd2: LABEL&#x3D;&quot;rootfs&quot; UUID&#x3D;&quot;80571af6-21c9-48a0-9df5-cffb60cf79af&quot; TYPE&#x3D;&quot;ext4&quot; PARTUUID&#x3D;&quot;ea7d04d6-02&quot;</span><br><span class="line">&#x2F;dev&#x2F;sdd3: LABEL&#x3D;&quot;recoveryfs&quot; UUID&#x3D;&quot;80571af6-21c9-48a0-9df5-cffb60cf79af&quot; TYPE&#x3D;&quot;ext4&quot; PARTUUID&#x3D;&quot;ea7d04d6-03&quot;</span><br></pre></td></tr></table></figure></li>
+<li><p>将恢复分区挂载</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount /dev/sdd3 /mnt</span><br></pre></td></tr></table></figure></li>
+<li><p>修改 <code>etc/fstab</code> 文件，修改对应的 PARTUUID</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">proc            /proc           proc    defaults          0       0</span><br><span class="line">PARTUUID=ea7d04d6-01  /boot           vfat    defaults          0       2</span><br><span class="line">PARTUUID=ea7d04d6-03  /               ext4    defaults,noatime  0       1</span><br><span class="line"><span class="comment"># a swapfile is not a swap partition, no line here</span></span><br><span class="line"><span class="comment">#   use  dphys-swapfile swap[on|off]  for that</span></span><br></pre></td></tr></table></figure></li>
+<li><p>修改 <code>boot</code> 中的 <code>cmdline.txt</code> 文件中的 PAERUUID 来指定启动分区</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console&#x3D;serial0,115200 console&#x3D;tty1 root&#x3D;PARTUUID&#x3D;ea7d04d6-02 rootfstype&#x3D;ext4 elevator&#x3D;deadline fsck.repair&#x3D;yes quiet splash plymouth.ignore-serial-consoles</span><br></pre></td></tr></table></figure>
+<p>将 <code>PARTUUID=</code> 后面的 8 个字符的代码改为我们查到到的值，并将下面的 <code>-02</code> 改为 <code>-03</code>，告诉 Raspbian 引导到第三个分区。</p></li>
+</ol>
+<h1 id="备份镜像">备份镜像</h1>
+<p>接下来就是要备份我们的主分区了，我们也是使用 <code>dd</code> 命令并通过 <code>gzip</code> 进行压缩。</p>
+<p><strong>备份</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /mnt</span><br><span class="line">sudo dd <span class="keyword">if</span>=/dev/sdd2 bs=4M status=progress | gzip -6 &gt; recovery.img.gz</span><br></pre></td></tr></table></figure>
+<p><strong>恢复</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip -dc recovery.img.gz | sudo dd of=/dev/sdd2 bs=4M status=progress</span><br></pre></td></tr></table></figure>
+<h1 id="恢复脚本">恢复脚本</h1>
+<p>我们将脚本创建在 <code>/boot</code> 中，这样在两个系统中都可以使用</p>
+<p><strong>boot_to_recovery</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$EUID</span>&quot;</span> -ne 0 ]</span><br><span class="line">  <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">&quot;Please run as root&quot;</span></span><br><span class="line">  <span class="built_in">exit</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> Rebooting to recovery partition <span class="keyword">in</span> 5 seconds</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$1</span>&quot;</span> = <span class="string">&quot;restore&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> Automatic restore selected</span><br><span class="line">    touch /boot/restore</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">sleep 5</span><br><span class="line">sed -i <span class="string">&#x27;s/-02/-03/&#x27;</span> /boot/cmdline.txt</span><br><span class="line">touch /boot/ssh</span><br><span class="line">reboot</span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+<p><strong>boot_to_root</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$EUID</span>&quot;</span> -ne 0 ]</span><br><span class="line">  <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">&quot;Please run as root&quot;</span></span><br><span class="line">  <span class="built_in">exit</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> Rebooting to root partition <span class="keyword">in</span> 5 seconds</span><br><span class="line">sleep 5</span><br><span class="line">sed -i <span class="string">&#x27;s/-03/-02/&#x27;</span> /boot/cmdline.txt</span><br><span class="line">touch /boot/ssh</span><br><span class="line">reboot</span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+<p><strong>restore_root</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="keyword">if</span> [ -f <span class="string">&quot;/boot/restore&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> Restoring rootfs</span><br><span class="line">    <span class="comment">#dd if=/recovery.img of=/dev/mmcblk0p3 conv=fsync status=progress bs=4M</span></span><br><span class="line">    gzip -dc recovery.img.gz | sudo dd of=/dev/sdd2 bs=4M status=progress</span><br><span class="line">    unlink /boot/restore</span><br><span class="line">    /boot/boot_to_root</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+<h3 id="自动恢复">自动恢复</h3>
+<p>如果你想在启动恢复分区时自动运行脚本，可以将它添加到恢复分区的 <code>/etc/rc.local</code> 文件，</p>
+<p>在 <code>exit 0</code> 之前加上 <code>/boot/restore_root</code>。</p>
+
+
+  </article>
+  </script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © zachary 2018-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

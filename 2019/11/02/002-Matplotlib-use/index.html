@@ -1,0 +1,226 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>使用 matplotlib 绘制图标</title>
+  <meta name="author" content="Zachary Zhang">
+  <meta name="description" content="This is my personal blog, share knowledge, record life.">
+  
+  
+  <meta property="og:title" content="使用 matplotlib 绘制图标"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="=just a blogs="/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="=just a blogs=" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  <div class="description">
+    &nbsp;Hope to have what you need
+  </div>
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        使用 matplotlib 绘制图标
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2019-11-02T10:34:05.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2019-11-02
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/Python/">Python</a>
+
+
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/tags/matplotlib/">matplotlib</a>
+
+
+    </div>
+    <hr>
+    <div>
+    
+      
+    
+    </div>
+    <div class="picture-container">
+      
+    </div>
+    <p>怎么用 Python 绘制图标呢? 最常用的一定是 matplotlib 库吧. 那么来看看怎么使用吧.</p>
+<a id="more"></a>
+<p>首先绘制一张简单的图</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">plt.plot([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p>绘图的结果：</p>
+<figure>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ickZyUUZ3QUIwWVhVdHVHaWJlYlBXN2tSUWZlNVI5aWI2NUQxb0tHc0l5NHllNGR2MzAxZmlhbERJQk16eWJON3RENHR4Z28xR3Fwck9YS0VDd1hySjdjUS82NDA?x-oss-process=image/format,png" alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
+</figure>
+<p>很容易，你只需要导入包、输入数据，然后你就可以得到你想要的图表了。</p>
+<p>但是看起来似乎十分的单调，让我们来看看下面这段代码。</p>
+<h3 id="折线图">折线图</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">a = np.arange(<span class="number">10</span>)</span><br><span class="line">plt.plot(a, a*<span class="number">1.5</span>, linestyle=<span class="string">&#x27;--&#x27;</span>, label=<span class="string">&quot;Firstline&quot;</span>, color=<span class="string">&quot;gold&quot;</span>)</span><br><span class="line">plt.plot(a, a*<span class="number">2.5</span>, linestyle=<span class="string">&#x27;:&#x27;</span>, label=<span class="string">&quot;Secondline&quot;</span>)</span><br><span class="line">plt.plot(a, a*<span class="number">3.5</span>, linestyle=<span class="string">&#x27;-&#x27;</span>, label=<span class="string">&quot;Thirdline&quot;</span>)</span><br><span class="line">plt.plot(a, a*<span class="number">4.5</span>, linestyle=<span class="string">&#x27;-.&#x27;</span>, label=<span class="string">&quot;Fourthline&quot;</span>)</span><br><span class="line"><span class="comment"># linestyle supported values are &#x27;-&#x27;, &#x27;--&#x27;, &#x27;-.&#x27;, &#x27;:&#x27;, &#x27;None&#x27;, &#x27; &#x27;, &#x27;&#x27;, &#x27;solid&#x27;, &#x27;dashed&#x27;, &#x27;dashdot&#x27;, &#x27;dotted&#x27;</span></span><br><span class="line">plt.title(<span class="string">&#x27;title&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;x label&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;y label&#x27;</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<figure>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ickZyUUZ3QUIwWVhVdHVHaWJlYlBXN2tSUWZlNVI5aWI2NVpza3JKM1VzTDY0RkswMWliVmxRMDIyVUtDQXpsU3poellhNTBSRHRSQ1ZIeTMxdU9ySmZpYXcvNjQw?x-oss-process=image/format,png" alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
+</figure>
+<p>现在图表是不是看起来好多了。在代码中我们可以通过 title 来指定图表的标题，通过<code>xlablel</code>和<code>ylabel</code>来指定<code>x</code>轴和<code>y</code>轴的标题。在绘制折线图的<code>plot()</code>方法中可以通过<code>color</code>参数来指定颜色，<code>linestyle</code>参数来指定线的样式。通过<code>legend()</code> 方法可以让图表显示图例，图例的文字可以通过 plot 中的<code>label</code>参数来指定。</p>
+<p>花完了折线图，接下来让我们条形图和直方图</p>
+<p>有了 plt.plot()的基础之后，对后面的理解就很容易了。</p>
+<p>直接上例子：</p>
+<h3 id="条形图">条形图</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">plt.bar([<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>], [random.randint(<span class="number">1</span>,<span class="number">10</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>)], label=<span class="string">&quot;Example one&quot;</span>)</span><br><span class="line">plt.bar([<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">10</span>],[random.randint(<span class="number">1</span>,<span class="number">10</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>)], label=<span class="string">&quot;Example two&quot;</span>, color=<span class="string">&#x27;orange&#x27;</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.xlabel(<span class="string">&#x27;bar number&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;bar height&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Bar Title&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<figure>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ickZyUUZ3QUIwWVhVdHVHaWJlYlBXN2tSUWZlNVI5aWI2WmRxVUJhVkNsV1FITkltSmtDWVdMVkJDNzQ1akFncWJtcDBuZEgyOERpYm9NeHoycDBQbW8wQS82NDA?x-oss-process=image/format,png" alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
+</figure>
+<p>利用<code>bar()</code>方法就可绘制条形图了</p>
+<p>接下来我们尝试添加一些属性信息：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">r1 = plt.bar([<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>], [random.randint(<span class="number">1</span>, <span class="number">10</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>)], label=<span class="string">&quot;Example one&quot;</span>, align=<span class="string">&quot;center&quot;</span>)</span><br><span class="line">r2 = plt.bar([<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">10</span>], [random.randint(<span class="number">1</span>, <span class="number">10</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>)], label=<span class="string">&quot;Example two&quot;</span>, color=<span class="string">&#x27;orange&#x27;</span>,</span><br><span class="line">             align=<span class="string">&quot;center&quot;</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.xlabel(<span class="string">&#x27;bar number&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;bar height&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Bar Title&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置x轴</span></span><br><span class="line">_xtick_lables = [<span class="string">&quot;one&quot;</span>, <span class="string">&quot;two&quot;</span>, <span class="string">&quot;three&quot;</span>, <span class="string">&quot;four&quot;</span>, <span class="string">&quot;five&quot;</span>]</span><br><span class="line">plt.xticks([i / <span class="number">1.5</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>, <span class="number">18</span>, <span class="number">3</span>)], _xtick_lables, rotation=<span class="number">45</span>)</span><br><span class="line">plt.grid(alpha=<span class="number">0.7</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加值标</span></span><br><span class="line"><span class="keyword">for</span> rec <span class="keyword">in</span> r1:</span><br><span class="line">    x = rec.get_x()</span><br><span class="line">    height = rec.get_height()</span><br><span class="line">    plt.text(x + <span class="number">0.3</span>, <span class="number">1.02</span> * height, <span class="built_in">str</span>(height))</span><br><span class="line"><span class="keyword">for</span> rec <span class="keyword">in</span> r2:</span><br><span class="line">    x = rec.get_x()</span><br><span class="line">    height = rec.get_height()</span><br><span class="line">    plt.text(x + <span class="number">0.3</span>, <span class="number">1.02</span> * height, <span class="built_in">str</span>(height))</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<figure>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ickZyUUZ3QUIwWVhVdHVHaWJlYlBXN2tSUWZlNVI5aWI2WlBhaEVnVFhoSUNndlQ1M2JpYXZYWExHT3ZxNDZZeVJPaWFQZE96QXhYOWNvODNtbW1sVGpzVUEvNjQw?x-oss-process=image/format,png" alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
+</figure>
+<p>看完了条形图，接下来看看直方图：</p>
+<h3 id="直方图">直方图</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">population_ages = [random.randint(<span class="number">0</span>, <span class="number">130</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">60</span>)]</span><br><span class="line">bins = [<span class="number">0</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>, <span class="number">70</span>, <span class="number">80</span>, <span class="number">90</span>, <span class="number">100</span>, <span class="number">110</span>, <span class="number">120</span>, <span class="number">130</span>]</span><br><span class="line">plt.hist(population_ages, bins, histtype=<span class="string">&#x27;bar&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;x&#x27;</span>, fontsize=<span class="string">&#x27;large&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;y&#x27;</span>, rotation=<span class="number">0</span>, fontsize=<span class="string">&#x27;large&#x27;</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<figure>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ickZyUUZ3QUIwWVhVdHVHaWJlYlBXN2tSUWZlNVI5aWI2VzBQblZVWk9maWJIZUdEdVRkaWE1Nzc3dWdtbThzREVMT24xN256NzhyNFRNc3M4WlJ5VmhPMmcvNjQw?x-oss-process=image/format,png" alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
+</figure>
+<p>直方图用的是<code>hist()</code>方法，是不是看起和条形图来很像，其实两者区别非常大</p>
+<ul>
+<li>条形图的长度是当前类别的频数，而它的宽是没有意义的，各个矩阵之间通常是分开排列的，主要是用于展示分类数据</li>
+<li>直方图使用矩阵的面积表示各组频度的，高代表频率、宽为组距，由于分组之间的数据具有连续性通常矩形直之间连续排列，主要用于展示数值型数</li>
+</ul>
+<p>最后让我们来看看散点图和饼图：</p>
+<h3 id="散点图">散点图</h3>
+<p>直接甩代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">x = [random.randint(<span class="number">25</span>,<span class="number">50</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">300</span>)]</span><br><span class="line">y = [random.randint(<span class="number">25</span>,<span class="number">50</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">300</span>)]</span><br><span class="line"></span><br><span class="line">x1 = [random.randint(<span class="number">1</span>,<span class="number">25</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">300</span>)]</span><br><span class="line">y1 = [random.randint(<span class="number">1</span>,<span class="number">25</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">300</span>)]</span><br><span class="line">plt.scatter(x,y, label=<span class="string">&#x27;dot-1&#x27;</span>, color=<span class="string">&quot;red&quot;</span>, s=<span class="number">25</span>, marker=<span class="string">&quot;o&quot;</span>)</span><br><span class="line">plt.scatter(x1,y1, label=<span class="string">&#x27;dot-2&#x27;</span>, color=<span class="string">&quot;gold&quot;</span>, s=<span class="number">25</span>, marker=<span class="string">&quot;o&quot;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;x&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;y&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Title&#x27;</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<figure>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ickZyUUZ3QUIwWVhVdHVHaWJlYlBXN2tSUWZlNVI5aWI2cjJ1cmZjaWEwYkhEZG1CazFPZEtpYkcwb0kxSjZ5eFI3UW9CZ0w2MElTRXRkSlFuYU83YTVLaWJBLzY0MA?x-oss-process=image/format,png" alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
+</figure>
+<p>散点图是指在回归分析中，数据点在直角坐标系平面上的分布图，散点图表示因变量随自变量而变化的大致趋势，据此可以选择合适的函数对数据点进行拟合。</p>
+<p>用两组数据构成多个坐标点，考察坐标点的分布，判断两变量之间是否存在某种关联或总结坐标点的分布模式。散点图将序列显示为一组点。值由点在图表中的位置表示。类别由图表中的不同标记表示。散点图通常用于比较跨类别的聚合数据。</p>
+<h3 id="饼状图">饼状图</h3>
+<p>通常，饼图用于显示部分对于整体的情况，通常以<code>％</code>为单位。幸运的是，Matplotlib 会处理切片大小以及一切事情，我们只需要提供数值。</p>
+<p>示例程序：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">slices = [<span class="number">8</span>, <span class="number">3</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">3</span>]</span><br><span class="line">activities = [<span class="string">&quot;sleeping&quot;</span>, <span class="string">&quot;eating&quot;</span>, <span class="string">&quot;working&quot;</span>, <span class="string">&quot;studying&quot;</span>, <span class="string">&quot;playing&quot;</span>]</span><br><span class="line">cols = [<span class="string">&#x27;grey&#x27;</span>, <span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;pink&#x27;</span>, <span class="string">&#x27;gold&#x27;</span>, <span class="string">&#x27;green&#x27;</span>]</span><br><span class="line">plt.pie(slices, labels=activities, colors=cols, startangle=<span class="number">90</span>, shadow=<span class="literal">True</span>, explode=(<span class="number">0</span>, <span class="number">0.1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>),</span><br><span class="line">        autopct=<span class="string">&#x27;%1.1f%%&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Title&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ickZyUUZ3QUIwWVhVdHVHaWJlYlBXN2tSUWZlNVI5aWI2cFRKUklkWkp0NUJtdmJKNDZYR3VtY3VpYndiaWNpYjlpYlN3aWJzWGNMSGFTWWVmN2VzeWlhaWJqaGJYdy82NDA?x-oss-process=image/format,png" alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
+</figure>
+<p>在<code>pie()</code>中，我们需要通过指定切片，这是每个部分的大小，它会自动求出百分比。</p>
+<p>然后，我们通过<code>labels</code>指定每个部分的名称，通过<code>colors</code>指定颜色列表。</p>
+<p>接下来，我们可以选择指定图形的起始角度。这使你可以在任何地方开始绘图。例子中，我们为饼图选择了 90 度角。</p>
+<p>我们也可以选择给绘图添加一个字符大小的阴影，我们甚至可以使用<code>explode</code>拉出一个切片，使用 explode 参数就可以了，如果我们不想拉出任何切片，我们传入 0,0,0,0,0。如果我们想要拉出第一个切片，我们传入 0,0.1,0,0,0。</p>
+<p>最后，我们使用<code>autopct</code>，选择将百分比放置到图表上面。</p>
+
+
+  </article>
+  </script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © zachary 2018-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

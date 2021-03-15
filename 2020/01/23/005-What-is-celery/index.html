@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>Celery 介绍与入门</title>
+  <meta name="author" content="Zachary Zhang">
+  <meta name="description" content="This is my personal blog, share knowledge, record life.">
+  
+  
+  <meta property="og:title" content="Celery 介绍与入门"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="=just a blogs="/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="=just a blogs=" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  <div class="description">
+    &nbsp;Hope to have what you need
+  </div>
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        Celery 介绍与入门
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2020-01-23T14:12:32.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2020-01-23
+</time>
+
+
+
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/tags/celery/">celery</a>
+
+
+    </div>
+    <hr>
+    <div>
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#celery-%E7%AE%80%E4%BB%8B%E5%92%8C%E5%8E%9F%E7%90%86"><span class="toc-text">Celery 简介和原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#celery-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-text">Celery 的安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#celery-%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8"><span class="toc-text">Celery 的简单使用</span></a></li></ol>
+    
+    </div>
+    <div class="picture-container">
+      
+    </div>
+    <p>Do you know what <code>celery</code> is? Let's take a look and learn how to use it.</p>
+<a id="more"></a>
+<h1 id="celery-简介和原理">Celery 简介和原理</h1>
+<p><strong>Celery(芹菜)是一个异步任务队列/基于分布式消息传递的作业队列。它侧重于实时操作</strong>，但对调度支持也很好。Celery 用于生产系统每天处理数以百万计的任务。Celery 是用 Python 编写的，但该协议可以在任何语言实现。</p>
+<p>简单来说就是你可以交给 celery 一些工作，它可以帮你同时的完成，而你并不需要等着。说白了就是一打工仔，但是 celery 一个顶很多个。</p>
+<p><strong>Celery 是怎么顶多个打工仔的呢？</strong> 其实是因为<code>celery workers</code> ，它是 Celery 的一个工作队列，里面有多少<code>worker(任务执行单元)</code>就可以同时干多少件任务。</p>
+<p>这时我们又必须说到 Celery 中的另一个概念了：<code>broker</code>。 <code>broker</code>是一个消息中间件，可以理解成一个邮箱。如果没有<code>broker</code>，当你丢给 Celery 任务时，如果恰好所有的<code>worker</code>都在工作，那么你就必须等待有一个<code>worker</code>完成任务才可以。<code>broker</code>的引入正好解决可这个问题，你只需要把任务告诉 broker，它就会帮你传递给 worker。</p>
+<p>但这样又出现了新的问题，你无法得知<code>broker</code>什么时候传递任务，也无法得知<code>worker</code>什么时候完成任务。为此，Celery 实现了一个<code>backend</code>用于任务完成的结果。</p>
+<h3 id="原理图">原理图</h3>
+<figure>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ickZyUUZ3QUIwWXJldkhBcHBBSG1pYjZkWFFuTXRqQnlFTmJCNE01Y2liRzZXaHUyRGlhZUJUeEJaZTRmWkRyckJ0SGhZY2FDNFh4aWJUeFA1OTV0aWFkRUlRLzY0MA?x-oss-process=image/format,png" alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
+</figure>
+<p>Celery 本身不提供消息服务，但是可以方便的使用第三发提供，如：<code>RabbitMQ</code> <code>Redis</code> <code>Amazon SQS</code></p>
+<p>Worker 是 Celery 提供的任务执行的单元，worker 并发的运行在分布式的系统节点中</p>
+<p>Celery 支持以不同的方式存储任务的结果，如：<code>AMQP, redis，memcached, mongodb，SQLAlchemy, Django ORM，Apache Cassandra, IronCache ....</code></p>
+<h1 id="celery-的安装">Celery 的安装</h1>
+<h3 id="安装">安装</h3>
+<p>您可以通过 python 的 pip 安装或通过源代码进行安装 Celery，使用 pip 进行安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ pip install -U Celery</span><br><span class="line"></span><br><span class="line"> -U 不存在下载celery，存在更新celery</span><br></pre></td></tr></table></figure>
+<h3 id="捆绑">捆绑</h3>
+<p>Celery 自定义了一组用于安装 Celery 和特定功能的依赖。</p>
+<p>您可以在中括号加入您需要依赖，并可以通过逗号分割需要安装的多个依赖包。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ pip install <span class="string">&quot;celery[librabbitmq]&quot;</span></span><br><span class="line">$ pip install <span class="string">&quot;celery[librabbitmq,redis,auth,msgpack]&quot;</span></span><br></pre></td></tr></table></figure>
+<h1 id="celery-的简单使用">Celery 的简单使用</h1>
+<p>Celery 上手比较简单，不需要配置文件就可以直接运行，大多数情况下，使用默认的配置就可以满足。</p>
+<p><strong>这是一个简单的 Demo</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> celery <span class="keyword">import</span> Celery</span><br><span class="line"></span><br><span class="line"><span class="comment"># broker指定中间人，我选择的是redis</span></span><br><span class="line"><span class="comment"># backend指定存储任务结果的数据库，我没有使用</span></span><br><span class="line">app = Celery(<span class="string">&#x27;hello&#x27;</span>, broker=<span class="string">&#x27;redis://127.0.0.1:3679/1&#x27;</span>)</span><br><span class="line"><span class="meta">@app.task</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span>():</span></span><br><span class="line">   <span class="keyword">return</span> <span class="string">&#x27;hello world&#x27;</span></span><br></pre></td></tr></table></figure>
+<p><strong>然后在 shell 中启动 celery</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">celery -A hello worker --loglevel=info</span><br><span class="line"><span class="comment"># -A 是Application的首字母</span></span><br><span class="line"><span class="comment"># hello是应用的所在</span></span><br><span class="line"><span class="comment"># --loglevel=info 指定log等级</span></span><br></pre></td></tr></table></figure>
+<p><strong>使用</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> hello <span class="keyword">import</span> hello</span><br><span class="line">hello.delay()</span><br></pre></td></tr></table></figure>
+
+
+  </article>
+  </script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © zachary 2018-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

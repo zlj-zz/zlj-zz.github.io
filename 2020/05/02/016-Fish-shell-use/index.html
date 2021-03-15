@@ -1,0 +1,191 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>fish shell, young people&#39;s shell</title>
+  <meta name="author" content="Zachary Zhang">
+  <meta name="description" content="This is my personal blog, share knowledge, record life.">
+  
+  
+  <meta property="og:title" content="fish shell, young people&#39;s shell"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="=just a blogs="/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="=just a blogs=" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  <div class="description">
+    &nbsp;Hope to have what you need
+  </div>
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        fish shell, young people&#39;s shell
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2020-05-02T02:16:08.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2020-05-02
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/Linux/">Linux</a>
+
+
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/tags/fish/">fish</a>
+
+
+    </div>
+    <hr>
+    <div>
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#whats-fish"><span class="toc-text">what&#39;s fish?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#how-to-install"><span class="toc-text">how to install?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#customize-your-fish"><span class="toc-text">Customize your fish</span></a></li></ol>
+    
+    </div>
+    <div class="picture-container">
+      
+    </div>
+    <h1 id="whats-fish">what's fish?</h1>
+<p>fish is a smart and user-friendly command line shell for macOS, Linux, and the rest of the family. fish includes features like syntax highlighting, autosuggest-as-you-type, and fancy tab completions that just work, with no configuration required.</p>
+<figure>
+<img src="/images/fish-shell-use/fish-shell.png" alt="fish shell" /><figcaption aria-hidden="true">fish shell</figcaption>
+</figure>
+<h1 id="how-to-install">how to install?</h1>
+<p>Installing <code>fish</code> is really easy. If you are <strong>Linux</strong> or <strong>MaxOS</strong>, your system has its own package manager, you can use it. But different system may be different package managers.</p>
+<p>Like me, type in the command line:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S fish</span><br></pre></td></tr></table></figure>
+<p>On Windows 10, fish can be installed under the WSL Windows Subsystem for Linux with <code>sudo apt install fish</code> or from source with the instructions below. Fish can also be installed on all versions of Windows using <a target="_blank" rel="noopener" href="https://cygwin.com/">Cygwin</a>(from the Shells category).</p>
+<p>If there is a problem during the installation, you can check the <a target="_blank" rel="noopener" href="https://github.com/fish-shell/fish-shell">github of fish</a>. After you install it, enter <code>fish</code> on the command line to start using it, and it is already easy to use.</p>
+<p><strong>Make it the default shell</strong></p>
+<p>When you use it for a while, and you like it very much. You want to set it as the default shell, how to do it?</p>
+<p>It's very easy, just do that:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chsh -s /usr/local/bin/fish</span><br></pre></td></tr></table></figure>
+<p><code>chsh</code> will prompt you for your password and change your default shell. (Substitute <code>/usr/local/bin/fish</code> with whatever path fish was installed to, if it differs.) Log out, then log in again for the changes to take effect.</p>
+<h1 id="customize-your-fish">Customize your fish</h1>
+<p>Now you fall in love with <code>fish</code>, you want to make it a little different.</p>
+<p>If you have a graphical interface, enter <code>fish_config</code> on the command line to setting you <code>fish</code>. Like this:</p>
+<figure>
+<img src="/images/fish-shell-use/fish_config.png" alt="fish_config" /><figcaption aria-hidden="true">fish_config</figcaption>
+</figure>
+<p>You think this is not enough, you want to make your <code>fish</code> more special. Then you can use <code>oh-my-fish</code>.</p>
+<p><code>oh-my-fish</code> provides core infrastructure to allow you to install packages which extend or modify the look of your shell. It's fast, extensible and easy to use. You can enter its github from <a target="_blank" rel="noopener" href="https://github.com/oh-my-fish/oh-my-fish">here</a>.</p>
+<p>I install <code>oh-my-fish</code> use git, like this:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> https://github.com/oh-my-fish/oh-my-fish</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> oh-my-fish</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> bin/install --offline</span></span><br></pre></td></tr></table></figure>
+<p>Use <code>omf</code> to use it. <code>oh-my-fish</code> offers interesting plugins and a lot of themes.</p>
+<p><strong>Theme</strong></p>
+<p>You can use <code>omf theme</code> to view installed and all themes. <code>omf install &lt;theme name&gt;</code> to install theme. <code>omf theme &lt;theme name&gt;</code> to use the theme of you choice.</p>
+<p>Look at the preview at the beginning of this article, that is the theme I used. You can preview more themes <a target="_blank" rel="noopener" href="https://github.com/oh-my-fish/oh-my-fish/blob/master/docs/Themes.md">here</a>.</p>
+<p><strong>Plugin</strong></p>
+<p>Here we recommend a plugin to check the weather in the terminal.</p>
+<p>Install through <code>omf install wttr</code>, use through <code>wttr</code>. <img src="/images/fish-shell-use/wttr.png" alt="wttr" /></p>
+
+
+  </article>
+  </script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © zachary 2018-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

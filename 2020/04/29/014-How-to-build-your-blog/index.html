@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>How to build your blog use hexo + github</title>
+  <meta name="author" content="Zachary Zhang">
+  <meta name="description" content="This is my personal blog, share knowledge, record life.">
+  
+  
+  <meta property="og:title" content="How to build your blog use hexo + github"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="=just a blogs="/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="=just a blogs=" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  <div class="description">
+    &nbsp;Hope to have what you need
+  </div>
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        How to build your blog use hexo + github
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2020-04-29T02:08:13.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2020-04-29
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/Front-end/">Front-end</a>
+
+
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/tags/hexo/">hexo</a>
+
+
+    </div>
+    <hr>
+    <div>
+    
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#introduction"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#just-do-it"><span class="toc-text">Just do it</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#choose-theme"><span class="toc-text">Choose theme</span></a></li></ol>
+    
+    </div>
+    <div class="picture-container">
+      
+    </div>
+    <p>Building a personal blog is simpler than it seems</p>
+<a id="more"></a>
+<h2 id="introduction">Introduction</h2>
+<p>Today, we can't live without th Internet, and we can do a lot of things on it. For example, write something.</p>
+<p>Ok, next I will tell you how to build a personal blog that belongs to you, and now it's actually very simple. We will use <code>hexo</code> and <code>github</code>. So I should introduce them to you.</p>
+<p>First, let's talk about <code>github</code>. <strong>Github</strong> is where people build sofware, and more than 40 million people use github ti discover, fork, and contribute to over 100 million projects. Here we will use github to do our blog server.</p>
+<p>Next, let's talk about <code>hexo</code>. <strong>Hexo</strong> is a static blog framework based on <code>Node.js</code>. It has few dependencies and is easy to install and use. It can easily generate static web pages and be hosted on Github and Heroku.</p>
+<h2 id="just-do-it">Just do it</h2>
+<h4 id="create-warehouse">Create warehouse</h4>
+<p>Log in to github first, if you don't have an account then go and register one. Next, create a new warehouse, the name of the warehouse must be like: <code>&lt;github username&gt;.github.io</code>.</p>
+<p>Since you need to push files to github, don’t forget to install git. If you are using a <strong>Linux</strong> or <strong>macos</strong> system, you may easily install it in the terminal, <em>like</em>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
+<p><em>or like</em>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S git</span><br></pre></td></tr></table></figure>
+<p>If these do not work, you can find the corresponding command for you system distribution on the Internet.</p>
+<p>If you are using windows, then you may need to go to git’s official website to download it.</p>
+<h4 id="configure-hexo">Configure Hexo</h4>
+<p><strong>Hexo</strong> based on <code>Node.js</code>, so we need to install Node.js. As before, <strong>Linux</strong> and <strong>macos</strong> can be easily installed by command, like:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S nodejs</span><br></pre></td></tr></table></figure>
+<p>Please go to the official website to <a target="_blank" rel="noopener" href="https://nodejs.org/en/download/">download</a>, if you are <strong>windows</strong>.</p>
+<p>Don't forget to check after installation.The command aret <code>node -v</code> and <code>npm -v</code></p>
+<blockquote>
+<p>NPM is a package management tool installed with <code>Node.js</code>, which can solve many problems in <code>Node.js</code> code deployment.Common usage scenarios are as follows:</p>
+<ul>
+<li>allow users to download third-party packages written by others from the NPM server for local use.</li>
+<li>allow users to download and install command line programs written by others from the NPM server for local use.</li>
+<li>allow users to upload their own packages or command line programs to the NPM server for others to use. The new version of <code>Node.js</code> has integrated npm.</li>
+</ul>
+</blockquote>
+<p>After doing this, we can finally start to install <code>hexo</code>, we just use this command:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<p>This installation takes a long time to wait patiently. When the installation is complete, initialize our blog,this command:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure>
+<p>Then you will find that there is a <code>blog</code> folder in the current directory, let's go in. It's almost the same here, but we want to deploy to <code>github</code>, so we need to do some configuration. Edit <code>blog/_config.yml</code>, modify like these:</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:zlj-zz/zlj-zz.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+<p>After modifying the configuration file, we install the git deployment plugin to deploy.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>before start:</p>
+<p>You need to add sshkey to your github account.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;email&quot;</span><br></pre></td></tr></table></figure>
+<p>check it at <code>~/.ssh/id_rsa.pub</code></p>
+<p>start deploy:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br><span class="line"><span class="meta">#</span><span class="bash"> or</span></span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
+<p>If there is no error in executing the command, then the website is deployed. Let's open the browser to visit it, <a href="#">https://&lt;github username&gt;.github.io</a></p>
+<p><strong>Let's look at some common command of <code>hexo</code>.</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo -g # install hexo</span><br><span class="line">npm update hexo -g # update hexo</span><br><span class="line">hexo init # initialize</span><br><span class="line"></span><br><span class="line">hexo n &quot;your blog&quot; == hexo new &quot;your blog&quot; # new article</span><br><span class="line">hexo g == hexo generate</span><br><span class="line">hexo s == hexo server</span><br><span class="line">hexo d == hexo deploy</span><br></pre></td></tr></table></figure>
+<h2 id="choose-theme">Choose theme</h2>
+<p>We can change the theme of the blog, you can find many themes <a target="_blank" rel="noopener" href="https://hexo.io/themes/">here</a> and choose to use. The theme I use is <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">hexo-theme-pln</a>.</p>
+<p><strong>Download theme like this:</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/gaoryrt/hexo-theme-pln.git themes/pln</span><br></pre></td></tr></table></figure>
+<p>Edit <code>blog/_config.yml</code>, modify like these to use theme:</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line"><span class="attr">theme:</span> <span class="string">pln</span></span><br></pre></td></tr></table></figure>
+
+
+  </article>
+  </script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © zachary 2018-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

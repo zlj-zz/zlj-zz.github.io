@@ -1,0 +1,308 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>Hive 使用命令总结</title>
+  <meta name="author" content="Zachary Zhang">
+  <meta name="description" content="This is my personal blog, share knowledge, record life.">
+  
+  
+  <meta property="og:title" content="Hive 使用命令总结"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="=just a blogs="/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="=just a blogs=" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  <div class="description">
+    &nbsp;Hope to have what you need
+  </div>
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        Hive 使用命令总结
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2020-03-11T16:00:00.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2020-03-12
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/Database/">Database</a>
+
+
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/tags/Hive/">Hive</a>
+
+
+    </div>
+    <hr>
+    <div>
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#hive-%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="toc-text">hive 导入数据</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hive-%E5%BB%BA%E8%A1%A8"><span class="toc-text">hive 建表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hive-%E6%9F%A5%E8%AF%A2"><span class="toc-text">hive 查询</span></a></li></ol>
+    
+    </div>
+    <div class="picture-container">
+      
+    </div>
+    <p>最近用到 hive，这里做个笔记. hive 的 hql 的使用总结也算的上七七八八了. 以后在补充吧.</p>
+<a id="more"></a>
+<h1 id="hive-导入数据">hive 导入数据</h1>
+<p>hive 不支持 <code>insert</code> 语句，数据只能通过 <code>load</code> 导入 <strong>1.本地导入</strong> <code>hive&gt; load data local inpath 'file-path' into table table-name;</code> <strong>2.HDFS 导入</strong> <code>hive&gt; load data inpath 'hdfs-path' into table table-name;</code></p>
+<blockquote>
+<p>本地导入的过程就是先加载到 HDFS 中，再导入 hive 表中</p>
+</blockquote>
+<p><strong>3.查询导入</strong> <code>hive&gt; insert into table table-name 查询语句</code> <strong>4.创建表时查询导入</strong> (建表的方式之一) <code>hive&gt; create table table-name as 查询语句</code></p>
+<h1 id="hive-建表">hive 建表</h1>
+<p>首先看官网介绍 (进行一定标注) <code>[ ]</code>表示可选，<code>|</code> 表示二选一</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> [TEMPORARY] [<span class="keyword">EXTERNAL</span>] <span class="keyword">TABLE</span> [IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>] [db_name.]table_name</span><br><span class="line">	<span class="comment">-- (<span class="doctag">Note:</span> TEMPORARY 0.14.0版本及以后存在)</span></span><br><span class="line">  [(col_name data_type [COMMENT col_comment], ... [constraint_specification])]</span><br><span class="line">  <span class="comment">--(列名 data_type comment 列注释内容)</span></span><br><span class="line">  [COMMENT table_comment]</span><br><span class="line">  <span class="comment">--(comment 表注释内容)</span></span><br><span class="line">  [PARTITIONED <span class="keyword">BY</span> (col_name data_type [COMMENT col_comment], ...)]</span><br><span class="line">  [CLUSTERED <span class="keyword">BY</span> (col_name, col_name, ...) [SORTED <span class="keyword">BY</span> (col_name [<span class="keyword">ASC</span><span class="operator">|</span><span class="keyword">DESC</span>], ...)] <span class="keyword">INTO</span> num_buckets BUCKETS]</span><br><span class="line">  [SKEWED <span class="keyword">BY</span> (col_name, col_name, ...)                  <span class="comment">-- (<span class="doctag">Note:</span> Available in Hive 0.10.0 and later)]</span></span><br><span class="line">     <span class="keyword">ON</span> ((col_value, col_value, ...), (col_value, col_value, ...), ...)</span><br><span class="line">     [STORED <span class="keyword">AS</span> DIRECTORIES]</span><br><span class="line">  [</span><br><span class="line">   [<span class="type">ROW</span> FORMAT row_format] <span class="comment">--(行格式)</span></span><br><span class="line">   [STORED <span class="keyword">AS</span> file_format]</span><br><span class="line">     <span class="operator">|</span> STORED <span class="keyword">BY</span> <span class="string">&#x27;storage.handler.class.name&#x27;</span> [<span class="keyword">WITH</span> SERDEPROPERTIES (...)]  <span class="comment">-- (<span class="doctag">Note:</span> Available in Hive 0.6.0 and later)</span></span><br><span class="line">  ]</span><br><span class="line">  [LOCATION hdfs_path]</span><br><span class="line">  [TBLPROPERTIES (property_name<span class="operator">=</span>property_value, ...)]   <span class="comment">-- (<span class="doctag">Note:</span> Available in Hive 0.6.0 and later)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[<span class="keyword">AS</span> select_statement];   <span class="comment">-- (<span class="doctag">Note:</span> Available in Hive 0.5.0 and later; not supported for external tables)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> [TEMPORARY] [<span class="keyword">EXTERNAL</span>] <span class="keyword">TABLE</span> [IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>] [db_name.]table_name</span><br><span class="line">  <span class="keyword">LIKE</span> existing_table_or_view_name</span><br><span class="line">  [LOCATION hdfs_path];</span><br><span class="line"></span><br><span class="line">data_type <span class="comment">--(支持数据类型)</span></span><br><span class="line">  : primitive_type <span class="comment">--(原始类型)</span></span><br><span class="line">  <span class="operator">|</span> array_type <span class="comment">--(存储同类型的list，如:array&lt;data_type&gt;)</span></span><br><span class="line">  <span class="operator">|</span> map_type <span class="comment">--(key-value形式，如：map&lt;primitive_type, data_type&gt;)</span></span><br><span class="line">  <span class="operator">|</span> struct_type <span class="comment">--(存储不同类型)</span></span><br><span class="line">  		：STRUCT <span class="operator">&lt;</span> col_name : data_type [COMMENT col_comment], ...<span class="operator">&gt;</span></span><br><span class="line">  <span class="operator">|</span> union_type  <span class="comment">-- (有限取值范围内取值，<span class="doctag">Note:</span>0.7.0版本及之后存在)</span></span><br><span class="line">  		: UNIONTYPE <span class="operator">&lt;</span> data_type, data_type, ... <span class="operator">&gt;</span></span><br><span class="line"></span><br><span class="line">primitive_type <span class="comment">--(支持原始类型)</span></span><br><span class="line">  : TINYINT <span class="comment">--(1bit整数，如：45Y)</span></span><br><span class="line">  <span class="operator">|</span> <span class="type">SMALLINT</span> <span class="comment">--(2bit整数，如：45S)</span></span><br><span class="line">  <span class="operator">|</span> <span class="type">INT</span> <span class="comment">--(4bit整数，如：45)</span></span><br><span class="line">  <span class="operator">|</span> <span class="type">BIGINT</span> <span class="comment">--(8bit整数，如：45L)</span></span><br><span class="line">  <span class="operator">|</span> <span class="type">BOOLEAN</span> <span class="comment">--(布尔类型，true / false)</span></span><br><span class="line">  <span class="operator">|</span> <span class="type">FLOAT</span> <span class="comment">--(4字节单精度浮点数)</span></span><br><span class="line">  <span class="operator">|</span> <span class="keyword">DOUBLE</span> <span class="comment">--(8字节单精度浮点数)</span></span><br><span class="line">  <span class="operator">|</span> <span class="type">DOUBLE PRECISION</span> <span class="comment">-- (<span class="doctag">Note:</span> 2.2.0版本及之后存在)</span></span><br><span class="line">  <span class="operator">|</span> STRING <span class="comment">--(字符串，不定长)</span></span><br><span class="line">  <span class="operator">|</span> <span class="type">BINARY</span> <span class="comment">-- (变长二进制，<span class="doctag">Note:</span>0.8.0版本及之后存在)</span></span><br><span class="line">  <span class="operator">|</span> <span class="type">TIMESTAMP</span> <span class="comment">-- (时间戳，纳秒精度，<span class="doctag">Note:</span>0.8.0版本及之后存在)</span></span><br><span class="line">  <span class="operator">|</span> <span class="type">DECIMAL</span> <span class="comment">-- (任意精度带符号小数，如：DECIMAL(4, 2)范围：-99.99到99.99，<span class="doctag">Note:</span> 0.11.0版本及之后存在)</span></span><br><span class="line">  <span class="operator">|</span> <span class="type">DECIMAL</span>(<span class="keyword">precision</span>, scale)  <span class="comment">-- (<span class="doctag">Note:</span> 0.13.0版本及之后存在)</span></span><br><span class="line">  <span class="operator">|</span> <span class="type">DATE</span>        <span class="comment">-- (日期，如：&#x27;2020-3-10&#x27;，<span class="doctag">Note:</span> 0.12.0版本及之后存在)</span></span><br><span class="line">  <span class="operator">|</span> <span class="type">VARCHAR</span>     <span class="comment">-- (变长字符串，长度有上限，<span class="doctag">Note:</span> 0.12.0版本及之后存在)</span></span><br><span class="line">  <span class="operator">|</span> <span class="type">CHAR</span>        <span class="comment">-- (定长字符串，<span class="doctag">Note:</span> 0.13.0版本及之后存在)</span></span><br><span class="line"></span><br><span class="line">row_format <span class="comment">--(行样式格式)</span></span><br><span class="line">  : DELIMITED [FIELDS TERMINATED <span class="keyword">BY</span> <span class="type">char</span> [ESCAPED <span class="keyword">BY</span> <span class="type">char</span>]] [COLLECTION ITEMS TERMINATED <span class="keyword">BY</span> <span class="type">char</span>]</span><br><span class="line">        [MAP KEYS TERMINATED <span class="keyword">BY</span> <span class="type">char</span>] [LINES TERMINATED <span class="keyword">BY</span> <span class="type">char</span>]</span><br><span class="line">        [<span class="keyword">NULL</span> DEFINED <span class="keyword">AS</span> <span class="type">char</span>]   <span class="comment">-- (<span class="doctag">Note:</span> 0.13.0版本及之后存在)</span></span><br><span class="line">  <span class="operator">|</span> SERDE serde_name [<span class="keyword">WITH</span> SERDEPROPERTIES (property_name<span class="operator">=</span>property_value, property_name<span class="operator">=</span>property_value, ...)]</span><br><span class="line"></span><br><span class="line">file_format: <span class="comment">--(文件存储格式)</span></span><br><span class="line">  : SEQUENCEFILE</span><br><span class="line">  <span class="operator">|</span> TEXTFILE    <span class="comment">-- (Default, 文本格式, 常用)</span></span><br><span class="line">  <span class="operator">|</span> RCFILE      <span class="comment">-- (<span class="doctag">Note:</span> 0.6.0版本及之后存在)</span></span><br><span class="line">  	<span class="comment">--(基于HDFS架构，表格占用多个HDFS块。每个HDFS块中，RCFile以行组为基本单位来组织记录。)</span></span><br><span class="line">  <span class="operator">|</span> ORC         <span class="comment">-- (<span class="doctag">Note:</span> 0.11.0版本及之后存在)</span></span><br><span class="line">  <span class="operator">|</span> PARQUET     <span class="comment">-- (<span class="doctag">Note:</span> 0.13.0版本及之后存在)</span></span><br><span class="line">  <span class="operator">|</span> AVRO        <span class="comment">-- (<span class="doctag">Note:</span> 0.14.0版本及之后存在)</span></span><br><span class="line">  <span class="operator">|</span> INPUTFORMAT input_format_classname OUTPUTFORMAT output_format_classname</span><br><span class="line"></span><br><span class="line">constraint_specification: <span class="comment">--(约束规范)</span></span><br><span class="line">  : [, <span class="keyword">PRIMARY</span> KEY (col_name, ...) DISABLE NOVALIDATE ] <span class="comment">--(主键)</span></span><br><span class="line">  	<span class="comment">--(外键约束)</span></span><br><span class="line">    [, <span class="keyword">CONSTRAINT</span> constraint_name <span class="keyword">FOREIGN</span> KEY (col_name, ...) <span class="keyword">REFERENCES</span> table_name(col_name, ...) DISABLE NOVALIDATE</span><br></pre></td></tr></table></figure>
+<p>样例</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hive<span class="operator">&gt;</span> <span class="keyword">create</span> <span class="keyword">table</span> cpo_1 (url string, title string, reply_number <span class="type">int</span>, last_time string, content <span class="keyword">array</span><span class="operator">&lt;</span>string<span class="operator">&gt;</span>)</span><br><span class="line">    <span class="operator">&gt;</span> <span class="type">row</span> format delimited fields terminated <span class="keyword">by</span> <span class="string">&#x27;\t&#x27;</span> collection items terminated <span class="keyword">by</span> <span class="string">&#x27;-&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="like-建表">like 建表</h3>
+<p>会创建结构完全相同的表，但是没有数据。 常用语中间表 <code>CREATE TABLE empty_key_value_store LIKE key_value_store;</code></p>
+<h3 id="外部表">外部表</h3>
+<p>未被 <code>external</code> 修饰的是内部表(managed table)，被 <code>external</code> 修饰的为外部表(external table)；</p>
+<blockquote>
+<p>内部表数据由 Hive 自身管理，外部表数据由 HDFS 管理； 内部表数据存储的位置是 hive.metastore.warehouse.dir（默认：/user/hive/warehouse），外部表数据的存储位置由自己制定； 删除内部表会直接删除元数据（metadata）及存储数据；删除外部表仅仅会删除元数据，HDFS 上的文件并不会被删除； 对内部表的修改会将修改直接同步给元数据，而对外部表的表结构和分区进行修改，则需要修复（MSCK REPAIR TABLE table_name;）</p>
+</blockquote>
+<p>样例</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hive<span class="operator">&gt;</span> <span class="keyword">create</span> <span class="keyword">external</span> <span class="keyword">table</span> cpo_1 (url string, title string, reply_number <span class="type">int</span>, last_time string, content <span class="keyword">array</span><span class="operator">&lt;</span>string<span class="operator">&gt;</span>, <span class="keyword">add</span> map<span class="operator">&lt;</span>String,string<span class="operator">&gt;</span>)</span><br><span class="line">    <span class="operator">&gt;</span> <span class="type">row</span> format delimited fields terminated <span class="keyword">by</span> <span class="string">&#x27;\t&#x27;</span></span><br><span class="line">    <span class="operator">&gt;</span> collection items terminated <span class="keyword">by</span> <span class="string">&#x27;-&#x27;</span></span><br><span class="line">	<span class="operator">&gt;</span> map keys terminated <span class="keyword">by</span> <span class="string">&#x27;:&#x27;</span></span><br><span class="line">	<span class="operator">&gt;</span> location <span class="string">&#x27;/user/t2&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="hive-查询">hive 查询</h1>
+<ol type="1">
+<li><p>显示表结构：<code>desc tablename</code> or <code>desc formatted tablename</code></p></li>
+<li><p>全表查询：<code>select * from emp;</code></p></li>
+<li><p>选择特定列查询：<code>select empno, ename from emp;</code></p></li>
+<li><p>列别名查询：<code>select ename AS name, deptno dn from emp;</code></p></li>
+<li><p>算术运算符：<code>select sal + 1 from emp;</code></p></li>
+<li><p>常用函数 ① 求总行数（<strong>count</strong>）：<code>hive&gt; select count(*) cnt from emp;</code> ② 求工资的最大值（<strong>max</strong>）：<code>hive&gt; select max(sal) max_sal from emp;</code> ③ 求工资的最小值（<strong>min</strong>）：<code>hive&gt; select min(sal) min_sal from emp;</code> ④ 求工资的总和（<strong>sum</strong>）：<code>hive&gt; select sum(sal) sum_sal from emp;</code> ⑤ <strong>Limit</strong> 语句：<code>hive&gt; select * from emp limit 5;</code></p></li>
+<li><p>where 语句 <code>hive&gt; select * from emp where sal &gt;1000;</code></p></li>
+</ol>
+<h3 id="运算符">运算符</h3>
+<blockquote>
+<p>下面表中描述了谓词操作符，这些操作符同样可以用于 JOIN…ON 和 HAVING 语句中。</p>
+</blockquote>
+<p><strong>比较运算符</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">| 操作符                  | 支持的数据类型 | 描述                                                                                                                                                                                                                                                      |</span><br><span class="line">|-------------------------|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|</span><br><span class="line">| A&#x3D;B                     | 基本数据类型   | 如果A等于B则返回TRUE，反之返回FALSE                                                                                                                                                                                                                       |</span><br><span class="line">| A&lt;&#x3D;&gt;B                   | 基本数据类型   | 如果A和B都为NULL，则返回TRUE，其他的和等号（&#x3D;）操作符的结果一致，如果任一为NULL则结果为NULL                                                                                                                                                               |</span><br><span class="line">| A&lt;&gt;B, A!&#x3D;B              | 基本数据类型   | A或者B为NULL则返回NULL；如果A不等于B，则返回TRUE，反之返回FALSE                                                                                                                                                                                           |</span><br><span class="line">| A&lt;B                     | 基本数据类型   | A或者B为NULL，则返回NULL；如果A小于B，则返回TRUE，反之返回FALSE                                                                                                                                                                                           |</span><br><span class="line">| A&lt;&#x3D;B                    | 基本数据类型   | A或者B为NULL，则返回NULL；如果A小于等于B，则返回TRUE，反之返回FALSE                                                                                                                                                                                       |</span><br><span class="line">| A&gt;B                     | 基本数据类型   | A或者B为NULL，则返回NULL；如果A大于B，则返回TRUE，反之返回FALSE                                                                                                                                                                                           |</span><br><span class="line">| A&gt;&#x3D;B                    | 基本数据类型   | A或者B为NULL，则返回NULL；如果A大于等于B，则返回TRUE，反之返回FALSE                                                                                                                                                                                       |</span><br><span class="line">| A [NOT] BETWEEN B AND C | 基本数据类型   | 如果A，B或者C任一为NULL，则结果为NULL。如果A的值大于等于B而且小于或等于C，则结果为TRUE，反之为FALSE。如果使用NOT关键字则可达到相反的效果。                                                                                                                |</span><br><span class="line">| A IS NULL               | 所有数据类型   | 如果A等于NULL，则返回TRUE，反之返回FALSE                                                                                                                                                                                                                  |</span><br><span class="line">| A IS NOT NULL           | 所有数据类型   | 如果A不等于NULL，则返回TRUE，反之返回FALSE                                                                                                                                                                                                                |</span><br><span class="line">| IN(数值1, 数值2)        | 所有数据类型   | 使用 IN运算显示列表中的值                                                                                                                                                                                                                                 |</span><br><span class="line">| A [NOT] LIKE B          | STRING 类型    | B是一个SQL下的简单正则表达式，如果A与其匹配的话，则返回TRUE；反之返回FALSE。B的表达式说明如下：‘x%’表示A必须以字母‘x’开头，‘%x’表示A必须以字母’x’结尾，而‘%x%’表示A包含有字母’x’,可以位于开头，结尾或者字符串中间。如果使用NOT关键字则可达到相反的效果。 |</span><br><span class="line">| A RLIKE B, A REGEXP B   | STRING 类型    | B是一个正则表达式，如果A与其匹配，则返回TRUE；反之返回FALSE。匹配使用的是JDK中的正则表达式接口实现的，因为正则也依据其中的规则。例如，正则表达式必须和整个字符串A相匹配，而不是只需与其字符串匹配。                                                       |</span><br></pre></td></tr></table></figure>
+<p><strong>逻辑运算符</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>操作符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AND</td>
+<td>逻辑并</td>
+</tr>
+<tr class="even">
+<td>OR</td>
+<td>逻辑或</td>
+</tr>
+<tr class="odd">
+<td>NOT</td>
+<td>逻辑否</td>
+</tr>
+</tbody>
+</table>
+<h3 id="like-和-rlike">Like 和 RLike</h3>
+<ol type="1">
+<li>使用 <code>like</code> 运算选择类似的值</li>
+<li>选择条件可以包含字符或数字:<code>%</code> 代表零个或多个字符(任意个字符)。<code>_</code> 代表一个字符。</li>
+<li><code>RLIKE</code> 子句是 Hive 中这个功能的一个扩展，其可以通过 Java 的正则表达式这个更强大的语言来指定匹配条件。</li>
+</ol>
+<p><code>查找薪水中含有2的员工信息：hive (default)&gt; select * from emp where sal RLIKE '[2]’;</code></p>
+<h3 id="分组">分组</h3>
+<p><strong>Group By 语句</strong></p>
+<blockquote>
+<p>GROUP BY 语句通常会和聚合函数一起使用，按照一个或者多个列队结果进行分组，然后对每个组执行聚合操作。</p>
+</blockquote>
+<p>计算 emp 表每个部门的平均工资:<code>hive&gt; select t.deptno, avg(t.sal) avg_sal from emp t group by t.deptno;</code></p>
+<p><strong>Having 语句</strong> having 与 where 不同点 :</p>
+<ol type="1">
+<li>where 针对表中的列发挥作用,查询数据；having 针对查询结果中的列发挥作用，筛选数据。</li>
+<li>where 后面不能写分组函数，而 having 后面可以使用分组函数。</li>
+<li>having 只用于 group by 分组统计语句。</li>
+</ol>
+<p>求每个部门的平均薪水大于 2000 的部门:<code>hive&gt; select deptno, avg(sal) avg_sal from emp group by deptno having avg_sal &gt; 2000;</code></p>
+<h3 id="join">join</h3>
+<p><strong>等值 Join</strong></p>
+<blockquote>
+<p>Hive 支持通常的 SQL JOIN 语句，但是只支持等值连接，不支持非等值连接。</p>
+</blockquote>
+<p>案例实操:根据员工表和部门表中的部门编号相等，查询员工编号、员工名称和部门编号:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> e.empno, e.ename, d.deptno, d.dname <span class="keyword">from</span> emp e <span class="keyword">join</span> dept d <span class="keyword">on</span> e.deptno <span class="operator">=</span> d.deptno;</span><br></pre></td></tr></table></figure>
+<p><strong>内连接</strong></p>
+<blockquote>
+<p>只有进行连接的两个表中都存在与连接条件相匹配的数据才会被保留下来。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> e.empno, e.ename, d.deptno <span class="keyword">from</span> emp e <span class="keyword">join</span> dept d <span class="keyword">on</span> e.deptno<span class="operator">=</span>d.deptno;</span><br></pre></td></tr></table></figure>
+<p><strong>左外连接</strong></p>
+<blockquote>
+<p>JOIN 操作符左边表中符合 WHERE 子句的所有记录将会被返回。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> e.empno, e.ename, d.deptno <span class="keyword">from</span> emp e <span class="keyword">left</span> <span class="keyword">join</span> dept d <span class="keyword">on</span> e.deptno<span class="operator">=</span>d.deptno;</span><br></pre></td></tr></table></figure>
+<p><strong>右外连接</strong></p>
+<blockquote>
+<p>JOIN 操作符右边表中符合 WHERE 子句的所有记录将会被返回。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> e.empno, e.ename, d.deptno <span class="keyword">from</span> emp e <span class="keyword">right</span> <span class="keyword">join</span> dept d <span class="keyword">on</span> e.deptno<span class="operator">=</span> d.deptno;</span><br></pre></td></tr></table></figure>
+<p><strong>满外连接</strong></p>
+<blockquote>
+<p>将会返回所有表中符合 WHERE 语句条件的所有记录。如果任一表的指定字段没有符合条件的值的话，那么就使用 NULL 值替代。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> e.empno, e.ename, d.deptno <span class="keyword">from</span> emp e <span class="keyword">full</span> <span class="keyword">join</span> dept d <span class="keyword">on</span> e.deptno<span class="operator">=</span> d.deptno;</span><br></pre></td></tr></table></figure>
+<p><strong>多表连接</strong></p>
+<blockquote>
+<p>连接 n 个表，至少需要 n-1 个连接条件。例如：连接三个表，至少需要两个连接条件。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> e.ename, d.deptno, l. loc_name <span class="keyword">FROM</span>  emp e <span class="keyword">JOIN</span>  dept d <span class="keyword">ON</span> d.deptno <span class="operator">=</span> e.deptno <span class="keyword">JOIN</span>   location l <span class="keyword">ON</span>  d.loc <span class="operator">=</span> l.loc;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>说明</strong>：大多数情况下，Hive 会对每对 JOIN 连接对象启动一个 MapReduce 任务。本例中会首先启动一个 MapReduce job 对表 e 和表 d 进行连接操作，然后会再启动一个 MapReduce job 将第一个 MapReduce job 的输出和表 l 进行连接操作。 <strong>注意</strong>：为什么不是表 d 和表 l 先进行连接操作呢？这是因为 Hive 总是按照从左到右的顺序执行的。</p>
+</blockquote>
+<h3 id="排序">排序</h3>
+<p><strong>全局排序</strong>（<code>Order By</code>）</p>
+<blockquote>
+<p><code>ASC</code>（ascend）: 升序（默认）</p>
+</blockquote>
+<pre><code>`DESC`（descend）: 降序</code></pre>
+<p>ORDER BY 子句在 SELECT 语句的结尾: <code>hive (default)&gt; select * from emp order by col_name;</code></p>
+<blockquote>
+<p>也可以用别名，和使用多个字段</p>
+</blockquote>
+<p><strong>每个 MapReduce 内部排序</strong>（<code>Sort By</code>）</p>
+<blockquote>
+<p>Sort By：每个 MapReduce 内部进行排序，对全局结果集来说不是排序。</p>
+</blockquote>
+<p>（1）设置 reduce 个数:<code>hive&gt; set mapreduce.job.reduces=3;</code> （2）查看设置 reduce 个数:<code>hive&gt; set mapreduce.job.reduces;</code> （3）根据部门编号降序查看员工信息:<code>hive&gt; select * from emp sort by empno desc;</code> （4）将查询结果导入到文件中（按照部门编号降序排序）:<code>hive&gt; insert overwrite local directory '/opt/module/datas/sortby-result' select * from emp sort by deptno desc;</code></p>
+<p><strong>分区排序</strong>（<code>Distribute By</code>）</p>
+<blockquote>
+<p>Distribute By：类似 MR 中 partition，进行分区，结合 sort by 使用。 注意，Hive 要求 DISTRIBUTE BY 语句要写在 SORT BY 语句之前。对于 distribute by 进行测试，一定要分配多 reduce 进行处理，否则无法看到 distribute by 的效果。</p>
+</blockquote>
+<p>案例实操：</p>
+<ul>
+<li>先按照部门编号分区，再按照员工编号降序排序。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hive<span class="operator">&gt;</span> <span class="keyword">set</span> mapreduce.job.reduces<span class="operator">=</span><span class="number">3</span>;</span><br><span class="line">hive<span class="operator">&gt;</span> <span class="keyword">insert</span> overwrite <span class="keyword">local</span> directory <span class="string">&#x27;/opt/module/datas/distribute-result&#x27;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp distribute <span class="keyword">by</span> deptno sort <span class="keyword">by</span> empno <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>Cluster By</strong></p>
+<blockquote>
+<p>当 distribute by 和 sorts by 字段相同时，可以使用 cluster by 方式。 cluster by 除了具有 distribute by 的功能外还兼具 sort by 的功能。但是排序只能是倒序排序，不能指定排序规则为 ASC 或者 DESC。</p>
+</blockquote>
+<p>以下两种写法等价</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hive (<span class="keyword">default</span>)<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp cluster <span class="keyword">by</span> deptno;</span><br><span class="line">hive (<span class="keyword">default</span>)<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp distribute <span class="keyword">by</span> deptno sort <span class="keyword">by</span> deptno;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：按照部门编号分区，不一定就是固定死的数值，可以是 20 号和 30 号部门分到一个分区里面去。</p>
+</blockquote>
+<h3 id="分桶及抽样查询">分桶及抽样查询</h3>
+
+
+  </article>
+  </script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © zachary 2018-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>
