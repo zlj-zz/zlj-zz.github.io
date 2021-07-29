@@ -7,16 +7,16 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="google-site-verification" content="" />
   
-  <title>=just a blogs=</title>
+  <title>=Zachary&#39;s blogs=</title>
   <meta name="author" content="Zachary Zhang">
   <meta name="description" content="This is my personal blog, share knowledge, record life.">
   
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:site_name" content="=just a blogs="/>
+  <meta property="og:site_name" content="=Zachary&#39;s blogs="/>
   <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
-  <link rel="alternate" href="/atom.xml" title="=just a blogs=" type="application/atom+xml">
+  <link rel="alternate" href="/atom.xml" title="=Zachary&#39;s blogs=" type="application/atom+xml">
   <link rel="stylesheet" href="/css/m.min.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
@@ -111,6 +111,52 @@
 </nav>
 
 <ul class="posts">
+  
+    
+<li class="post-item">
+  
+  
+    <h1 class="index-title">
+        <a href="/2021/04/13/042-How-to-build-arduino-on-apple-silicon/">
+            mac m1 搭建 arduino 环境
+        </a>
+    </h1>
+  
+
+
+  <div class="excerpt">
+  
+    前前后后弄了几次 arduino 环境，这次就以 mac m1 为例，来做一个笔记。
+
+搭建 arduino
+首先，第一步肯定是安装 arduino，这直接去官网下载安装就好了。地址放在下面： https://www.arduino.cc/
+  
+  <a href="/2021/04/13/042-How-to-build-arduino-on-apple-silicon/">
+    more
+  </a>
+  </div>
+  <div class="index-meta">
+    <time datetime="2021-04-12T16:00:00.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2021-04-13
+</time>
+
+
+
+
+
+
+  </div>
+</li>
+<hr>
+
+
+
+
+
   
     
 <li class="post-item">
@@ -394,8 +440,8 @@ RaisedButt
   
   
     <h1 class="index-title">
-        <a href="/2020/11/17/034-flutter-route/">
-            Flutter 路由小谈
+        <a href="/2020/11/17/035-flutter-build-package/">
+            flutter应用打包、修改图标和app名字
         </a>
     </h1>
   
@@ -403,10 +449,13 @@ RaisedButt
 
   <div class="excerpt">
   
-    直接跳转
-12345import &#x27;newpage.dart&#x27;;Navigator.of(context).push(    MaterialPageRoute(builder: (context)=&gt;NewPag
+    打包 flutter app
+创建密钥
+如果您已有密钥库，请跳到下一步。 如果没有，请在命令行中运行以下命令来创建一个：
+在 Mac / Linux 上，使用以下命令：
+1keytool -genkey -v -keystore ~/key
   
-  <a href="/2020/11/17/034-flutter-route/">
+  <a href="/2020/11/17/035-flutter-build-package/">
     more
   </a>
   </div>
@@ -447,8 +496,8 @@ RaisedButt
   
   
     <h1 class="index-title">
-        <a href="/2020/11/17/035-flutter-build-package/">
-            flutter应用打包、修改图标和app名字
+        <a href="/2020/11/17/034-flutter-route/">
+            Flutter 路由小谈
         </a>
     </h1>
   
@@ -456,13 +505,10 @@ RaisedButt
 
   <div class="excerpt">
   
-    打包 flutter app
-创建密钥
-如果您已有密钥库，请跳到下一步。 如果没有，请在命令行中运行以下命令来创建一个：
-在 Mac / Linux 上，使用以下命令：
-1keytool -genkey -v -keystore ~/key
+    直接跳转
+12345import &#x27;newpage.dart&#x27;;Navigator.of(context).push(    MaterialPageRoute(builder: (context)=&gt;NewPag
   
-  <a href="/2020/11/17/035-flutter-build-package/">
+  <a href="/2020/11/17/034-flutter-route/">
     more
   </a>
   </div>
@@ -607,61 +653,9 @@ ssh方式，直接远程连接传输，简单粗暴
 
 
   
-    
-<li class="post-item">
-  
-  
-    <h1 class="index-title">
-        <a href="/2020/10/17/028-flutter-create-mode/">
-            Use tools to create mode in Flutter
-        </a>
-    </h1>
-  
-
-
-  <div class="excerpt">
-  
-    At Flutter app, sometime we need to create class for mode. Although it can be done manaually, it takes too much time. So
-  
-  <a href="/2020/10/17/028-flutter-create-mode/">
-    more
-  </a>
-  </div>
-  <div class="index-meta">
-    <time datetime="2020-10-16T16:00:00.000Z" itemprop="datePublished">
-  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
-  </svg>
-  &nbsp;
-  2020-10-17
-</time>
-
-
-    
-    &nbsp;
-    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-      <circle cx="24" cy="8" r="2"></circle>
-      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
-    </svg>
-    &nbsp;
-    <a href="/categories/Flutter/">Flutter</a>
-
-
-
-
-
-  </div>
-</li>
-<hr>
-
-
-
-
-
-  
 </ul>
 <ul class="pager">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next</a>
 </ul>
 
 
